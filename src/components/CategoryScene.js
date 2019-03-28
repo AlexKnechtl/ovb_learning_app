@@ -5,7 +5,8 @@ import { MainHeader, SubCategory, PopupCenter } from './common';
 const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
-    </Text>)
+    </Text>
+)
 
 const mainHeaderText = (
     <View>

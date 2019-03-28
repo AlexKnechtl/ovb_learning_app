@@ -13,7 +13,7 @@ const icon_continue = (<Image style={{ width: 32, height: 32, marginLeft: 8, mar
 const icon_watch_questions = (<Image style={{ width: 32, height: 32, marginLeft: 8, marginRight: 12 }} source={require('../img/ic_look_questions.png')} />)
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 20, paddingTop: 8, paddingBottom: 10 }}>
+    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>)
 
@@ -47,7 +47,7 @@ class CategoryInfoScene extends Component {
                     />
                 </SafeAreaView >
                 <MainHeader
-                    style={{ backgroundColor: "#663399", flexDirection: 'row', padding: 8, alignItems: 'center', justifyContent: 'space-between' }}
+                    style={{ backgroundColor: "#663399", flexDirection: 'row-reverse', alignItems: 'center' }}
                     buttonText={btnText}
                     children={mainHeaderText}
                     optionsPress={() => this.toogleModal()}

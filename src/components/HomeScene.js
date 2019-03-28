@@ -5,7 +5,7 @@ import { signOutAction } from "core";
 import { connect } from "react-redux";
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 20, paddingTop: 8, paddingBottom: 10 }}>
+    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18}}>
         Prüfung starten
     </Text>)
 
@@ -46,7 +46,7 @@ class HomeScene extends Component {
                     />
                 </SafeAreaView >
                 <MainHeader
-                    style={{backgroundColor: "#94C231", flexDirection: 'row', padding: 8, alignItems: 'center', justifyContent: 'space-between'}}
+                    style={{backgroundColor: "#94C231", flexDirection: 'row-reverse', alignItems: 'center'}}
                     onPressButton={() => this.toogleTestMode()}
                     optionsPress={() => this.toogleModal()}
                     buttonText={btnText}
