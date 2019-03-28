@@ -1,0 +1,3 @@
+[submodule "core"]
+	path = core
+	url = https://github.com/Fibs7000/core.git
