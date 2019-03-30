@@ -8,15 +8,17 @@ class QuestionScene extends Component {
     state = {
         answer1Clicked: false,
         answer2Clicked: false,
-        answer3Clicked: false
+        answer3Clicked: false,
+        check: false,
+        lastAnswerRight: undefined
     }
-
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
     }
 
     answer1Click() {
+        if(this.state.check) return;
         this.setState({ answer1Clicked: false });
         this.setState({ answer2Clicked: true });
         this.setState({ answer3Clicked: true });
@@ -26,6 +28,7 @@ class QuestionScene extends Component {
     }
 
     answer2Click() {
+        if(this.state.check) return;
         this.setState({ answer2Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer3Clicked: true });
@@ -35,6 +38,7 @@ class QuestionScene extends Component {
     }
 
     answer3Click() {
+        if(this.state.check) return;
         this.setState({ answer3Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer2Clicked: true });
@@ -45,15 +49,23 @@ class QuestionScene extends Component {
 
     toogleModal() {
         this.refs.popupBottom.showAddModal();
+    }
+
+    checkAnswers() {
+        this.setState({check: !this.state.check});
+        if(!this.state.check){
         var q = this.props.currentQuestion.question;
         var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
+        this.setState({lastAnswerRight: isright});
         console.log(isright);
         // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
         this.props.dispatchUpdateQuestion({questionid: this.props.currentQuestion.questionId, answeredRight: isright});
+        }else{
         this.props.dispatchGetNextQuestion();
         this.setState({ answer3Clicked: true });
         this.setState({ answer1Clicked: true });
         this.setState({ answer2Clicked: true });
+        }
     }
 
     render() {
@@ -64,9 +76,9 @@ class QuestionScene extends Component {
 
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
-        const background1 = answer1Clicked ? "#fff9" : "white";
-        const background2 = answer2Clicked ? "#fff9" : "white";
-        const background3 = answer3Clicked ? "#fff9" : "white";
+        const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#0f0' : '#f00' : answer1Clicked ? "#fff9" : "white";
+        const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#0f0' : '#f00' : answer2Clicked ? "#fff9" : "white";
+        const background3 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer3.isRight ? '#0f0' : '#f00' : answer3Clicked ? "#fff9" : "white";
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
@@ -89,7 +101,7 @@ class QuestionScene extends Component {
                         </Text>
                         <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                     </View>
-                    <TouchableOpacity
+                    <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer1Click.bind(this)}
                         style={{
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background1
@@ -98,7 +110,7 @@ class QuestionScene extends Component {
                             {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer:''}
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer2Click.bind(this)}
                         style={{
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background2
@@ -107,7 +119,7 @@ class QuestionScene extends Component {
                         {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer3Click.bind(this)}
                         style={{
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background3
@@ -116,6 +128,9 @@ class QuestionScene extends Component {
                         {this.props.currentQuestion ?this.props.currentQuestion.question.answer3.answer:''}
                         </Text>
                     </TouchableOpacity>
+                    <Text>
+                        {this.state.check? this.state.lastAnswerRight? 'Anwort war richtig':'Antwort war leider falsch':''}
+                    </Text>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
@@ -133,9 +148,9 @@ class QuestionScene extends Component {
                                 borderWidth: 2,
                                 paddingLeft: 24,
                                 paddingRight: 24
-                            }} onPress={() => this.toogleModal()}>
+                            }} onPress={() => this.checkAnswers()}>
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
-                                    Weiter
+                                    {this.state.check?'Weiter':'Check'}
                                 </Text>
                             </TouchableOpacity>
                         </View>
