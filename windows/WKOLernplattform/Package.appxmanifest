@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="4dd5f17b-5aa1-4910-a0bc-309c70113962"
+    Name="ab13427c-9ff3-4e17-b9a7-a43a2efb5e7e"
     Publisher="CN=fmore"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="4dd5f17b-5aa1-4910-a0bc-309c70113962" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="ab13427c-9ff3-4e17-b9a7-a43a2efb5e7e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WKOLernplattform</DisplayName>

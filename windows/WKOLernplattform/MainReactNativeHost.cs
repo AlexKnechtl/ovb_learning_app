@@ -1,6 +1,5 @@
 ﻿using ReactNative;
 using ReactNative.Modules.Core;
-using ReactNative;
 using ReactNative.Shell;
 using System.Collections.Generic;
 
@@ -24,7 +23,6 @@ namespace WKOLernplattform
 
         protected override List<IReactPackage> Packages => new List<IReactPackage>
         {
-            new MainReactPackage(),
             new MainReactPackage(),
         };
     }

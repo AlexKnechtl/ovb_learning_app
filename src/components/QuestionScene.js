@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { PopupBottom } from './common';
-import { updateCurrentQuestion, getNextQuestionAction } from 'core';
+import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor } from 'core';
 
 class QuestionScene extends Component {
     state = {
@@ -20,43 +20,63 @@ class QuestionScene extends Component {
         this.setState({ answer1Clicked: false });
         this.setState({ answer2Clicked: true });
         this.setState({ answer3Clicked: true });
+        this.props.currentQuestion.question.answer1.choosen = true;
+        this.props.currentQuestion.question.answer2.choosen = false;
+        this.props.currentQuestion.question.answer3.choosen = false;
     }
 
     answer2Click() {
         this.setState({ answer2Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer3Clicked: true });
+        this.props.currentQuestion.question.answer1.choosen = false;
+        this.props.currentQuestion.question.answer2.choosen = true;
+        this.props.currentQuestion.question.answer3.choosen = false;
     }
 
     answer3Click() {
         this.setState({ answer3Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer2Clicked: true });
+        this.props.currentQuestion.question.answer1.choosen = false;
+        this.props.currentQuestion.question.answer2.choosen = false;
+        this.props.currentQuestion.question.answer3.choosen = true;
     }
 
     toogleModal() {
         this.refs.popupBottom.showAddModal();
+        var q = this.props.currentQuestion.question;
+        var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
+        console.log(isright);
+        // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
+        this.props.dispatchUpdateQuestion({questionid: this.props.currentQuestion.questionId, answeredRight: isright});
+        this.props.dispatchGetNextQuestion();
+        this.setState({ answer3Clicked: true });
+        this.setState({ answer1Clicked: true });
+        this.setState({ answer2Clicked: true });
     }
 
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);
+        // console.log(this.props.currentQuestion.question);
+        // console.log(this.props.currentQuestion.question.question);
 
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
         const background1 = answer1Clicked ? "#fff9" : "white";
         const background2 = answer2Clicked ? "#fff9" : "white";
         const background3 = answer3Clicked ? "#fff9" : "white";
-
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
                     <View style={{ height: 180 }}>
                         <Text style={styles.questionTextHeader}>
-                            3.5 Frage 9
+                            {this.props.currentQuestion ? `${this.props.currentQuestion.sectionId}.${this.props.currentQuestion.moduleId} Frage ${this.props.currentQuestion.questionId.substr(4)}`: ''}
                             </Text>
                         <Text style={styles.questionText}>
-                            Welche5 der nachstehenden angeführten Krankheiten ist/sind im Rahmen der privaten Unfallversicherung mitversichert?
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.question:''}
+                            {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
                         </Text>
                     </View>
                 </SafeAreaView>
@@ -75,7 +95,7 @@ class QuestionScene extends Component {
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background1
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            1. Zweckmässige Schutzbekleidung ist neben einer vorrauschauenden Fahrweise der wichtigste Schutz.
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer:''}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -84,7 +104,7 @@ class QuestionScene extends Component {
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background2
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            2. Die Alzheimer'sche Krankheiten
+                        {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -93,7 +113,7 @@ class QuestionScene extends Component {
                             flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background3
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            3. Wundstarrkrampf und Tollwut
+                        {this.props.currentQuestion ?this.props.currentQuestion.question.answer3.answer:''}
                         </Text>
                     </TouchableOpacity>
                     <View style={styles.bottom}>
