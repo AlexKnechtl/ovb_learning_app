@@ -17,55 +17,58 @@ class QuestionScene extends Component {
         this.toogleModal = this.toogleModal.bind(this);
     }
 
+    checkAnswers() {
+        this.setState({ check: !this.state.check });
+        if (!this.state.check) {
+            var q = this.props.currentQuestion.question;
+            var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
+            this.setState({ lastAnswerRight: isright });
+            console.log(isright);
+            // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
+            this.props.dispatchUpdateQuestion({ questionid: this.props.currentQuestion.questionId, answeredRight: isright });
+        } else {
+            this.props.dispatchGetNextQuestion();
+            this.setState({ answer3Clicked: true });
+            this.setState({ answer1Clicked: true });
+            this.setState({ answer2Clicked: true });
+        }
+    }
+
     answer1Click() {
-        if(this.state.check) return;
+        if (this.state.check) return;
         this.setState({ answer1Clicked: false });
         this.setState({ answer2Clicked: true });
         this.setState({ answer3Clicked: true });
         this.props.currentQuestion.question.answer1.choosen = true;
         this.props.currentQuestion.question.answer2.choosen = false;
         this.props.currentQuestion.question.answer3.choosen = false;
+        this.checkAnswers();
     }
 
     answer2Click() {
-        if(this.state.check) return;
+        if (this.state.check) return;
         this.setState({ answer2Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer3Clicked: true });
         this.props.currentQuestion.question.answer1.choosen = false;
         this.props.currentQuestion.question.answer2.choosen = true;
         this.props.currentQuestion.question.answer3.choosen = false;
+        this.checkAnswers();
     }
 
     answer3Click() {
-        if(this.state.check) return;
+        if (this.state.check) return;
         this.setState({ answer3Clicked: false });
         this.setState({ answer1Clicked: true });
         this.setState({ answer2Clicked: true });
         this.props.currentQuestion.question.answer1.choosen = false;
         this.props.currentQuestion.question.answer2.choosen = false;
         this.props.currentQuestion.question.answer3.choosen = true;
+        this.checkAnswers();
     }
 
     toogleModal() {
         this.refs.popupBottom.showAddModal();
-    }
-
-    checkAnswers() {
-        this.setState({check: !this.state.check});
-        if(!this.state.check){
-        var q = this.props.currentQuestion.question;
-        var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
-        this.setState({lastAnswerRight: isright});
-        console.log(isright);
-        // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
-        this.props.dispatchUpdateQuestion({questionid: this.props.currentQuestion.questionId, answeredRight: isright});
-        }else{
-        this.props.dispatchGetNextQuestion();
-        this.setState({ answer3Clicked: true });
-        this.setState({ answer1Clicked: true });
-        this.setState({ answer2Clicked: true });
-        }
     }
 
     render() {
@@ -76,18 +79,23 @@ class QuestionScene extends Component {
 
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
-        const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#0f0' : '#f00' : answer1Clicked ? "#fff9" : "white";
-        const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#0f0' : '#f00' : answer2Clicked ? "#fff9" : "white";
-        const background3 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer3.isRight ? '#0f0' : '#f00' : answer3Clicked ? "#fff9" : "white";
+        const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#44E677' : '#F44B4B' : answer1Clicked ? "white" : "white";
+        const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#44E677' : '#F44B4B' : answer2Clicked ? "white" : "white";
+        const background3 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer3.isRight ? '#44E677' : '#F44B4B' : answer3Clicked ? "white" : "white";
+
+        const borderColor1 = answer1Clicked ? "#fff0" : "#fff";
+        const borderColor2 = answer2Clicked ? "#fff0" : "#fff";
+        const borderColor3 = answer3Clicked ? "#fff0" : "#fff";
+
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
                     <View style={{ height: 180 }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.currentQuestion ? `${this.props.currentQuestion.sectionId}.${this.props.currentQuestion.moduleId} Frage ${this.props.currentQuestion.questionId.substr(4)}`: ''}
-                            </Text>
+                            {this.props.currentQuestion ? `${this.props.currentQuestion.sectionId}.${this.props.currentQuestion.moduleId} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
+                        </Text>
                         <Text style={styles.questionText}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.question:''}
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
                             {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
                         </Text>
                     </View>
@@ -104,32 +112,32 @@ class QuestionScene extends Component {
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer1Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background1
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background1, borderColor: borderColor1, borderWidth: 1.5
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer:''}
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer2Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background2
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background2, borderColor: borderColor2, borderWidth: 1.5
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                        {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer3Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 20, backgroundColor: background3
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background3, borderColor: borderColor3, borderWidth: 1.5
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                        {this.props.currentQuestion ?this.props.currentQuestion.question.answer3.answer:''}
+                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
                         </Text>
                     </TouchableOpacity>
-                    <Text>
-                        {this.state.check? this.state.lastAnswerRight? 'Anwort war richtig':'Antwort war leider falsch':''}
+                    <Text style={styles.answerTrueFalse}>
+                        {this.state.check ? this.state.lastAnswerRight ? 'Anwort war richtig' : 'Antwort war leider falsch' : ''}
                     </Text>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>
@@ -150,7 +158,7 @@ class QuestionScene extends Component {
                                 paddingRight: 24
                             }} onPress={() => this.checkAnswers()}>
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
-                                    {this.state.check?'Weiter':'Check'}
+                                    {this.state.check ? 'Weiter' : 'Check'}
                                 </Text>
                             </TouchableOpacity>
                         </View>
@@ -168,7 +176,7 @@ const styles = StyleSheet.create({
     questionView: {
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#304C59'
+        backgroundColor: '#003A65'
     },
     buttonStyle: {
         backgroundColor: 'rgba(255,255,255, 0.0)',
@@ -186,6 +194,14 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20,
         backgroundColor: '#ffffff',
+    },
+    answerTrueFalse: {
+        width: '100%',
+        textAlign: "center",
+        marginTop: 8,
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#fff"
     },
     linearLayout: {
         marginTop: 12,
