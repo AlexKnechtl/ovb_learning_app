@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
 import { signOutAction } from "core";
 import { connect } from "react-redux";
-
-const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18}}>
-        Prüfung starten
-    </Text>)
+import { Actions } from 'react-native-router-flux';
 
 const mainHeaderText = (
     <Text style={{ fontSize: 26, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
@@ -15,28 +11,66 @@ const mainHeaderText = (
     </Text>
 )
 
-const picture1 = require("../img/wk_allgemeinesrecht_bg.jpg")
-const picture2 = require("../img/wk_sachversicherungen_bg.jpg")
+const icOptions = require('../img/ic_options.png')
+const icBack = require('../img/ic_back.png')
 
 class HomeScene extends Component {
     constructor(props) {
         super(props);
-        this.state = { testMode: false };
-        this.toogleModal = this.toogleModal.bind(this);
+        this.state = {
+            testMode: false,
+            icon: icOptions
+        };
     }
 
-    toogleTestMode() {
-        this.setState({
-            testMode: !this.state.testMode
-        });
-        console.log('Test Mode value is now: ', this.state.testMode);
+    testButtonPress() {
+        if (this.state.testMode == false) {
+            this.setState({
+                testMode: !this.state.testMode,
+                icon: icBack
+            });
+        } else if (this.state.testMode == true) {
+
+        }
     }
 
-    toogleModal() {
-        this.refs.popupCenter.showAddModal();
+    optionsPress() {
+        if (this.state.testMode == false) {
+            this.refs.popupCenter.showAddModal();
+        } else if (this.state.testMode == true) {
+            this.setState({
+                testMode: !this.state.testMode,
+                icon: icOptions
+            });
+        }
+    }
+
+    categoryPress(i) {
+        if (this.state.testMode == false) {
+            console.log(i);
+            Actions.main();
+        } else {
+            console.log(i);
+        }
     }
 
     render() {
+
+        const { testMode } = this.state;
+        const btnText = testMode ? "Prüfung starten" : "Prüfung auswählen";
+        const background = testMode ? "#fff0" : "#fff"
+        var testModus = false;
+
+        let erfolgsChanceView;
+
+        if (testMode == true) {
+            erfolgsChanceView = null;
+            testModus = true;
+        } else {
+            testModus = false;
+            //erfolgsChanceView = <Text style={styles.chanceTextStyle}>30%</Text>;
+        }
+
         return (
             <View style={{ flex: 1, alignItems: "stretch" }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -46,21 +80,31 @@ class HomeScene extends Component {
                     />
                 </SafeAreaView >
                 <MainHeader
-                    style={{backgroundColor: "#94C231", flexDirection: 'row-reverse', alignItems: 'center'}}
-                    onPressButton={() => this.toogleTestMode()}
-                    optionsPress={() => this.toogleModal()}
-                    buttonText={btnText}
-                    children={mainHeaderText} />
+                    text={btnText}
+                    style2={{ backgroundColor: "#fff0", height: 0, width: 0, marginLeft: -8 }}
+                    onPressButton={() => this.testButtonPress()}
+                    optionsPress={() => this.optionsPress()}
+                    children={mainHeaderText}
+                    children2={<Image style={{ height: 40, width: 40 }} source={this.state.icon} />}
+                />
                 <ScrollView
                     style={styles.containerStyle}
                     resizeMode='cover'>
                     <SafeAreaView>
-                        {this.props.modules.map((module) => <Category key={module.title} imageUri={{uri: module.imageUrl}} titleText={module.title} />)}
+                        {this.props.modules.map((module) =>
+                            <Category
+                                key={module.title}
+                                ref={(thisItem) => this[module.title] = thisItem}
+                                onPress={this.categoryPress.bind(this, module.title)}
+                                isPressed={this.state}
+                                erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
+                                imageUri={{ uri: module.imageUrl }}
+                                titleText={module.title}
+                            />
+                        )}
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'} logOut={()=> { this.props.dispatchLogOut(); }}>
-
-                </PopupCenter>
+                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} />
             </View>
         );
     }

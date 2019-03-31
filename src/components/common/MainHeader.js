@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 //Make a Component
 const MainHeader = (props) => {
@@ -12,20 +12,21 @@ const MainHeader = (props) => {
             <View style={[styles.linearLayout2, props.style]}>
                 <View style={styles.iconViewLayout}>
                     <TouchableOpacity hidden onPress={props.optionsPress}>
-                        <View style={styles.iconView}>
-                            <Image style={styles.pdfImageStyle} source={require('../../img/pdf_icon.png')} />
+                        <View style={[styles.iconView, props.style2]}>
+                            <Image style={[styles.pdfImageStyle, props.style2]} source={require('../../img/pdf_icon.png')} />
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={props.optionsPress}>
                         <View style={styles.iconView}>
-                            <Image style={styles.settingsImageStyle} source={require('../../img/ic_options.png')} />
+                            {props.children2}
                         </View>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity onPress={props.onPressButton} style={styles.buttonStyle}>
-                    <View
-                        children={props.buttonText}
-                        /*style={styles.buttonStyle}*/>
+                    <View >
+                        <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
+                            {props.text}
+                        </Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -76,13 +77,9 @@ const styles = StyleSheet.create({
         height: 56,
         width: 56
     },
-    settingsImageStyle: {
-        width: 40,
-        height: 40,
-    },
     pdfImageStyle: {
-      height: 28,
-      width: 28  
+        height: 28,
+        width: 28
     },
     buttonStyle: {
         flex: 1,
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    buttonTextStyle:{
+    buttonTextStyle: {
         paddingLeft: 8,
         paddingRight: 8,
         justifyContent: "center",

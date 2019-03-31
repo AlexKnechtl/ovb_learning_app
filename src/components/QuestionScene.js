@@ -112,7 +112,7 @@ class QuestionScene extends Component {
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer1Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background1, borderColor: borderColor1, borderWidth: 1.5
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background1, borderColor: borderColor1, borderWidth: 2
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
                             {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
@@ -121,7 +121,7 @@ class QuestionScene extends Component {
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer2Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background2, borderColor: borderColor2, borderWidth: 1.5
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background2, borderColor: borderColor2, borderWidth: 2
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
                             {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
@@ -130,14 +130,14 @@ class QuestionScene extends Component {
                     <TouchableOpacity disabled={this.state.check}
                         onPress={this.answer3Click.bind(this)}
                         style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background3, borderColor: borderColor3, borderWidth: 1.5
+                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background3, borderColor: borderColor3, borderWidth: 2
                         }}>
                         <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
                             {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.answerTrueFalse}>
-                        {this.state.check ? this.state.lastAnswerRight ? 'Anwort war richtig' : 'Antwort war leider falsch' : ''}
+                        {this.state.check ? this.state.lastAnswerRight ? 'Anwort ist richtig' : 'Antwort ist falsch' : ''}
                     </Text>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>

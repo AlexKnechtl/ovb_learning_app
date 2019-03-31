@@ -1,14 +1,11 @@
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 const Category = (props) => {
     return (
         <TouchableWithoutFeedback
-            onPress={() => {
-                Actions.main();
-            }}>
+            onPress={props.onPress}>
             <View>
                 <ImageBackground
                     source={props.imageUri}
@@ -26,9 +23,10 @@ const Category = (props) => {
                             </View>
                             <View style={{ marginTop: 8, alignItems: 'center', justifyContent: 'center' }}>
                                 <View style={styles.chanceViewStyle}>
+                                    {props.erfolgsChance}
                                     <Text style={styles.chanceTextStyle}>30%</Text>
                                 </View>
-                                <Text style={{ fontSize: 14, margin: 3, color: "#fff" }}>Erfolgschance</Text>
+                                    {props.erfolgText}
                             </View>
                         </View>
                     </View>
@@ -45,8 +43,12 @@ const styles = StyleSheet.create({
         marginRight: 12,
         marginTop: 12
     },
+    textErfolg: {
+        fontSize: 14,
+        margin: 3,
+        color: "#fff"
+    },
     titleStyle: {
-        backgroundColor: "#fff3",
         justifyContent: "center",
         height: 40
     },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 
 const btnText = (
@@ -42,8 +42,10 @@ class CategoryScene extends Component {
                     />
                 </SafeAreaView >
                 <MainHeader
+                    text="Lernvorgang fortsetzen"
                     buttonText={btnText}
                     children={mainHeaderText}
+                    children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
                 />
                 <ScrollView

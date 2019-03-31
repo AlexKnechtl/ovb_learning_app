@@ -47,9 +47,11 @@ class CategoryInfoScene extends Component {
                     />
                 </SafeAreaView >
                 <MainHeader
+                    text="Lernvorgang fortsetzen"
                     style={{ backgroundColor: "#663399", flexDirection: 'row-reverse', alignItems: 'center' }}
                     buttonText={btnText}
                     children={mainHeaderText}
+                    children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
                 />
                 <ScrollView
