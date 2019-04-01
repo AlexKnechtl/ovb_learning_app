@@ -4,6 +4,7 @@ import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter } from './common';
+import { connect } from "react-redux";
 
 var screen = Dimensions.get("window");
 
@@ -59,7 +60,7 @@ class CategoryInfoScene extends Component {
                     resizeMode='cover'>
                     <SafeAreaView>
                         <Text style={styles.titleTextStyle}>
-                            1.2 Grundzüge des bürgerlichen Rechts
+                            {`${this.props.modules.selectedSubmodule.replace("_",".")} ${this.props.modules.selectedSubmoduleName}`}
                         </Text>
                         <View style={{ marginTop: 12 }}>
                             <Text style={styles.statisticTextStyle}>
@@ -150,4 +151,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CategoryInfoScene;
+
+const mapDispatchToProps = {
+};
+
+const mapStateToProps = state => ({
+    modules: state.modules,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryInfoScene);

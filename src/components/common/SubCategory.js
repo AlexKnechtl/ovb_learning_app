@@ -5,9 +5,7 @@ import { Actions } from 'react-native-router-flux';
 
 const SubCategory = (props) => {
     return (
-        <TouchableWithoutFeedback onPress={() => {
-            Actions.info();
-        }}>
+        <TouchableWithoutFeedback onPress={props.onPress}>
             <View style={styles.containerStyle}>
                 <View style={styles.titleStyle}>
                     <Text style={styles.titleTextStyle}>{props.titleText}</Text>

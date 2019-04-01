@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
-import { signOutAction } from "core";
+import { signOutAction, SetCurrentModuleAction } from "core";
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 
@@ -57,15 +57,15 @@ class HomeScene extends Component {
         }
     }
 
-    categoryPress(i) {
+    categoryPress(sectionID) {
         if (this.state.testMode == false) {
-            Actions.main();
+            this.props.dispatchSelectCategory(sectionID);
         } else {
-            var cat = this.state.categories[i]||{};
+            var cat = this.state.categories[sectionID]||{};
             cat.isPressed = !cat || !cat.isPressed;
             this.setState({
                 categories: {
-                    ...this.state.categories, [i]: cat
+                    ...this.state.categories, [sectionID]: cat
                 }
             });
         }
@@ -87,6 +87,7 @@ class HomeScene extends Component {
             testModus = false;
             //erfolgsChanceView = <Text style={styles.chanceTextStyle}>30%</Text>;
         }
+        // console.log(this.props.modules);
 
         return (
             <View style={{ flex: 1, alignItems: "stretch" }}>
@@ -111,9 +112,9 @@ class HomeScene extends Component {
                         {Object.keys(this.props.modules).map((sectionID) =>
                             <Category
                                 key={sectionID}
-                                ref={(thisItem) => this[sectionID] = thisItem}
+                                // ref={(thisItem) => this[sectionID] = thisItem}
                                 onPress={this.categoryPress.bind(this, sectionID)}
-                                isPressed={(this.state.categories[module.title]||{}).isPressed}
+                                isPressed={(this.state.categories[sectionID]||{}).isPressed}
                                 testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
                                 imageUri={{ uri: this.props.modules[sectionID].image }}
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
     dispatchLogOut: signOutAction,
+    dispatchSelectCategory: SetCurrentModuleAction
 };
 
 const mapStateToProps = state => ({

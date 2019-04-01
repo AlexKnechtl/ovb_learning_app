@@ -7,7 +7,7 @@ import LoadingScene from './components/LoadingScene';
 import QuestionScene from './components/QuestionScene';
 import CategoryScene from './components/CategoryScene';
 import CategoryInfoScene from './components/CategoryInfoScene';
-import { LOGIN_SUCCESS, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, LOGIN_FAILED } from 'core/lib/adapters/redux/actions/types';
+import { LOGIN_SUCCESS, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, LOGIN_FAILED, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE } from '../core/lib/adapters/redux/actions/types';
 
 export default RouterComponent = () => {
     return (
@@ -58,6 +58,10 @@ export const sceneReducer = (state = {}, {type}) => {
         case START_SIGN_IN : Actions.auth();
             return state;
         case START_SIGN_IN_WITHOUT_CREDENTIAL : Actions.auth();
+            return state;
+        case SET_CURRENT_MODULE: Actions.main();
+            return state;
+        case SELECT_CURRENT_SUBMODULE: Actions.info();
             return state;
         default:
             return state;
