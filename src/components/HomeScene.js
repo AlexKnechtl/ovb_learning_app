@@ -108,16 +108,16 @@ class HomeScene extends Component {
                     style={styles.containerStyle}
                     resizeMode='cover'>
                     <SafeAreaView>
-                        {this.props.modules.map((module) =>
+                        {Object.keys(this.props.modules).map((sectionID) =>
                             <Category
-                                key={module.title}
-                                ref={(thisItem) => this[module.title] = thisItem}
-                                onPress={this.categoryPress.bind(this, module.title)}
+                                key={sectionID}
+                                ref={(thisItem) => this[sectionID] = thisItem}
+                                onPress={this.categoryPress.bind(this, sectionID)}
                                 isPressed={(this.state.categories[module.title]||{}).isPressed}
                                 testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
-                                imageUri={{ uri: module.imageUrl }}
-                                titleText={module.title}
+                                imageUri={{ uri: this.props.modules[sectionID].image }}
+                                titleText={this.props.modules[sectionID].name}
                             />
                         )}
                     </SafeAreaView>
