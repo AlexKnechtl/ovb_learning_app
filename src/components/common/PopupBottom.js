@@ -53,10 +53,10 @@ export default class PopupBottom extends Component {
                     </TouchableOpacity>
                 </View>
                 <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 8, alignSelf: "center", color: "white" }}>
-                    3.5 Private Unfallversicherung
+                    {this.props.sectionText}
                 </Text>
                 <Text style={{ fontSize: 20, alignSelf: "center", color: "white" }}>
-                    Frage 09 / 11
+                    {this.props.questionNumberText}
                 </Text>
             </Modal>
         );
