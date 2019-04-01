@@ -19,8 +19,10 @@ class HomeScene extends Component {
         super(props);
         this.state = {
             testMode: false,
-            icon: icOptions
+            icon: icOptions,
+            categories: []
         };
+        console.log(this.state);
     }
 
     testButtonPress() {
@@ -36,8 +38,18 @@ class HomeScene extends Component {
 
     optionsPress() {
         if (this.state.testMode == false) {
+            //No Test Mode
+            
             this.refs.popupCenter.showAddModal();
         } else if (this.state.testMode == true) {
+            //Test Mode activated
+            var cats = this.state.categories;
+            Object.keys(cats).forEach(key => cats[key].isPressed = false);
+            this.setState({
+                categories: {
+                    ...cats
+                }
+            });
             this.setState({
                 testMode: !this.state.testMode,
                 icon: icOptions
@@ -47,10 +59,15 @@ class HomeScene extends Component {
 
     categoryPress(i) {
         if (this.state.testMode == false) {
-            console.log(i);
             Actions.main();
         } else {
-            console.log(i);
+            var cat = this.state.categories[i]||{};
+            cat.isPressed = !cat || !cat.isPressed;
+            this.setState({
+                categories: {
+                    ...this.state.categories, [i]: cat
+                }
+            });
         }
     }
 
@@ -96,7 +113,8 @@ class HomeScene extends Component {
                                 key={module.title}
                                 ref={(thisItem) => this[module.title] = thisItem}
                                 onPress={this.categoryPress.bind(this, module.title)}
-                                isPressed={this.state}
+                                isPressed={(this.state.categories[module.title]||{}).isPressed}
+                                testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
                                 imageUri={{ uri: module.imageUrl }}
                                 titleText={module.title}

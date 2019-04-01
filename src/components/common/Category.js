@@ -1,8 +1,18 @@
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
-import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 
 const Category = (props) => {
+
+    renderView = () => {
+        if(!props.testMode) {
+            props.isPressed = false;
+            return <Text style={{ fontSize: 16, fontWeight: "bold", color: props.testMode ? '#fff0' : '#fff' }}>30%</Text>;
+        } else {
+            return <Image source={require('../../img/ic_check.png')} style={{ width: props.isPressed ? 31 : 0, height: 24}} />;
+        }
+    }
+
     return (
         <TouchableWithoutFeedback
             onPress={props.onPress}>
@@ -22,11 +32,10 @@ const Category = (props) => {
                                 <Text style={styles.textStyle}>3 Fragen falsch beantwortet</Text>
                             </View>
                             <View style={{ marginTop: 8, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={styles.chanceViewStyle}>
-                                    {props.erfolgsChance}
-                                    <Text style={styles.chanceTextStyle}>30%</Text>
+                                <View style={{backgroundColor: props.isPressed ? 'rgba(46, 239, 100, 0.55)' : '#fff3', width: 50, height: 50, justifyContent: "center", alignItems: "center"}}>
+                                    {renderView()}
                                 </View>
-                                    {props.erfolgText}
+                                {props.erfolgText}
                             </View>
                         </View>
                     </View>
