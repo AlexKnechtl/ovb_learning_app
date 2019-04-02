@@ -145,7 +145,7 @@ class QuestionScene extends Component {
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>{this.state.check &&
                             <TouchableOpacity style={{
                                 flex: 1,
                                 backgroundColor: 'rgba(255,255,255, 0.0)',
@@ -160,7 +160,7 @@ class QuestionScene extends Component {
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                     {this.state.check ? 'Weiter' : 'Check'}
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
                         </View>
                     </View>
                     <PopupBottom ref={'popupBottom'} 

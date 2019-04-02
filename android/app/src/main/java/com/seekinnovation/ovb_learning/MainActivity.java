@@ -1,4 +1,4 @@
-package com.wkolernplattform;
+package com.seekinnovation.ovb_learning;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "WKOLernplattform";
+        return "OVB Learning";
     }
 }
