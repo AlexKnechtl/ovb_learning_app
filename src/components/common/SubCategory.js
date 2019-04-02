@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Progress from 'react-native-progress';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 const SubCategory = (props) => {
     return (

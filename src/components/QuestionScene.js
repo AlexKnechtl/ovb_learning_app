@@ -137,7 +137,7 @@ class QuestionScene extends Component {
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.answerTrueFalse}>
-                        {this.state.check ? this.state.lastAnswerRight ? 'Anwort ist richtig' : 'Antwort ist falsch' : ''}
+                        {this.state.check ? this.state.lastAnswerRight ? 'Antwort ist richtig' : 'Antwort ist falsch' : ''}
                     </Text>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>

@@ -15,9 +15,10 @@ const DismissKeyboard = ({ children }) => (
 )
 
 const buttonText = (
-    <Text style={{ alignSelf: 'center', color: '#45B759', fontSize: 22, fontWeight: "bold", paddingTop: 10, paddingBottom: 10 }}>
+    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontWeight: "bold", paddingTop: 10, paddingBottom: 10 }}>
         Anmelden
-    </Text>)
+    </Text>
+)
 
 class LoginScene extends Component {
     state = {

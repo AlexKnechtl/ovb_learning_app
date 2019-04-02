@@ -5,11 +5,11 @@ import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback, Imag
 const Category = (props) => {
 
     renderView = () => {
-        if(!props.testMode) {
+        if (!props.testMode) {
             props.isPressed = false;
             return <Text style={{ fontSize: 16, fontWeight: "bold", color: props.testMode ? '#fff0' : '#fff' }}>30%</Text>;
         } else {
-            return <Image source={require('../../img/ic_check.png')} style={{ width: props.isPressed ? 31 : 0, height: 24}} />;
+            return <Image source={require('../../img/ic_check.png')} style={{ width: props.isPressed ? 31 : 0, height: 24 }} />;
         }
     }
 
@@ -25,17 +25,19 @@ const Category = (props) => {
                         <View style={styles.titleStyle}>
                             <Text style={styles.titleTextStyle}>{props.titleText}</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={styles.textStyle}>45% abgeschlossen</Text>
-                                <ProgressBar progress={0.45} height={16} width={190} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.textStyle}>3 Fragen falsch beantwortet</Text>
-                            </View>
-                            <View style={{ marginTop: 8, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{backgroundColor: props.isPressed ? 'rgba(46, 239, 100, 0.55)' : '#fff3', width: 50, height: 50, justifyContent: "center", alignItems: "center"}}>
+                        <View style={{ flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <View style={{ marginTop: 4, alignItems: 'center', justifyContent: 'center', marginRight: 6 }}>
+                                <View style={{ backgroundColor: props.isPressed ? 'rgba(46, 239, 100, 0.55)' : '#fff3', width: 50, height: 50, justifyContent: "center", alignItems: "center" }}>
                                     {renderView()}
                                 </View>
                                 {props.erfolgText}
+                            </View>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                                <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontWeight: "bold" }}>Lernfortschritt</Text>
+                                <ProgressBar style={{ minHeight: 22, width: "85%"}} width={null} progress={0.65} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
+                                    <Text style={{ marginTop: -19, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>65%</Text>
+                                </ProgressBar>
+                                <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>3 Fragen richtig / 2 falsch</Text>
                             </View>
                         </View>
                     </View>
@@ -69,7 +71,8 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 16,
-        margin: 8,
+        marginTop: 8,
+        marginBottom: 6,
         color: '#fff'
     },
     chanceViewStyle: {
