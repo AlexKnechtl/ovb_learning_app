@@ -145,7 +145,7 @@ class QuestionScene extends Component {
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>{this.state.check &&
                             <TouchableOpacity style={{
                                 flex: 1,
                                 backgroundColor: 'rgba(255,255,255, 0.0)',
@@ -160,12 +160,12 @@ class QuestionScene extends Component {
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                     {this.state.check ? 'Weiter' : 'Check'}
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
                         </View>
                     </View>
-                    <PopupBottom ref={'popupBottom'}
-                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")}` : ''}
-                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
+                    <PopupBottom ref={'popupBottom'} 
+                    sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}`: ''}
+                    questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}`: ''} >
 
                     </PopupBottom>
                 </View>
@@ -270,6 +270,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     currentQuestion: state.learning.currentQuestion,
+    modules: state.modules
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionScene);

@@ -38,7 +38,7 @@ class CategoryScene extends Component {
         var currMID = this.props.modules.currentModuleID;
         if(!currMID) return undefined;
         var currMods = this.props.modules.modules[currMID].modules;
-        return Object.keys(currMods).map(key => <SubCategory key={key} onPress={() => {console.log(`key: ${key}, name: ${currMods[key].name}`);this.props.dispatchSelectSubmodule(key, currMods[key].name);}} titleText={currMods[key].name}/>);
+        return Object.keys(currMods).map(key => <SubCategory key={key} onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)} titleText={`${key.replace('_', '.')} ${currMods[key].name}`}/>);
     }
 
     render() {

@@ -17,7 +17,7 @@ export default RouterComponent = () => {
                     <Scene key='loading' component={LoadingScene} />   
                     <Scene key="login" component={LoginScene} />
                 </Scene>
-                <Scene key="home" component={HomeScene} gesturesEnabled={false} />
+                <Scene key="home" component={HomeScene} gesturesEnabled={false} renderBackButton={false} type={ActionConst.RESET} />
                 <Stack key="main" hideNavBar cardStyle={{backgroundColor: '#FFF'}}>
                     <Scene key="category" component={CategoryScene} />
                     <Scene key="info" component={CategoryInfoScene} />
