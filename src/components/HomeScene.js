@@ -99,6 +99,7 @@ class HomeScene extends Component {
                 </SafeAreaView >
                 <MainHeader
                     text={btnText}
+                    style={{ backgroundColor: "#94C231", flexDirection: 'row-reverse', alignItems: 'center' }}
                     style2={{ backgroundColor: "#fff0", height: 0, width: 0, marginLeft: -8 }}
                     onPressButton={() => this.testButtonPress()}
                     optionsPress={() => this.optionsPress()}

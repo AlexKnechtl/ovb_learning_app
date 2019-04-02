@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     lineStyle: {
         height: 32,
-        width: 1,
+        width: 1.7,
         marginLeft: 10,
         marginRight: 10,
         backgroundColor: '#ffffff'

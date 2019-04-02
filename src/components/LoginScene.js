@@ -5,7 +5,7 @@ import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, Image
 import { Input, Button, Spinner } from './common';
 import { signInAction } from 'core';
 
-const userIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_user.png')} />)
+const mailIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_mail.png')} />)
 const lockIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_password.png')} />)
 
 const DismissKeyboard = ({ children }) => (
@@ -15,7 +15,7 @@ const DismissKeyboard = ({ children }) => (
 )
 
 const buttonText = (
-    <Text style={{ alignSelf: 'center', color: '#003A65', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+    <Text style={{ alignSelf: 'center', color: '#45B759', fontSize: 22, fontWeight: "bold", paddingTop: 10, paddingBottom: 10 }}>
         Anmelden
     </Text>)
 
@@ -24,10 +24,7 @@ class LoginScene extends Component {
         email: "",
         password: ""
     };
-    // state = {
-    //     email: "fmoretti981@gmail.com",
-    //     password: "Passw0rd"
-    // };
+
     onEmailChange(text) {
         this.setState({ email: text });
     }
@@ -44,8 +41,6 @@ class LoginScene extends Component {
     }
 
     renderError() {
-        // console.log(`renderError(${this.props.error})`);
-
         if (this.props.error && this.props.error != "") {
             return (
                 <View style={{ marginTop: 8 }} >
@@ -69,11 +64,11 @@ class LoginScene extends Component {
         return (
             <ImageBackground
                 style={styles.containerStyle}
-                source={require('../img/bg_ovb.png')}
+                source={require('../img/bg2.png')}
                 resizeMode='cover'>
-                <SafeAreaView style={{ backgroundColor: "#003A65" }}>
+                <SafeAreaView style={{ backgroundColor: "#fff0" }}>
                     <StatusBar
-                        backgroundColor="#003A65"
+                        backgroundColor="#fff0"
                         barStyle="light-content"
                     />
                 </SafeAreaView >
@@ -85,8 +80,8 @@ class LoginScene extends Component {
                         </Text>
                         <View style={{ marginTop: 42 }}>
                             <Input
-                                children={userIcon}
-                                placeholderText="Username"
+                                children={mailIcon}
+                                placeholderText="E-Mail"
                                 onChangeText={this.onEmailChange.bind(this)}
                                 value={this.state.email}
                             />
@@ -129,7 +124,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#fff',
-        fontSize: 32,
+        fontSize: 36,
         fontWeight: "bold",
         alignSelf: 'center'
     },
