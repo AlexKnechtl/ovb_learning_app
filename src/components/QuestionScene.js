@@ -164,7 +164,7 @@ class QuestionScene extends Component {
                         </View>
                     </View>
                     <PopupBottom ref={'popupBottom'} 
-                    sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")}`: ''}
+                    sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}`: ''}
                     questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}`: ''} >
 
                     </PopupBottom>
@@ -270,6 +270,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     currentQuestion: state.learning.currentQuestion,
+    modules: state.modules
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionScene);
