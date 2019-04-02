@@ -92,8 +92,8 @@ class QuestionScene extends Component {
                 <SafeAreaView>
                     <View style={{ height: 180 }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}`: ''}
-                            </Text>
+                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
+                        </Text>
                         <Text style={styles.questionText}>
                             {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
                             {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
@@ -163,9 +163,9 @@ class QuestionScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <PopupBottom ref={'popupBottom'} 
-                    sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")}`: ''}
-                    questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}`: ''} >
+                    <PopupBottom ref={'popupBottom'}
+                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")}` : ''}
+                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
 
                     </PopupBottom>
                 </View>

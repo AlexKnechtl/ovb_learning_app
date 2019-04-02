@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         height: 46,
         marginTop: 12,
-        marginRight: 50,
-        marginLeft: 50,
+        marginRight: 70,
+        marginLeft: 70,
         backgroundColor: '#fff'
     }
 });

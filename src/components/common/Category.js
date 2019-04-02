@@ -28,7 +28,7 @@ const Category = (props) => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                                 <Text style={styles.textStyle}>45% abgeschlossen</Text>
-                                <ProgressBar progress={0.45} height={12} width={190} color={'#94C231'} unfilledColor='#93A9AF' borderWidth={0} borderRadius={0} />
+                                <ProgressBar progress={0.45} height={16} width={190} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0} />
                                 <Text style={styles.textStyle}>3 Fragen falsch beantwortet</Text>
                             </View>
                             <View style={{ marginTop: 8, alignItems: 'center', justifyContent: 'center' }}>

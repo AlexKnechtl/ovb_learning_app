@@ -9,9 +9,9 @@ class LoadingScene extends Component {
         return (
             <ImageBackground
                 style={styles.containerStyle}
-                source={require('../img/bg_ovb.png')}
+                source={require('../img/bg2.png')}
                 resizeMode='cover'>
-                <SafeAreaView style={{ }}>
+                <SafeAreaView style={{}}>
                     <StatusBar
                         barStyle="light-content"
                     />
@@ -21,10 +21,12 @@ class LoadingScene extends Component {
                     <Text style={styles.headerText}>
                         Learning Suite
                     </Text>
-                    <View style={{ marginTop: 32 }}>
+                    <View style={{ marginTop: 62, flexDirection: "column" }}>
+                        <ActivityIndicator size="large" />
+                        <Text style={{ color: "#fff", fontSize: 16, marginTop: 12 }}>Daten werden geladen...</Text>
                     </View>
                     <View style={styles.bottom}>
-                        <View style= {styles.linearLayout}>
+                        <View style={styles.linearLayout}>
                             <Image style={styles.logoSmall} source={require('../img/seek_innovation_logo.png')} />
                             <Text style={styles.smallHeaderText}>
                                 Powered by SeekInnovation
@@ -50,8 +52,9 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#fff',
-        fontSize: 38,
-        marginTop: 48,
+        fontSize: 36,
+        fontWeight: "bold",
+        marginTop: 32,
         alignSelf: 'center'
     },
     bottom: {
