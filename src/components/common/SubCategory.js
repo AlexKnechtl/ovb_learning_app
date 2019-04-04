@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#003A65",
         marginLeft: 16,
         marginRight: 16,
-        marginTop: 12
+        marginBottom: 12
     },
     linearLayout: {
         flexDirection: 'row',

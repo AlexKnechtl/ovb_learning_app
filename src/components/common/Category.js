@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         height: 128,
         marginLeft: 12,
         marginRight: 12,
-        marginTop: 12
+        marginBottom: 12
     },
     textErfolg: {
         fontSize: 14,

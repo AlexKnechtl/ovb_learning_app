@@ -12,6 +12,8 @@ const Button = ({ onPress, children, style }) => {
 const styles = StyleSheet.create({
     buttonStyle: {
         alignSelf: 'stretch',
+        justifyContent: "center",
+        alignItems: "center",
         height: 46,
         marginTop: 12,
         marginRight: 70,
