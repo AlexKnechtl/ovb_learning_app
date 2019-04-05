@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
-//import { emailChanged, passwordChanged, loginUser } from '../actions';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Input, Button, Spinner } from './common';
 import { signInAction } from 'core';
 
@@ -15,9 +15,10 @@ const DismissKeyboard = ({ children }) => (
 )
 
 const buttonText = (
-    <Text style={{ alignSelf: 'center', color: '#45B759', fontSize: 22, fontWeight: "bold", paddingTop: 10, paddingBottom: 10 }}>
+    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontWeight: "bold" }}>
         Anmelden
-    </Text>)
+    </Text>
+)
 
 class LoginScene extends Component {
     state = {
@@ -68,7 +69,7 @@ class LoginScene extends Component {
                 resizeMode='cover'>
                 <SafeAreaView style={{ backgroundColor: "#fff0" }}>
                     <StatusBar
-                        backgroundColor="#fff0"
+                        backgroundColor="#154A38"
                         barStyle="light-content"
                     />
                 </SafeAreaView >
@@ -96,6 +97,7 @@ class LoginScene extends Component {
                                 onPress={this.onButtonPress.bind(this)}>
                             </Button>
                         </View>
+                        <KeyboardSpacer />
                         {this.renderError()}
                         {/* {this.renderSpinner()} */}
                         <View style={styles.bottom}>
@@ -141,16 +143,16 @@ const styles = StyleSheet.create({
         borderColor: '#fff4'
     },
     logoBig: {
-        marginTop: 24,
+        marginTop: '10%',
         marginBottom: 12,
         resizeMode: "contain",
-        height: 180,
+        height: '22%',
         width: 180
     },
     logoSmall: {
         resizeMode: "contain",
         width: 32,
-        height: 32,
+        height: '6%',
         marginRight: 10
     },
     iconStyle: {
@@ -171,13 +173,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         fontWeight: "bold",
-        marginTop: 18,
+        marginTop: 8,
+        marginBottom: 4,
         alignSelf: "center"
     },
     logoSmall: {
         resizeMode: "contain",
-        width: 48,
-        height: 48
+        width: 42,
+        height: 42
     }
 });
 

@@ -17,7 +17,8 @@ const icon_watch_questions = (<Image style={{ width: 32, height: 32, marginLeft:
 const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
-    </Text>)
+    </Text>
+)
 
 const mainHeaderText = (
     <View>
@@ -27,7 +28,8 @@ const mainHeaderText = (
         <Text style={{ fontSize: 18, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
             Allgemeine Rechtskunde
         </Text>
-    </View>)
+    </View>
+)
 
 class CategoryInfoScene extends Component {
     constructor(props) {
@@ -62,7 +64,7 @@ class CategoryInfoScene extends Component {
                     resizeMode='cover'>
                     <SafeAreaView>
                         <Text style={styles.titleTextStyle}>
-                            {`${this.props.modules.selectedSubmodule.replace("_",".")} ${this.props.modules.selectedSubmoduleName}`}
+                            {`${this.props.modules.selectedSubmodule.replace("_", ".")} ${this.props.modules.selectedSubmoduleName}`}
                         </Text>
                         <View style={{ marginTop: 12 }}>
                             <Text style={styles.statisticTextStyle}>
@@ -96,7 +98,7 @@ class CategoryInfoScene extends Component {
                         <ActionButton image={icon_continue} onPress={() => {
                             Actions.question();
                         }}>
-                            Lernvorgang fortsetzen
+                            Dieses Kapitel üben
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
                             Actions.question();

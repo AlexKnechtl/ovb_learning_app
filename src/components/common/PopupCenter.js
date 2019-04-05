@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         height: null,
         width: 280,
         alignItems: "center",
+        marginTop: 16,
         paddingLeft: 18,
         paddingRight: 18,
         paddingBottom: 18,

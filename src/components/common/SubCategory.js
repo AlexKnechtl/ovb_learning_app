@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Progress from 'react-native-progress';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 const SubCategory = (props) => {
     return (
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#003A65",
         marginLeft: 16,
         marginRight: 16,
-        marginTop: 12
+        marginBottom: 12
     },
     linearLayout: {
         flexDirection: 'row',

@@ -47,7 +47,7 @@ class CategoryScene extends Component {
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
-                        backgroundColor="#304C59"
+                        backgroundColor="#003A65"
                         barStyle="light-content"
                     />
                 </SafeAreaView >

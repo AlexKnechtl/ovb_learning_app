@@ -11,8 +11,9 @@ class LoadingScene extends Component {
                 style={styles.containerStyle}
                 source={require('../img/bg2.png')}
                 resizeMode='cover'>
-                <SafeAreaView style={{}}>
+                <SafeAreaView style={{ backgroundColor: "#fff0" }}>
                     <StatusBar
+                        backgroundColor="#154A38"
                         barStyle="light-content"
                     />
                 </SafeAreaView >
@@ -82,9 +83,9 @@ const styles = StyleSheet.create({
         marginTop: 32
     },
     logoBig: {
-        marginTop: 100,
+        marginTop: '15%',
         resizeMode: "contain",
-        height: 194,
+        height: '25%',
         width: 194
     }
 });

@@ -93,7 +93,7 @@ class HomeScene extends Component {
             <View style={{ flex: 1, alignItems: "stretch" }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
-                        backgroundColor="#304C59"
+                        backgroundColor="#003A65"
                         barStyle="light-content"
                     />
                 </SafeAreaView >

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
 
@@ -91,7 +91,7 @@ class QuestionScene extends Component {
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
-                    <View style={{ height: 180 }}>
+                    <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
                             {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
                         </Text>
@@ -99,54 +99,52 @@ class QuestionScene extends Component {
                             {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
                             {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
                         </Text>
-                    </View>
+                    </ScrollView>
                 </SafeAreaView>
-
+                <View style={styles.lineColor} />
                 <View style={styles.questionView}>
-                    <View style={styles.lineColor} />
-                    <View style={styles.linearLayout2}>
-                        <Text style={styles.answerHeaderText}>
-                            Antworten
-                        </Text>
-                        <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
-                    </View>
-                    <TouchableOpacity disabled={this.state.check}
-                        onPress={this.answer1Click.bind(this)}
-                        style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background1, borderColor: borderColor1, borderWidth: 2
-                        }}>
-                        <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity disabled={this.state.check}
-                        onPress={this.answer2Click.bind(this)}
-                        style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background2, borderColor: borderColor2, borderWidth: 2
-                        }}>
-                        <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity disabled={this.state.check}
-                        onPress={this.answer3Click.bind(this)}
-                        style={{
-                            flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginTop: 18, backgroundColor: background3, borderColor: borderColor3, borderWidth: 2
-                        }}>
-                        <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
-                        </Text>
-                    </TouchableOpacity>
-                    <Text style={styles.answerTrueFalse}>
-                        {this.state.check ? this.state.lastAnswerRight ? 'Anwort ist richtig' : 'Antwort ist falsch' : ''}
-                    </Text>
+                    <ScrollView style={{ flex: 1, height: '100%' }}>
+                        <View style={styles.linearLayout2}>
+                            <Text style={styles.answerHeaderText}>
+                                Antworten
+                                </Text>
+                            <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
+                        </View>
+                        <TouchableOpacity disabled={this.state.check}
+                            onPress={this.answer1Click.bind(this)}
+                            style={{
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginBottom: 16, backgroundColor: background1, borderColor: borderColor1, borderWidth: 2
+                            }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
+                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity disabled={this.state.check}
+                            onPress={this.answer2Click.bind(this)}
+                            style={{
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginBottom: 16, backgroundColor: background2, borderColor: borderColor2, borderWidth: 2
+                            }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
+                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity disabled={this.state.check}
+                            onPress={this.answer3Click.bind(this)}
+                            style={{
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginHorizontal: 20, marginBottom: 16, backgroundColor: background3, borderColor: borderColor3, borderWidth: 2
+                            }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#003A65", fontSize: 14, padding: 8 }}>
+                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
+                            </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
-                            </TouchableOpacity>{this.state.check &&
+                            </TouchableOpacity>
                             <TouchableOpacity style={{
                                 flex: 1,
                                 backgroundColor: 'rgba(255,255,255, 0.0)',
@@ -157,17 +155,16 @@ class QuestionScene extends Component {
                                 borderWidth: 2,
                                 paddingLeft: 24,
                                 paddingRight: 24
-                            }} onPress={() => this.checkAnswers()}>
-                                <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
-                                    {this.state.check ? 'Weiter' : 'Check'}
+                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                                <Text style={{ color: this.state.check ? '#fff' : '#fff6', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                    Weiter
                                 </Text>
-                            </TouchableOpacity>}
+                            </TouchableOpacity>
                         </View>
                     </View>
-                    <PopupBottom ref={'popupBottom'} 
-                    sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}`: ''}
-                    questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}`: ''} >
-
+                    <PopupBottom ref={'popupBottom'}
+                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
+                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
             </View>
@@ -207,7 +204,6 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     linearLayout: {
-        marginTop: 12,
         marginLeft: 20,
         marginRight: 20,
         flexDirection: 'row',
@@ -216,6 +212,7 @@ const styles = StyleSheet.create({
     },
     linearLayout2: {
         marginTop: 16,
+        marginBottom: 16,
         marginLeft: 20,
         marginRight: 20,
         flexDirection: 'row',
@@ -223,13 +220,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     bottom: {
-        flex: 1,
         justifyContent: 'flex-end',
-        marginBottom: 36
+        alignItems: "flex-end",
+        marginBottom: 18
     },
     questionTextHeader: {
-        fontSize: 30,
-        marginTop: 12,
+        fontSize: 28,
+        marginTop: 10,
         marginLeft: 20,
         fontWeight: "bold",
         color: '#003A65'
@@ -239,7 +236,7 @@ const styles = StyleSheet.create({
         color: '#003A65',
         marginLeft: 18,
         marginRight: 12,
-        marginTop: 6
+        marginTop: 4
     },
     answerHeaderText: {
         fontSize: 28,

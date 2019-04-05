@@ -52,10 +52,10 @@ export default class PopupBottom extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 8, alignSelf: "center", color: "white" }}>
+                <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginTop: 8, alignSelf: "center", color: "white" }}>
                     {this.props.sectionText}
                 </Text>
-                <Text style={{ fontSize: 20, alignSelf: "center", color: "white" }}>
+                <Text style={{ fontSize: 20, alignSelf: "center", textAlign: "center", color: "white" }}>
                     {this.props.questionNumberText}
                 </Text>
             </Modal>
