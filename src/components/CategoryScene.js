@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { SelectSubmoduleAction } from  'core';
+import { SelectSubmoduleAction, setLearningModeAction } from  'core';
+import { Actions } from 'react-native-router-flux';
 
 const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
@@ -56,6 +57,7 @@ class CategoryScene extends Component {
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
+                    onPressButton={() => {this.props.dispatchSelectLearningMode('section'); Actions.question();}}
                 />
                 <ScrollView
                     style={styles.containerStyle}
@@ -82,7 +84,8 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
-    dispatchSelectSubmodule: SelectSubmoduleAction
+    dispatchSelectSubmodule: SelectSubmoduleAction,
+    dispatchSelectLearningMode: setLearningModeAction
 };
 
 const mapStateToProps = state => ({

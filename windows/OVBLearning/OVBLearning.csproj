@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{91a2e844-36c6-4914-a1a4-a0fe3fc9d380}</ProjectGuid>
+    <ProjectGuid>{d1fd89c3-6b03-4302-92f6-d1a67d7a4ef6}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WKOLernplattform</RootNamespace>
-    <AssemblyName>WKOLernplattform</AssemblyName>
+    <RootNamespace>OVBLearning</RootNamespace>
+    <AssemblyName>OVBLearning</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -16,8 +16,8 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>WKOLernplattform_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>E5B7767AB8EA754851559BDDC06B5EC9694DCCDC</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>OVBLearning_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>AA9AFA3EAFA7DEF42A7D40038C66B7AF0A552275</PackageCertificateThumbprint>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <DependencyConfiguration>Debug</DependencyConfiguration>
   </PropertyGroup>
@@ -188,7 +188,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="WKOLernplattform_TemporaryKey.pfx" />
+    <None Include="OVBLearning_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />

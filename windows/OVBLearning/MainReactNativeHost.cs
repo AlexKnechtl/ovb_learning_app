@@ -3,11 +3,11 @@ using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using System.Collections.Generic;
 
-namespace WKOLernplattform
+namespace OVBLearning
 {
     class MainReactNativeHost : ReactNativeHost
     {
-        public override string MainComponentName => "WKOLernplattform";
+        public override string MainComponentName => "OVBLearning";
 
 #if !BUNDLE || DEBUG
         public override bool UseDeveloperSupport => true;

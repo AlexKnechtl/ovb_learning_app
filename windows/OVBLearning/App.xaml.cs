@@ -1,6 +1,6 @@
 ﻿using ReactNative;
 
-namespace WKOLernplattform
+namespace OVBLearning
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

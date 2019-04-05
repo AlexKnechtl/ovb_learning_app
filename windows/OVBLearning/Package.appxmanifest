@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="ab13427c-9ff3-4e17-b9a7-a43a2efb5e7e"
+    Name="76405ea4-9cdd-47da-a84d-f61fa2e1e689"
     Publisher="CN=fmore"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="ab13427c-9ff3-4e17-b9a7-a43a2efb5e7e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="76405ea4-9cdd-47da-a84d-f61fa2e1e689" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>WKOLernplattform</DisplayName>
+    <DisplayName>OVBLearning</DisplayName>
     <PublisherDisplayName>React Native for UWP</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="WKOLernplattform.App">
+      EntryPoint="OVBLearning.App">
       <uap:VisualElements
-        DisplayName="WKOLernplattform"
+        DisplayName="OVBLearning"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="WKOLernplattform"
+        Description="OVBLearning"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

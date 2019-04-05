@@ -5,6 +5,7 @@ import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter } from './common';
 import { connect } from "react-redux";
+import { setLearningModeAction } from "core";
 
 var screen = Dimensions.get("window");
 
@@ -51,6 +52,7 @@ class CategoryInfoScene extends Component {
                     text="Lernvorgang fortsetzen"
                     style={{ backgroundColor: "#663399", flexDirection: 'row-reverse', alignItems: 'center' }}
                     buttonText={btnText}
+                    onPressButton={() => this.startLearning()}
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
@@ -119,6 +121,10 @@ class CategoryInfoScene extends Component {
             </View>
         );
     }
+    startLearning() {
+        this.props.dispatchSelectLearningMode('module');
+        Actions.question();
+    }
 }
 
 const styles = StyleSheet.create({
@@ -153,6 +159,7 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
+    dispatchSelectLearningMode: setLearningModeAction
 };
 
 const mapStateToProps = state => ({
