@@ -96,22 +96,25 @@ class CategoryInfoScene extends Component {
                             Aktionen
                         </Text>
                         <ActionButton image={icon_continue} onPress={() => {
-                            Actions.question();
+                            this.startLearning();
                         }}>
                             Dieses Kapitel üben
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
-                            Actions.question();
+                            // Actions.question();
+                            alert("comming soon");
                         }}>
                             Falsche Fragen üben
                         </ActionButton>
                         <ActionButton image={icon_watch_questions} onPress={() => {
-                            Actions.question();
+                            // Actions.question();
+                            alert("comming soon");
                         }}>
                             Fragen druchblättern
                         </ActionButton>
                         <ActionButton image={icon_pdf} onPress={() => {
-                            Actions.question();
+                            // Actions.question();
+                            alert("comming soon");
                         }}>
                             PDF durchlessen
                         </ActionButton>
