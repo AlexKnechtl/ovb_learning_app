@@ -82,6 +82,10 @@ class QuestionScene extends Component {
         return true;
     }
 
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {});
+    }
+
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);

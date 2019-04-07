@@ -52,6 +52,10 @@ class CategoryInfoScene extends Component {
         return true;
     }
 
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {});
+    }
+
     render() {
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
         var subMID = this.props.modules.selectedSubmodule;

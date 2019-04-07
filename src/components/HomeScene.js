@@ -67,6 +67,10 @@ class HomeScene extends Component {
         return true;
     }
 
+    componentWillUnmount() {
+        this.backHandler.remove();
+      }
+
     categoryPress(sectionID) {
         if (this.state.testMode == false) {
             this.props.dispatchSelectCategory(sectionID);

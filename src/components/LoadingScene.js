@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet, ActivityIndicator, ImageBackground, View, Image, StatusBar } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, ActivityIndicator, ImageBackground, View, Image, StatusBar, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { signInWithoutPasswordAction } from 'core';
 
 
 class LoadingScene extends Component {
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {});
+    }
+
+    handleBackPress = () => {
+        return true;
+    }
+
     render() {
         return (
             <ImageBackground
