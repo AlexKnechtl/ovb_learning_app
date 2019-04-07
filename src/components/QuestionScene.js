@@ -74,16 +74,13 @@ class QuestionScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
-    componentDidMount() {
-        // BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    componentWillMount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {})
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     handleBackPress = () => {
         return true;
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {});
     }
 
     render() {
@@ -103,7 +100,7 @@ class QuestionScene extends Component {
         const borderColor3 = answer3Clicked ? "#fff0" : "#fff";
 
         return (
-            <View style={{ flexDirection: 'column', flex: 1, backgroundColor: '#fff' }}>
+            <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>

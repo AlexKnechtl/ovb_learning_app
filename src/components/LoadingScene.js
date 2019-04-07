@@ -5,15 +5,6 @@ import { signInWithoutPasswordAction } from 'core';
 
 
 class LoadingScene extends Component {
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {});
-    }
-
-    handleBackPress = () => {
-        return true;
-    }
-
     render() {
         return (
             <ImageBackground

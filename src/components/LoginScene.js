@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Keyboard, StyleSheet, Image, StatusBar, BackHandler, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Input, Button } from './common';
+import { Input, Button, Spinner } from './common';
 import { signInAction } from 'core';
-import { Actions } from 'react-native-router-flux';
 
 const mailIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_mail.png')} />)
 const lockIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_password.png')} />)
@@ -54,14 +53,6 @@ class LoginScene extends Component {
         }
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
-
-    handleBackPress = () => {
-        return true;
-    }
-
     render() {
         return (
             <ImageBackground
@@ -100,6 +91,7 @@ class LoginScene extends Component {
                         </View>
                         <KeyboardSpacer />
                         {this.renderError()}
+                        {/* {this.renderSpinner()} */}
                         <View style={styles.bottom}>
                         </View>
                         <View style={styles.linearLayout}>
