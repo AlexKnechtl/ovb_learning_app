@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Linking } from 'react-native';
 import Modal from 'react-native-modalbox';
 
 class PopupCenter extends Component {
@@ -25,7 +25,7 @@ class PopupCenter extends Component {
     }
 
     onDataSecPress() {
-        //Actions.question();
+        Linking.openURL("https://www.seekinnovation.at/ovb-datenschutz");
     }
 
     render() {

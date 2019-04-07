@@ -34,7 +34,7 @@ class HomeScene extends Component {
                 icon: icBack
             });
         } else if (this.state.testMode == true) {
-
+            alert("Feature kommt bald.");
         }
     }
 

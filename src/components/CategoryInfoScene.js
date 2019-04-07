@@ -118,19 +118,19 @@ class CategoryInfoScene extends Component {
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
                             // Actions.question();
-                            alert("comming soon");
+                            alert("Feature kommt bald.");
                         }}>
                             Falsche Fragen üben
                         </ActionButton>
                         <ActionButton image={icon_watch_questions} onPress={() => {
                             // Actions.question();
-                            alert("comming soon");
+                            alert("Feature kommt bald.");
                         }}>
                             Fragen druchblättern
                         </ActionButton>
                         <ActionButton image={icon_pdf} onPress={() => {
                             // Actions.question();
-                            alert("comming soon");
+                            alert("Feature kommt bald.");
                         }}>
                             PDF durchlessen
                         </ActionButton>
