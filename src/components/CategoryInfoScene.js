@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, BackHandler, View, Text, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';

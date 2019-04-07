@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
-import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, BackHandler, QuestionService } from 'core';
 
 class QuestionScene extends Component {
     state = {

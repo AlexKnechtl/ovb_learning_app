@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, BackHandler, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
 import { SelectSubmoduleAction, setLearningModeAction } from  'core';
@@ -47,7 +47,7 @@ class CategoryScene extends Component {
     }
 
     handleBackPress = () => {
-        Actions.main();
+        Actions.home();
         return true;
     }
 
