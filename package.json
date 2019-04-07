@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
-    "appcenter": "1.13.0",
+    "appcenter": "^1.13.0",
     "appcenter-analytics": "1.13.0",
     "appcenter-crashes": "1.13.0",
     "babel-plugin-transform-decorators": "^6.24.1",
