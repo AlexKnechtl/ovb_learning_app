@@ -24,7 +24,7 @@ class HomeScene extends Component {
         };
         console.log(this.state);
         
-        this.handleBackPress = this.handleBackPress.bind(this);
+        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     testButtonPress() {
@@ -59,14 +59,14 @@ class HomeScene extends Component {
         }
     }
 
-    componentWillMount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {})
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
+    // componentWillMount() {
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
 
-    handleBackPress = () => {
-        return true;
-    }
+    // handleBackPress = () => {
+    //     this.props.navigation.goBack();
+    //     return true;
+    // }
 
     categoryPress(sectionID) {
         if (this.state.testMode == false) {

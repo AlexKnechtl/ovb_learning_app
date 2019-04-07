@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, BackHandler, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
@@ -36,22 +36,23 @@ class CategoryInfoScene extends Component {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
         
-        this.handleBackPress = this.handleBackPress.bind(this);
+        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {
         this.refs.popupCenter.showAddModal();
     }
 
-    handleBackPress = () => {
-        Actions.category();
-        return true;
-    }
+    // handleBackPress = () => {
+    //     // Actions.category();
 
-    componentWillMount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {})
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
+    //     return true;
+    // }
+
+    // componentWillMount() {
+    //     BackHandler.removeEventListener('hardwareBackPress', () => {})
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
 
     render() {
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
@@ -144,8 +145,17 @@ class CategoryInfoScene extends Component {
     }
     startLearning() {
         this.props.dispatchSelectLearningMode('module');
-        Actions.question();
+        // Actions.question();
+        this.props.navigation.push('question');
     }
+    // componentWillMount() {
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
+
+    // handleBackPress = () => {
+    //     this.props.navigation.goBack();
+    //     return true;
+    // }
 }
 
 const styles = StyleSheet.create({

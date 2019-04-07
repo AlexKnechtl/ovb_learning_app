@@ -15,7 +15,8 @@ export default class PopupBottom extends Component {
     }
 
     onLogoutPress() {
-        Actions.home();
+        // Actions.home();
+        this.props.navigation.navigate('main');
     }
 
     render() {

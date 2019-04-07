@@ -74,14 +74,14 @@ class QuestionScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
-    componentWillMount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {})
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
+    // componentWillMount() {
+    //     BackHandler.removeEventListener('hardwareBackPress', () => {})
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
 
-    handleBackPress = () => {
-        return true;
-    }
+    // handleBackPress = () => {
+    //     return true;
+    // }
 
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
@@ -173,7 +173,7 @@ class QuestionScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom ref={'popupBottom'}
+                    <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
                         sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>

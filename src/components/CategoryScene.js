@@ -1,5 +1,7 @@
+//@ts-check
+
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, BackHandler, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
 import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from  'core';
@@ -30,7 +32,7 @@ class CategoryScene extends Component {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
         
-        this.handleBackPress = this.handleBackPress.bind(this);
+        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {
@@ -52,15 +54,14 @@ class CategoryScene extends Component {
     });
     }
 
-    componentWillMount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {})
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
+    // componentWillMount() {
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
 
-    handleBackPress = () => {
-        Actions.home();
-        return true;
-    }
+    // handleBackPress = () => {
+    //     this.props.navigation.goBack();
+    //     return true;
+    // }
 
     render() {
         return (
@@ -77,7 +78,7 @@ class CategoryScene extends Component {
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
-                    onPressButton={() => {this.props.dispatchSelectLearningMode('section'); Actions.question();}}
+                    onPressButton={() => {this.props.dispatchSelectLearningMode('section'); this.props.navigation.push('question');}}
                 />
                 <ScrollView
                     style={styles.containerStyle}
