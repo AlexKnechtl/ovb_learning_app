@@ -74,16 +74,13 @@ class QuestionScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
-    componentDidMount() {
-        // BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    componentWillMount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {})
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     handleBackPress = () => {
         return true;
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {});
     }
 
     render() {

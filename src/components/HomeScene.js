@@ -59,17 +59,14 @@ class HomeScene extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {})
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     handleBackPress = () => {
         return true;
     }
-
-    componentWillUnmount() {
-        this.backHandler.remove();
-      }
 
     categoryPress(sectionID) {
         if (this.state.testMode == false) {
@@ -103,7 +100,7 @@ class HomeScene extends Component {
         }
         console.log(this.props.modules);
         return (
-            <View style={{ flex: 1, alignItems: "stretch" }}>
+            <View style={{ flex: 1, alignItems: "stretch", backgroundColor:"#fff" }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"

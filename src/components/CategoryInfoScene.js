@@ -43,17 +43,14 @@ class CategoryInfoScene extends Component {
         this.refs.popupCenter.showAddModal();
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
-
     handleBackPress = () => {
         Actions.category();
         return true;
     }
 
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {});
+    componentWillMount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {})
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     render() {

@@ -53,13 +53,6 @@ class LoginScene extends Component {
         }
     }
 
-    // renderSpinner() {
-    //     // console.log(`renderSpinner(${this.props.loading})`);
-
-    handleBackPress = () => {
-        return true;
-    }
-
     render() {
         return (
             <ImageBackground

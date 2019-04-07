@@ -52,17 +52,14 @@ class CategoryScene extends Component {
     });
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {})
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     handleBackPress = () => {
         Actions.home();
         return true;
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {});
     }
 
     render() {
