@@ -50,6 +50,10 @@ class CategoryInfoScene extends Component {
         return true;
     }
 
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => {});
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
