@@ -88,7 +88,7 @@ class CategoryInfoScene extends Component {
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
                                 <Progress.Bar progress={lernState} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{(lernState*100).toFixed(1)}%</Text>
+                                <Text style={styles.percentTextStyle}>{(lernState*100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 12 }}>
@@ -97,7 +97,7 @@ class CategoryInfoScene extends Component {
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
                                 <Progress.Bar progress={stats.successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='#DEEBE1' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{(stats.successRate*100).toFixed(1)}%</Text>
+                                <Text style={styles.percentTextStyle}>{(stats.successRate*100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>

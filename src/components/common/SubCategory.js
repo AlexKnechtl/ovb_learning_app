@@ -11,7 +11,7 @@ const SubCategory = (props) => {
                 </View>
                 <View style={styles.linearLayout}>
                     <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{(props.learningState*100).toFixed(1)}% abgeschlossen</Text>
+                        <Text style={styles.textStyle}>{(props.learningState*100).toFixed(0)}% abgeschlossen</Text>
                         <Progress.Bar progress={props.learningState} height={12} width={190} color={'#00B7E5'} unfilledColor='#fff3' borderWidth={0} borderRadius={0} />
                     </View>
                     <View style={{ flex: 1, marginTop: 6, alignItems: 'center', justifyContent: 'center' }}>
