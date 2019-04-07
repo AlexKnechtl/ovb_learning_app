@@ -149,7 +149,7 @@ class QuestionScene extends Component {
                             </Text>
                         </TouchableOpacity>
                     </ScrollView>
-                    <View style={styles.bottom}>
+                    <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
                                 <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
@@ -172,7 +172,7 @@ class QuestionScene extends Component {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </SafeAreaView>
                     <PopupBottom ref={'popupBottom'}
                         sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
