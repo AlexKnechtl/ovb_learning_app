@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
 
@@ -16,6 +16,8 @@ class QuestionScene extends Component {
         super(props);
         props.dispatchGetNextQuestion();
         this.toogleModal = this.toogleModal.bind(this);
+        
+        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     checkAnswers() {
@@ -73,7 +75,7 @@ class QuestionScene extends Component {
     }
 
     componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        // BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     handleBackPress = () => {

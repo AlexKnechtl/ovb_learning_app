@@ -23,6 +23,8 @@ class HomeScene extends Component {
             categories: []
         };
         console.log(this.state);
+        
+        this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     testButtonPress() {
@@ -95,8 +97,7 @@ class HomeScene extends Component {
             testModus = false;
             //erfolgsChanceView = <Text style={styles.chanceTextStyle}>30%</Text>;
         }
-        // console.log(this.props.modules);
-
+        console.log(this.props.modules);
         return (
             <View style={{ flex: 1, alignItems: "stretch" }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -128,6 +129,10 @@ class HomeScene extends Component {
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
                                 imageUri={{ uri: this.props.modules[sectionID].image }}
                                 titleText={this.props.modules[sectionID].name}
+                                questionsRight={this.props.modules[sectionID].seenQuestions}
+                                questionsFalse={this.props.modules[sectionID].falseQuestions}
+                                learningState={this.props.modules[sectionID].seenQuestions/this.props.modules[sectionID].questionCount}
+                                successRate={this.props.modules[sectionID].successRate}
                             />
                         )}
                     </SafeAreaView>

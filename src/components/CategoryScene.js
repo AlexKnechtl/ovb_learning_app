@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, BackHandler, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { SelectSubmoduleAction, setLearningModeAction } from  'core';
+import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from  'core';
 import { Actions } from 'react-native-router-flux';
 
 const btnText = (
@@ -31,6 +31,8 @@ class CategoryScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
+        
+        this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {
@@ -41,7 +43,15 @@ class CategoryScene extends Component {
         var currMID = this.props.modules.currentModuleID;
         if(!currMID) return undefined;
         var currMods = this.props.modules.modules[currMID].modules;
-        return Object.keys(currMods).map(key => <SubCategory key={key} onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)} titleText={`${key.replace('_', '.')} ${currMods[key].name}`}/>);
+        var la = new LearningAlgorithm(new QuestionService(), LearningService);
+    return Object.keys(currMods).map(key => { var stats = la.calcCurrentLearningStatsForModule(key);
+        return (<SubCategory key={key} 
+        onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)} 
+        titleText={`${key.replace('_', '.')} ${currMods[key].name}`}
+        learningState={stats.seenQuestions/stats.questionCount}
+        successRate={stats.successRate}
+        />);
+    });
     }
 
     componentDidMount() {

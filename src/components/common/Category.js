@@ -7,7 +7,7 @@ const Category = (props) => {
     renderView = () => {
         if (!props.testMode) {
             props.isPressed = false;
-            return <Text style={{ fontSize: 16, fontWeight: "bold", color: props.testMode ? '#fff0' : '#fff' }}>30%</Text>;
+            return <Text style={{ fontSize: 16, fontWeight: "bold", color: props.testMode ? '#fff0' : '#fff' }}>{(props.successRate*100).toFixed(0)} %</Text>;
         } else {
             return <Image source={require('../../img/ic_check.png')} style={{ width: props.isPressed ? 31 : 0, height: 24 }} />;
         }
@@ -34,10 +34,10 @@ const Category = (props) => {
                             </View>
                             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                                 <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontWeight: "bold" }}>Lernfortschritt</Text>
-                                <ProgressBar style={{ minHeight: 22, width: "85%"}} width={null} progress={0.65} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
-                                    <Text style={{ marginTop: -20, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>65%</Text>
+                                <ProgressBar style={{ minHeight: 22, width: "85%"}} width={null} progress={props.learningState} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
+                                    <Text style={{ marginTop: -20, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>{(props.learningState*100).toFixed(1)} %</Text>
                                 </ProgressBar>
-                                <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>3 Fragen richtig / 2 falsch</Text>
+                                <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>{props.questionsRight} Fragen richtig / {props.questionsFalse} falsch</Text>
                             </View>
                         </View>
                     </View>

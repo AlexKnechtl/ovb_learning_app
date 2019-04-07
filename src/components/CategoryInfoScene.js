@@ -5,7 +5,7 @@ import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { setLearningModeAction } from "core";
+import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from "core";
 
 var screen = Dimensions.get("window");
 
@@ -35,6 +35,8 @@ class CategoryInfoScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
+        
+        this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {
@@ -51,6 +53,10 @@ class CategoryInfoScene extends Component {
     }
 
     render() {
+        var la = new LearningAlgorithm(new QuestionService(), LearningService);
+        var subMID = this.props.modules.selectedSubmodule;
+        var stats = la.calcCurrentLearningStatsForModule(subMID);
+        var lernState = stats.seenQuestions/stats.questionCount;
         return (
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -80,8 +86,8 @@ class CategoryInfoScene extends Component {
                                 Fortschritt Lernvorgang
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
-                                <Progress.Bar progress={0.72} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>72%</Text>
+                                <Progress.Bar progress={lernState} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
+                                <Text style={styles.percentTextStyle}>{(lernState*100).toFixed(1)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 12 }}>
@@ -89,17 +95,17 @@ class CategoryInfoScene extends Component {
                                 Erfolgschance
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
-                                <Progress.Bar progress={0.36} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='#DEEBE1' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>36%</Text>
+                                <Progress.Bar progress={stats.successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='#DEEBE1' borderWidth={0} borderRadius={0} />
+                                <Text style={styles.percentTextStyle}>{(stats.successRate*100).toFixed(1)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>
                             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
-                                86/102 Fragen richtig beantwortet
+                                {stats.seenQuestions}/{stats.questionCount} Fragen richtig beantwortet
                             </Text>
                         </View>
                         <Text style={{ fontSize: 14, marginTop: 6, marginBottom: 16, fontWeight: "bold", color: "#003A65", width: '100%', textAlign: "center" }}>
-                            14 Fragen richtig beatnwortet
+                            {stats.falseQuestions} Fragen falsch beantwortet
                         </Text>
                         <Text style={styles.statisticTextStyle}>
                             Aktionen
