@@ -42,6 +42,15 @@ class CategoryScene extends Component {
         return Object.keys(currMods).map(key => <SubCategory key={key} onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)} titleText={`${key.replace('_', '.')} ${currMods[key].name}`}/>);
     }
 
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    handleBackPress = () => {
+        Actions.main();
+        return true;
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>

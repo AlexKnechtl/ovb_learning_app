@@ -72,6 +72,14 @@ class QuestionScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    handleBackPress = () => {
+        return true;
+    }
+
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);

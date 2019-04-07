@@ -59,7 +59,6 @@ class LoginScene extends Component {
     }
 
     handleBackPress = () => {
-        Actions.main();
         return true;
     }
 

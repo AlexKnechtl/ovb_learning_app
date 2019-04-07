@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, BackHandler, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
 import { signOutAction, SetCurrentModuleAction } from "core";
 import { connect } from "react-redux";
@@ -39,7 +39,7 @@ class HomeScene extends Component {
     optionsPress() {
         if (this.state.testMode == false) {
             //No Test Mode
-            
+
             this.refs.popupCenter.showAddModal();
         } else if (this.state.testMode == true) {
             //Test Mode activated
@@ -57,11 +57,19 @@ class HomeScene extends Component {
         }
     }
 
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    handleBackPress = () => {
+        return true;
+    }
+
     categoryPress(sectionID) {
         if (this.state.testMode == false) {
             this.props.dispatchSelectCategory(sectionID);
         } else {
-            var cat = this.state.categories[sectionID]||{};
+            var cat = this.state.categories[sectionID] || {};
             cat.isPressed = !cat || !cat.isPressed;
             this.setState({
                 categories: {
@@ -115,7 +123,7 @@ class HomeScene extends Component {
                                 key={sectionID}
                                 // ref={(thisItem) => this[sectionID] = thisItem}
                                 onPress={this.categoryPress.bind(this, sectionID)}
-                                isPressed={(this.state.categories[sectionID]||{}).isPressed}
+                                isPressed={(this.state.categories[sectionID] || {}).isPressed}
                                 testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
                                 imageUri={{ uri: this.props.modules[sectionID].image }}
