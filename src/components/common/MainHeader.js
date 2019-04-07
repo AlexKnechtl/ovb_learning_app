@@ -11,7 +11,7 @@ const MainHeader = (props) => {
             </View>
             <View style={[styles.linearLayout2, props.style]}>
                 <View style={styles.iconViewLayout}>
-                    <TouchableOpacity hidden onPress={props.optionsPress}>
+                    <TouchableOpacity hidden>
                         <View style={[styles.iconView, props.style2]}>
                             <Image style={[styles.pdfImageStyle, props.style2]} source={require('../../img/pdf_icon.png')} />
                         </View>
