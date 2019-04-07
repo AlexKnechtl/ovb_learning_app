@@ -1,3 +1,5 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, BackHandler, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
