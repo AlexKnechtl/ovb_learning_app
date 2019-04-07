@@ -35,7 +35,7 @@ const Category = (props) => {
                             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                                 <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontWeight: "bold" }}>Lernfortschritt</Text>
                                 <ProgressBar style={{ minHeight: 22, width: "85%"}} width={null} progress={0.65} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
-                                    <Text style={{ marginTop: -19, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>65%</Text>
+                                    <Text style={{ marginTop: -20, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>65%</Text>
                                 </ProgressBar>
                                 <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>3 Fragen richtig / 2 falsch</Text>
                             </View>
