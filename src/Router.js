@@ -55,7 +55,7 @@ export const sceneReducer = (state = {}, {type}) => {
             return state;
         case SIGNED_OUT: Actions.auth(); Actions.login();
             return state;
-        case START_SIGN_IN : Actions.auth();
+        case START_SIGN_IN : Actions.auth(); Actions.loading();
             return state;
         case START_SIGN_IN_WITHOUT_CREDENTIAL : Actions.auth();
             return state;
