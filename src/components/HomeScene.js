@@ -150,7 +150,6 @@ class HomeScene extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        paddingTop: 12,
         backgroundColor: '#ffffff'
     }
 });

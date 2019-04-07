@@ -11,7 +11,7 @@ const MainHeader = (props) => {
             </View>
             <View style={[styles.linearLayout2, props.style]}>
                 <View style={styles.iconViewLayout}>
-                    <TouchableOpacity hidden onPress={props.pdfPress}>
+                    <TouchableOpacity hidden onPress={props.optionsPress}>
                         <View style={[styles.iconView, props.style2]}>
                             <Image style={[styles.pdfImageStyle, props.style2]} source={require('../../img/pdf_icon.png')} />
                         </View>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#003A65',
         shadowColor: '#000',
+        marginBottom: 12,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.2,
         elevation: 6
