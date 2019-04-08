@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "214342629988",
+    "firebase_url": "https://wko-lernplattform.firebaseio.com",
+    "project_id": "wko-lernplattform",
+    "storage_bucket": "wko-lernplattform.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214342629988:android:d5cdcef0161e4ad9",
+        "android_client_info": {
+          "package_name": "com.seekinnovation.ovb_learning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoyKHtTE6AvN2cwOkMPiOvjbPAKFYiRF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214342629988-ji6fe4fsae4u29tq1i1s34imah3c6fl2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
