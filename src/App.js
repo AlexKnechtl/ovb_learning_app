@@ -1,4 +1,7 @@
+//@ts-check
+
 import React, { Component } from 'react';
+// import {BackHandler} from 'react-native';
 import { Provider } from 'react-redux';
 import Router, {sceneReducer} from './Router2';
 import { signInWithoutPasswordAction, configureStore } from 'core/lib';
@@ -18,4 +21,14 @@ export default class App extends Component {
             </Provider>
         );
     }
+
+    // componentWillMount() {
+    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // }
+
+    // handleBackPress = () => {
+    //     alert("Backhandler pressed");
+    //     NavigationService.goBack();
+    //     return true;
+    // }
 }
