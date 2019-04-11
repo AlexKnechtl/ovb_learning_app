@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from  'core';
+import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from 'core';
 import { Actions } from 'react-native-router-flux';
 
 const btnText = (
@@ -13,12 +13,14 @@ const btnText = (
     </Text>
 )
 
+const source2 = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
+
 const mainHeaderText = (
     <View>
         <Text style={{ fontSize: 22, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
             Kategorien
         </Text>
-        <Text style={{ fontSize: 16, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16}}>
+        <Text style={{ fontSize: 16, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
             Allgemeine Rechtskunde
         </Text>
     </View>
@@ -31,7 +33,7 @@ class CategoryScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
-        
+
         // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
@@ -39,19 +41,20 @@ class CategoryScene extends Component {
         this.refs.popupCenter.showAddModal();
     }
 
-    mapModules(){
+    mapModules() {
         var currMID = this.props.modules.currentModuleID;
-        if(!currMID) return undefined;
+        if (!currMID) return undefined;
         var currMods = this.props.modules.modules[currMID].modules;
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
-    return Object.keys(currMods).map(key => { var stats = la.calcCurrentLearningStatsForModule(key);
-        return (<SubCategory key={key} 
-        onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)} 
-        titleText={`${key.replace('_', '.')} ${currMods[key].name}`}
-        learningState={stats.seenQuestions/stats.questionCount}
-        successRate={stats.successRate}
-        />);
-    });
+        return Object.keys(currMods).map(key => {
+            var stats = la.calcCurrentLearningStatsForModule(key);
+            return (<SubCategory key={key}
+                onPress={() => this.props.dispatchSelectSubmodule(key, currMods[key].name)}
+                titleText={`${key.replace('_', '.')} ${currMods[key].name}`}
+                learningState={stats.seenQuestions / stats.questionCount}
+                successRate={stats.successRate}
+            />);
+        });
     }
 
     // componentWillMount() {
@@ -64,9 +67,14 @@ class CategoryScene extends Component {
     //     return true;
     // }
 
+    showPDF() {
+        return <PdfView source={source2} />
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
+                {this.showPDF}
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"
@@ -77,9 +85,10 @@ class CategoryScene extends Component {
                     text="Lernvorgang fortsetzen"
                     buttonText={btnText}
                     children={mainHeaderText}
+                    pdfPress={}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
-                    onPressButton={() => {this.props.dispatchSelectLearningMode('section'); this.props.navigation.push('question');}}
+                    onPressButton={() => { this.props.dispatchSelectLearningMode('section'); this.props.navigation.push('question'); }}
                 />
                 <ScrollView
                     style={styles.containerStyle}

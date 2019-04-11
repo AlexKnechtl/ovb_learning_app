@@ -6,3 +6,4 @@ export * from './SubCategory';
 export * from './ActionButton';
 export * from './PopupCenter';
 export * from './PopupBottom';
+export * from './PdfView';

@@ -34,6 +34,7 @@ class PopupCenter extends Component {
                 ref={"myModal"}
                 style={styles.modalStyle}
                 position='center'
+                
                 backdrop={true}>
                 <View style={{
                     width: 280,
