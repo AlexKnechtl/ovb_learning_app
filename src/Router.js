@@ -13,7 +13,7 @@ export default RouterComponent = () => {
     return (
         <Router navigationBarStyle={{ backgroundColor: '#304C59' }} titleStyle={styles.navTitle} >
             <Scene key="root" statusBarStyle="light-content" hideNavBar >
-                <Scene key="auth" navigationBarStyle={{ backgroundColor: '#304C59' }} hideNavBar type={ActionConst.REPLACE}>
+                <Scene key="auth" navigationBarStyle={{ backgroundColor: '#304C59' }} gesturesEnabled={false} hideNavBar type={ActionConst.REPLACE}>
                     <Scene key='loading' component={LoadingScene} />   
                     <Scene key="login" component={LoginScene} />
                 </Scene>
