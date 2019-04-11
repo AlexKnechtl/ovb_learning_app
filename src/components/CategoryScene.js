@@ -1,5 +1,3 @@
-//@ts-check
-
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
@@ -57,24 +55,14 @@ class CategoryScene extends Component {
         });
     }
 
-    // componentWillMount() {
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
-    // handleBackPress = () => {
-    //     alert("Backhandler pressed");
-    //     this.props.navigation.goBack();
-    //     return true;
-    // }
-
-    showPDF() {
+    /*showPDF() {
         return <PdfView source={source2} />
-    }
+    }*/
 
     render() {
         return (
             <View style={{ flex: 1 }}>
-                {this.showPDF}
+                //{this.showPDF}
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"
@@ -85,7 +73,7 @@ class CategoryScene extends Component {
                     text="Lernvorgang fortsetzen"
                     buttonText={btnText}
                     children={mainHeaderText}
-                    pdfPress={}
+                    //pdfPress={}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
                     onPressButton={() => { this.props.dispatchSelectLearningMode('section'); this.props.navigation.push('question'); }}

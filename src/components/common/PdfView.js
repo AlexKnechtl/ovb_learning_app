@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export { PdfView };
+export { PdfView };*/
