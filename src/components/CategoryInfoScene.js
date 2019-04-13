@@ -7,7 +7,7 @@ import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction } from "core";
+import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction } from "core";
 
 var screen = Dimensions.get("window");
 
@@ -55,7 +55,7 @@ class CategoryInfoScene extends Component {
                     {this.props.modules.modules[this.props.modules.currentModuleID].name}
                 </Text>
             </View>
-        )
+        );
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
         var subMID = this.props.modules.selectedSubmodule;
         var stats = la.calcCurrentLearningStatsForModule(subMID);
@@ -120,8 +120,10 @@ class CategoryInfoScene extends Component {
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
                             // Actions.question();
-                            alert("Feature kommt bald.");
-                        }}>
+                            this.props.dispatchLearnFalseQuestions(this.props.modules.selectedSubmodule);
+                        }}
+                        disabled={stats.falseQuestions == 0}
+                        >
                             Falsche Fragen üben
                         </ActionButton>
                         <ActionButton image={icon_watch_questions} onPress={() => {
@@ -188,7 +190,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = {
     // dispatchSelectLearningMode: setLearningModeAction,
     dispatchContinueModuleLearning: continueModuleLearningAction,
-    dispatchContinueSectionLearning: continueSectionLearningAction
+    dispatchContinueSectionLearning: continueSectionLearningAction,
+    dispatchLearnFalseQuestions: learnFalseQuestionsFromModuleAction
 };
 
 const mapStateToProps = state => ({

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import NoMoreQuestionsPopupCenter from './common/NoMoreQuestions';
 
 class QuestionScene extends Component {
     state = {
@@ -16,8 +17,11 @@ class QuestionScene extends Component {
         super(props);
         props.dispatchGetNextQuestion();
         this.toogleModal = this.toogleModal.bind(this);
-        
-        // this.handleBackPress = this.handleBackPress.bind(this);
+        this.toogleModalBox = this.toogleModalBox.bind(this);
+    }
+
+    toogleModalBox() {
+        this.refs.popupCenter.showModal();
     }
 
     checkAnswers() {
@@ -99,6 +103,9 @@ class QuestionScene extends Component {
         const borderColor2 = answer2Clicked ? "#fff0" : "#fff";
         const borderColor3 = answer3Clicked ? "#fff0" : "#fff";
 
+        if(this.props.noMoreQuestions)
+            this.toogleModalBox();
+
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
@@ -178,6 +185,11 @@ class QuestionScene extends Component {
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
+                <NoMoreQuestionsPopupCenter buttonText={"OK"} 
+                headerText={"Keine weiteren Fragen mehr"} 
+                onButtonPress={()=> {this.props.navigation.goBack();}}
+                ref={'popupCenter'}
+                />
             </View>
         );
     }
@@ -279,6 +291,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     currentQuestion: state.learning.currentQuestion,
+    noMoreQuestions: state.learning.noMoreQuestions,
     modules: state.modules
 });
 
