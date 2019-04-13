@@ -130,13 +130,13 @@ class CategoryInfoScene extends Component {
                             // Actions.question();
                             alert("Feature kommt bald.");
                         }}>
-                            Fragen druchblättern
+                            Fragen durchblättern
                         </ActionButton>
                         <ActionButton image={icon_pdf} onPress={() => {
                             // Actions.question();
                             alert("Feature kommt bald.");
                         }}>
-                            PDF durchlessen
+                            PDF durchlesen
                         </ActionButton>
                     </SafeAreaView>
                 </ScrollView>

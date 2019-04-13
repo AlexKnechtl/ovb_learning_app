@@ -7,6 +7,8 @@ import LoadingScene from './components/LoadingScene';
 import QuestionScene from './components/QuestionScene';
 import CategoryScene from './components/CategoryScene';
 import CategoryInfoScene from './components/CategoryInfoScene';
+import TestScene from './components/TestScene';
+
 import { LOGIN_SUCCESS, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, LOGIN_FAILED, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE } from '../core/lib/adapters/redux/actions/types';
 
 export default RouterComponent = () => {
@@ -23,6 +25,7 @@ export default RouterComponent = () => {
                     <Scene key="info" component={CategoryInfoScene} />
                     <Scene key="question" component={QuestionScene} />
                 </Stack>
+                    <Scene key="test" component={{TestScene}} gesturesEnabled={false} renderBackButton={false} type={ActionConst.RESET}/>
             </Scene>
         </Router>
     );

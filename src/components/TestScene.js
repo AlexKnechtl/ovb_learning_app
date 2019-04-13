@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
-import NoMoreQuestionsPopupCenter from './common/NoMoreQuestions';
 
-class QuestionScene extends Component {
+class TestScene extends Component {
     state = {
         answer1Clicked: true,
         answer2Clicked: true,
@@ -16,12 +15,7 @@ class QuestionScene extends Component {
     constructor(props) {
         super(props);
         props.dispatchGetNextQuestion();
-        this.toogleModal = this.toogleModal.bind(this);
-        this.toogleModalBox = this.toogleModalBox.bind(this);
-    }
-
-    toogleModalBox() {
-        this.refs.popupCenter.showModal();
+        this.toogleModal = this.toogleModal.bind(this);        
     }
 
     checkAnswers() {
@@ -31,7 +25,6 @@ class QuestionScene extends Component {
             var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
             this.setState({ lastAnswerRight: isright });
             console.log(isright);
-            // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
             this.props.dispatchUpdateQuestion({ questionid: this.props.currentQuestion.questionId, answeredRight: isright });
         } else {
             this.props.dispatchGetNextQuestion();
@@ -78,39 +71,27 @@ class QuestionScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
-    // componentWillMount() {
-    //     BackHandler.removeEventListener('hardwareBackPress', () => {})
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
-    // handleBackPress = () => {
-    //     return true;
-    // }
-
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);
-        // console.log(this.props.currentQuestion.question);
-        // console.log(this.props.currentQuestion.question.question);
 
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
-        const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#23B800' : '#B21515' : answer1Clicked ? "white" : "white";
-        const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#23B800' : '#B21515' : answer2Clicked ? "white" : "white";
-        const background3 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer3.isRight ? '#23B800' : '#B21515' : answer3Clicked ? "white" : "white";
+        const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
+        const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
+        const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
 
-        const fontWeightStyle1 = answer1Clicked ? "normal" : "bold";
+        const textColor1 = answer1Clicked ? "#003A65" : "#fff";
+        const textColor2 = answer2Clicked ? "#003A65" : "#fff";
+        const textColor3 = answer3Clicked ? "#003A65" : "#fff";
+
+        const fontWeightStyle = answer1Clicked ? "normal" : "bold";
         const fontWeightStyle2 = answer2Clicked ? "normal" : "bold";
         const fontWeightStyle3 = answer3Clicked ? "normal" : "bold";
 
         const marginAnswer1 = answer1Clicked ? 20 : 0;
         const marginAnswer2 = answer2Clicked ? 20 : 0;
         const marginAnswer3 = answer3Clicked ? 20 : 0;
-
-        const fontColorAnswers = answer1Clicked && answer2Clicked && answer3Clicked ? "#003A65" : "#fff";
-
-        if(this.props.noMoreQuestions)
-            this.toogleModalBox();
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
@@ -137,27 +118,27 @@ class QuestionScene extends Component {
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer1Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: background1
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle1, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer2Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: background2
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle2, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer3Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: background3
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle3, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -191,11 +172,6 @@ class QuestionScene extends Component {
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
-                <NoMoreQuestionsPopupCenter buttonText={"OK"} 
-                headerText={"Keine weiteren Fragen mehr"} 
-                onButtonPress={()=> {this.props.navigation.goBack();}}
-                ref={'popupCenter'}
-                />
             </View>
         );
     }
@@ -288,8 +264,6 @@ const styles = StyleSheet.create({
     }
 });
 
-// export default QuestionScene;
-
 const mapDispatchToProps = {
     dispatchUpdateQuestion: updateCurrentQuestion,
     dispatchGetNextQuestion: getNextQuestionAction
@@ -297,8 +271,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     currentQuestion: state.learning.currentQuestion,
-    noMoreQuestions: state.learning.noMoreQuestions,
     modules: state.modules
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionScene);
+export default connect(mapStateToProps, mapDispatchToProps)(TestScene);

@@ -1,11 +1,8 @@
-//@ts-check
-
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
 import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction } from 'core';
-import { Actions } from 'react-native-router-flux';
 
 const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
@@ -15,15 +12,10 @@ const btnText = (
 
 const source2 = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
 
-// const picture1 = require("../img/wk_allgemeinesrecht_bg.jpg")
-// const picture2 = require("../img/wk_sachversicherungen_bg.jpg")
-
 class CategoryScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
-
-        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {
@@ -45,10 +37,6 @@ class CategoryScene extends Component {
             />);
         });
     }
-
-    /*showPDF() {
-        return <PdfView source={source2} />
-    }*/
 
     render() {
         const mainHeaderText = (
@@ -84,8 +72,6 @@ class CategoryScene extends Component {
                     resizeMode='cover'>
                     <SafeAreaView>
                         {this.mapModules()}
-                        {/* <SubCategory imageUri={picture1} titleText="1.1 Allgemeine Rechtskunde" />
-                        <SubCategory imageUri={picture2} titleText="1.2 Sachversicherungen" /> */}
                     </SafeAreaView>
                 </ScrollView>
                 <PopupCenter ref={'popupCenter'}>
@@ -97,7 +83,6 @@ class CategoryScene extends Component {
 
     continueSectionLearningPress() {
         this.props.dispatchContinueSectionLearning(this.props.modules.currentModuleID);
-        // this.props.navigation.push('question');
     }
 }
 

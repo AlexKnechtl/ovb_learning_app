@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Dimensions, TouchableOpacity, View, Image } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modalbox';
 
 var screen = Dimensions.get("window");
@@ -15,7 +14,6 @@ export default class PopupBottom extends Component {
     }
 
     onLogoutPress() {
-        // Actions.home();
         this.props.navigation.navigate('main');
     }
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, BackHandler, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
 import { signOutAction, SetCurrentModuleAction } from "core";
 import { connect } from "react-redux";
-import { Actions } from 'react-native-router-flux';
 
 const mainHeaderText = (
     <Text style={{ fontSize: 26, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
@@ -23,8 +22,6 @@ class HomeScene extends Component {
             categories: []
         };
         console.log(this.state);
-        
-        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     testButtonPress() {
@@ -34,7 +31,7 @@ class HomeScene extends Component {
                 icon: icBack
             });
         } else if (this.state.testMode == true) {
-            alert("Feature kommt bald.");
+            this.props.navigation.navigate('test');
         }
     }
 
@@ -58,15 +55,6 @@ class HomeScene extends Component {
             });
         }
     }
-
-    // componentWillMount() {
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
-    // handleBackPress = () => {
-    //     this.props.navigation.goBack();
-    //     return true;
-    // }
 
     categoryPress(sectionID) {
         if (this.state.testMode == false) {
@@ -96,11 +84,12 @@ class HomeScene extends Component {
             testModus = true;
         } else {
             testModus = false;
-            //erfolgsChanceView = <Text style={styles.chanceTextStyle}>30%</Text>;
         }
+
         console.log(this.props.modules);
+
         return (
-            <View style={{ flex: 1, alignItems: "stretch", backgroundColor:"#fff" }}>
+            <View style={{ flex: 1, alignItems: "stretch", backgroundColor: "#fff" }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"
@@ -132,7 +121,7 @@ class HomeScene extends Component {
                                 titleText={this.props.modules[sectionID].name}
                                 questionsRight={this.props.modules[sectionID].seenQuestions}
                                 questionsFalse={this.props.modules[sectionID].falseQuestions}
-                                learningState={this.props.modules[sectionID].seenQuestions/this.props.modules[sectionID].questionCount}
+                                learningState={this.props.modules[sectionID].seenQuestions / this.props.modules[sectionID].questionCount}
                                 successRate={this.props.modules[sectionID].successRate}
                             />
                         )}
