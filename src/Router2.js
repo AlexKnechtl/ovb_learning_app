@@ -8,7 +8,7 @@ import CategoryScene from "./components/CategoryScene";
 import CategoryInfoScene from "./components/CategoryInfoScene";
 import QuestionScene from "./components/QuestionScene";
 import NavigationService from './NavigationService';
-import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE } from "core";
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING } from "core";
 
 
 const AppStack = createStackNavigator({
@@ -63,6 +63,10 @@ export const sceneReducer = (state = {}, {type}) => {
         case SET_CURRENT_MODULE: NavigationService.navigate('category');
             return state;
         case SELECT_CURRENT_SUBMODULE: NavigationService.navigate('info');
+            return state;
+        case CONTINUE_MODULE_LEARNING: NavigationService.navigate('question');
+            return state;
+        case CONTINUE_SECTION_LEARNING: NavigationService.navigate('question');
             return state;
         default:
             return state;

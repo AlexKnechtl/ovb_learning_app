@@ -1,8 +1,10 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from 'core';
+import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction } from 'core';
 import { Actions } from 'react-native-router-flux';
 
 const btnText = (
@@ -12,17 +14,6 @@ const btnText = (
 )
 
 const source2 = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
-
-const mainHeaderText = (
-    <View>
-        <Text style={{ fontSize: 22, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
-            Kategorien
-        </Text>
-        <Text style={{ fontSize: 16, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
-            Allgemeine Rechtskunde
-        </Text>
-    </View>
-)
 
 // const picture1 = require("../img/wk_allgemeinesrecht_bg.jpg")
 // const picture2 = require("../img/wk_sachversicherungen_bg.jpg")
@@ -60,9 +51,19 @@ class CategoryScene extends Component {
     }*/
 
     render() {
+        const mainHeaderText = (
+            <View>
+                <Text style={{ fontSize: 22, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
+                    Kategorien
+                </Text>
+                <Text style={{ fontSize: 16, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
+                    {this.props.modules.modules[this.props.modules.currentModuleID].name}
+                </Text>
+            </View>
+        )
         return (
             <View style={{ flex: 1 }}>
-                //{this.showPDF}
+                {/* {this.showPDF} */}
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"
@@ -76,7 +77,7 @@ class CategoryScene extends Component {
                     //pdfPress={}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
-                    onPressButton={() => { this.props.dispatchSelectLearningMode('section'); this.props.navigation.push('question'); }}
+                    onPressButton={() => { this.continueSectionLearningPress(); }}
                 />
                 <ScrollView
                     style={styles.containerStyle}
@@ -93,6 +94,11 @@ class CategoryScene extends Component {
             </View>
         );
     }
+
+    continueSectionLearningPress() {
+        this.props.dispatchContinueSectionLearning(this.props.modules.currentModuleID);
+        // this.props.navigation.push('question');
+    }
 }
 
 const styles = StyleSheet.create({
@@ -104,7 +110,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
     dispatchSelectSubmodule: SelectSubmoduleAction,
-    dispatchSelectLearningMode: setLearningModeAction
+    dispatchSelectLearningMode: setLearningModeAction,
+    dispatchContinueSectionLearning: continueSectionLearningAction
 };
 
 const mapStateToProps = state => ({

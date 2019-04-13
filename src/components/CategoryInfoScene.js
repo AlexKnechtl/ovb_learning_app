@@ -1,3 +1,5 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import * as Progress from 'react-native-progress';
@@ -5,7 +7,7 @@ import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter } from './common';
 import { connect } from "react-redux";
-import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService } from "core";
+import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction } from "core";
 
 var screen = Dimensions.get("window");
 
@@ -18,17 +20,6 @@ const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>
-)
-
-const mainHeaderText = (
-    <View>
-        <Text style={{ fontSize: 22, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
-            Kategorien
-        </Text>
-        <Text style={{ fontSize: 18, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
-            Allgemeine Rechtskunde
-        </Text>
-    </View>
 )
 
 class CategoryInfoScene extends Component {
@@ -55,6 +46,16 @@ class CategoryInfoScene extends Component {
     // }
 
     render() {
+        const mainHeaderText = (
+            <View>
+                <Text style={{ fontSize: 22, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
+                    Kategorien
+                </Text>
+                <Text style={{ fontSize: 18, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
+                    {this.props.modules.modules[this.props.modules.currentModuleID].name}
+                </Text>
+            </View>
+        )
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
         var subMID = this.props.modules.selectedSubmodule;
         var stats = la.calcCurrentLearningStatsForModule(subMID);
@@ -71,7 +72,7 @@ class CategoryInfoScene extends Component {
                     text="Lernvorgang fortsetzen"
                     style={{ backgroundColor: "#663399", flexDirection: 'row-reverse', alignItems: 'center' }}
                     buttonText={btnText}
-                    onPressButton={() => this.startLearning()}
+                    onPressButton={() => this.startSectionLearning()}
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
@@ -143,20 +144,14 @@ class CategoryInfoScene extends Component {
             </View>
         );
     }
-    startLearning() {
-        this.props.dispatchSelectLearningMode('module');
-        // Actions.question();
-        this.props.navigation.push('question');
+    startSectionLearning() {
+        this.props.dispatchContinueSectionLearning(this.props.modules.currentModuleID);
     }
-    // componentWillMount() {
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
-    // handleBackPress = () => {
-    //     alert("Backhandler pressed");
-    //     this.props.navigation.goBack();
-    //     return true;
-    // }
+    startLearning() {
+        this.props.dispatchContinueModuleLearning(this.props.modules.selectedSubmodule);
+        // Actions.question();
+        // this.props.navigation.push('question');
+    }
 }
 
 const styles = StyleSheet.create({
@@ -191,7 +186,9 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
-    dispatchSelectLearningMode: setLearningModeAction
+    // dispatchSelectLearningMode: setLearningModeAction,
+    dispatchContinueModuleLearning: continueModuleLearningAction,
+    dispatchContinueSectionLearning: continueSectionLearningAction
 };
 
 const mapStateToProps = state => ({
