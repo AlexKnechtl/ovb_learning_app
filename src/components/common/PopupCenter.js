@@ -65,7 +65,7 @@ class PopupCenter extends Component {
                     style={styles.buttonStyle}
                     onPress={this.onModuleChangePress.bind(this)}>
                     <Text style={styles.buttonText}>
-                        Modul wechseln
+                        Statistiken
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity

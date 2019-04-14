@@ -7,6 +7,7 @@ import CategoryInfoScene from "./components/CategoryInfoScene";
 import QuestionScene from "./components/QuestionScene";
 import NavigationService from './NavigationService';
 import TestScene from './components/TestScene';
+import QuestionViewScene from './components/QuestionViewScene';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION } from "core";
 
@@ -26,6 +27,9 @@ const AppStack = createStackNavigator({
     },
     test: {
         screen: TestScene
+    },
+    questionView: {
+        screen: QuestionViewScene
     },
 },
     {

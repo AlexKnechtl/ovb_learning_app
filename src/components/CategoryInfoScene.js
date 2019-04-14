@@ -26,7 +26,7 @@ class CategoryInfoScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
-        
+
         // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
@@ -59,7 +59,7 @@ class CategoryInfoScene extends Component {
         var la = new LearningAlgorithm(new QuestionService(), LearningService);
         var subMID = this.props.modules.selectedSubmodule;
         var stats = la.calcCurrentLearningStatsForModule(subMID);
-        var lernState = stats.seenQuestions/stats.questionCount;
+        var lernState = stats.seenQuestions / stats.questionCount;
         return (
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -90,7 +90,7 @@ class CategoryInfoScene extends Component {
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
                                 <Progress.Bar progress={lernState} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{(lernState*100).toFixed(0)}%</Text>
+                                <Text style={styles.percentTextStyle}>{(lernState * 100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 12 }}>
@@ -99,7 +99,7 @@ class CategoryInfoScene extends Component {
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
                                 <Progress.Bar progress={stats.successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='#DEEBE1' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{(stats.successRate*100).toFixed(0)}%</Text>
+                                <Text style={styles.percentTextStyle}>{(stats.successRate * 100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>
@@ -122,18 +122,16 @@ class CategoryInfoScene extends Component {
                             // Actions.question();
                             this.props.dispatchLearnFalseQuestions(this.props.modules.selectedSubmodule);
                         }}
-                        disabled={stats.falseQuestions == 0}
+                            disabled={stats.falseQuestions == 0}
                         >
                             Falsche Fragen üben
                         </ActionButton>
                         <ActionButton image={icon_watch_questions} onPress={() => {
-                            // Actions.question();
-                            alert("Feature kommt bald.");
+                            this.props.navigation.navigate('questionView');
                         }}>
                             Fragen durchblättern
                         </ActionButton>
                         <ActionButton image={icon_pdf} onPress={() => {
-                            // Actions.question();
                             alert("Feature kommt bald.");
                         }}>
                             PDF durchlesen
