@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Linking } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modalbox';
 
 class InfoPopup extends Component {
@@ -15,13 +15,6 @@ class InfoPopup extends Component {
     closeModal = () => {
         this.refs.myModal.close();
     }
-
-    // props = {
-    //     headerText: "",
-    //     buttonText: "",
-    //     onButtonPress: () => {},
-    //     show: false
-    // }
 
     render() {
         return (

@@ -98,7 +98,7 @@ class CategoryInfoScene extends Component {
                                 Erfolgschance
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
-                                <Progress.Bar progress={stats.successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='#DEEBE1' borderWidth={0} borderRadius={0} />
+                                <Progress.Bar progress={stats.successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
                                 <Text style={styles.percentTextStyle}>{(stats.successRate * 100).toFixed(0)}%</Text>
                             </View>
                         </View>
