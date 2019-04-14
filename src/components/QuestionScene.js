@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
-import NoMoreQuestionsPopupCenter from './common/NoMoreQuestions';
+import InfoPopup from './common/InfoPopup';
 
 class QuestionScene extends Component {
     state = {
@@ -191,7 +191,7 @@ class QuestionScene extends Component {
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
-                <NoMoreQuestionsPopupCenter buttonText={"OK"} 
+                <InfoPopup buttonText={"OK"} 
                 headerText={"Keine weiteren Fragen mehr"} 
                 onButtonPress={()=> {this.props.navigation.goBack();}}
                 ref={'popupCenter'}

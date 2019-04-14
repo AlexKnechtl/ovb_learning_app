@@ -1,10 +1,11 @@
-/*import React from 'react';
+import React from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import Pdf from 'react-native-pdf';
+import { SafeAreaView } from 'react-navigation';
 
 const PdfView = (props) => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={{flex: 1, alignItems: "center", justifyContent: "flex-start", backfaceVisibility: props.visibilty }}>
             <Pdf
                 source={props.source}
                 onLoadComplete={(numberOfPages, filePath) => {
@@ -17,7 +18,7 @@ const PdfView = (props) => {
                     console.log(error);
                 }}
                 style={styles.pdf} />
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -34,4 +35,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export { PdfView };*/
+export { PdfView };

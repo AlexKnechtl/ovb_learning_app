@@ -51,7 +51,6 @@ class CategoryScene extends Component {
         )
         return (
             <View style={{ flex: 1 }}>
-                {/* {this.showPDF} */}
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
                         backgroundColor="#003A65"
@@ -62,7 +61,7 @@ class CategoryScene extends Component {
                     text="Lernvorgang fortsetzen"
                     buttonText={btnText}
                     children={mainHeaderText}
-                    //pdfPress={}
+                    pdfPress={() => this.props.navigation.navigate('pdfScene')}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
                     onPressButton={() => { this.continueSectionLearningPress(); }}
@@ -74,9 +73,7 @@ class CategoryScene extends Component {
                         {this.mapModules()}
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'}>
-
-                </PopupCenter>
+                <PopupCenter ref={'popupCenter'} />
             </View>
         );
     }

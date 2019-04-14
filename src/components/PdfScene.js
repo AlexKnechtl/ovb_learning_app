@@ -1,19 +1,21 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, Dimensions, View, StatusBar } from 'react-native';
 
 import Pdf from 'react-native-pdf';
+import { SafeAreaView } from 'react-navigation';
 
 export default class PDFExample extends React.Component {
     render() {
         const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
-        //const source = require('./test.pdf');  // ios only
-        //const source = {uri:'bundle-assets://test.pdf'};
-
-        //const source = {uri:'file:///sdcard/test.pdf'};
-        //const source = {uri:"data:application/pdf;base64,..."};
 
         return (
             <View style={styles.container}>
+                <SafeAreaView style={{ backgroundColor: "#003A65" }}>
+                    <StatusBar
+                        backgroundColor="#003A65"
+                        barStyle="light-content"
+                    />
+                </SafeAreaView >
                 <Pdf
                     source={source}
                     onLoadComplete={(numberOfPages, filePath) => {
@@ -34,9 +36,9 @@ export default class PDFExample extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#003A65",
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: 25,
     },
     pdf: {
         flex: 1,

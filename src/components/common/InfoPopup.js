@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Linking } from 'react-native';
 import Modal from 'react-native-modalbox';
 
-class NoMoreQuestionsPopupCenter extends Component {
+class InfoPopup extends Component {
     constructor(props) {
         // this.props = props;
         super(props);
@@ -30,7 +30,7 @@ class NoMoreQuestionsPopupCenter extends Component {
                 style={styles.modalStyle}
                 position='center'
                 backdrop={true}
-                >
+            >
                 <View style={{
                     width: 280,
                     height: 45,
@@ -39,14 +39,14 @@ class NoMoreQuestionsPopupCenter extends Component {
                     alignItems: "center"
                 }}>
                     <Text style={{
-                        fontSize: 22,
+                        fontSize: 16,
                         fontWeight: 'bold',
                         textAlign: 'center',
                         justifyContent: "center",
                         color: "#003A65"
                     }}>
                         {this.props.headerText}
-                </Text>
+                    </Text>
                 </View>
                 <View style={styles.lineColor} />
                 <TouchableOpacity
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: "bold",
         color: '#fff',
-        fontSize: 20,
+        fontSize: 18,
         paddingTop: 8,
         paddingBottom: 10
     },
@@ -96,5 +96,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NoMoreQuestionsPopupCenter;
-export {NoMoreQuestionsPopupCenter};
+export default InfoPopup;
+export { InfoPopup };

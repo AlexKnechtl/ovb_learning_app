@@ -7,3 +7,4 @@ export * from './ActionButton';
 export * from './PopupCenter';
 export * from './PopupBottom';
 export * from './PdfView';
+export * from './InfoPopup';
