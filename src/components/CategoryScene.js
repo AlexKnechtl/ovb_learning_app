@@ -79,7 +79,7 @@ class CategoryScene extends Component {
                         {this.mapModules()}
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'} />
+                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
             </View>
         );
     }

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet, ImageBackground, Image, StatusBar } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, ImageBackground, Image, StatusBar, ScrollView, View, Linking } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class Impressum extends Component {
+
+    websitePress() {
+        Linking.openURL("https://www.seekinnovation.at");
+    }
+
     render() {
         return (
             <ImageBackground
@@ -14,18 +20,74 @@ class Impressum extends Component {
                         barStyle="light-content"
                     />
                 </SafeAreaView >
-                <SafeAreaView style={{ alignItems: "center", flex: 1 }} >
-                    <Image style={styles.logoBig} source={require('../img/seek_innovation_logo.png')} />
-                    <Text style={styles.smallHeader}>
-                        made with Passion.
-                    </Text>
-                    <Text style={styles.header}>
-                        by SeekInnovation
-                    </Text>
-                    <Text style={styles.header}>
-                        by SeekInnovation
-                    </Text>
-                </SafeAreaView>
+                <ScrollView style={styles.containerStyle}>
+                    <View style={{ flex: 1 }} >
+                        <Image style={styles.logoBig} source={require('../img/seek_innovation_logo.png')} />
+                        <Text style={styles.smallHeader}>
+                            made with Passion.
+                        </Text>
+                        <Text style={styles.header}>
+                            by SeekInnovation
+                        </Text>
+                        <Text style={styles.subHeader}>
+                            Kontakt
+                        </Text>
+                        <View style={styles.borderedView}>
+                            <Text style={styles.detailedText}>
+                                Probleme, Fragen und Anregungen an folgende E-Mail:
+                            </Text>
+                            <Text style={styles.informationText}>
+                                office@seekinnovation.at
+                            </Text>
+                        </View>
+                        <View style={styles.borderedView}>
+                            <Text style={styles.detailedText}>
+                                Besuchen Sie unsere Website:
+                            </Text>
+                            <TouchableOpacity onPress={this.websitePress.bind(this)}>
+                                <Text style={styles.link}>
+                                    www.seekinnovation.at
+                            </Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.subHeader}>
+                            Anschrift
+                        </Text>
+                        <View style={styles.borderedView}>
+                            <Text style={styles.informationText}>
+                                Seek Innovation OG
+                            </Text>
+                            <Text style={styles.detailedText}>
+                                Harmsdorfgasse 48B/6 {"\n"}
+                                8042 Graz {"\n"}
+                                Austria
+                            </Text>
+                        </View>
+                        <Text style={styles.subHeader}>
+                            Credits
+                        </Text>
+                        <View style={styles.borderedView}>
+                            <Text style={styles.informationText}>
+                                Alexander Knechtl
+                            </Text>
+                            <Text style={{color: '#fff', fontSize: 22, marginBottom: 8}}>
+                                Organisation, Programmierung
+                            </Text>
+                            <Text style={styles.informationText}>
+                                Florian Gerstner
+                            </Text>
+                            <Text style={{color: '#fff', fontSize: 22, marginBottom: 8}}>
+                                Design, Konzept
+                            </Text>
+                            <Text style={styles.informationText}>
+                                Fabio Moretti
+                            </Text>
+                            <Text style={styles.detailedText}>
+                                Programmierung
+                            </Text>
+                        </View>
+                    </View>
+                </ScrollView>
             </ImageBackground >
         );
     }
@@ -35,32 +97,59 @@ const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
     },
-    logoLayoutStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 30,
-        marginTop: 18,
-        flexDirection: "row",
-    },
     header: {
         color: '#fff',
-        fontSize: 28,
+        fontSize: 30,
         marginTop: 6,
+        marginBottom: 12,
         fontWeight: "bold",
         alignSelf: 'center',
-        textAlign
     },
     smallHeader: {
         color: '#fff',
-        fontSize: 22,
+        fontSize: 24,
+        fontWeight: "bold",
         marginTop: 18,
         alignSelf: 'center'
     },
+    subHeader: {
+        color: '#fff',
+        fontSize: 22,
+        fontWeight: "bold",
+        marginLeft: 16,
+        marginTop: 12,
+    },
+    borderedView: {
+        flex: 1,
+        borderWidth: 2,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        borderColor: "#fff8",
+        marginHorizontal: 14,
+        marginBottom: 12
+    },
+    detailedText: {
+        color: '#fff',
+        fontSize: 22,
+    },
+    informationText: {
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: "bold",
+        marginTop: 2,
+    },
+    link: {
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: "bold",
+        marginTop: 2,
+        textDecorationLine: 'underline'
+    },
     logoBig: {
-        marginTop: '12%',
+        marginTop: 22,
         resizeMode: "contain",
-        height: '12%',
-        width: 194
+        height: 124,
+        alignSelf: "center",
     }
 });
 

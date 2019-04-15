@@ -137,7 +137,7 @@ class CategoryInfoScene extends Component {
                         </ActionButton>
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'}>
+                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }}>
 
                 </PopupCenter>
             </View>
