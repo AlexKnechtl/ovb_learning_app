@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-navigation';
 
 export default class PDFExample extends React.Component {
     render() {
-        const source = { uri: 'https://blog.mozilla.org/security/files/2015/05/HTTPS-FAQ.pdf', cache: true };
+        const source = { uri: this.props.navigation.getParam('pdfSrc', ''), cache: true };
 
         return (
             <View style={styles.container}>
