@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-navigation';
 
 export default class PDFExample extends React.Component {
     render() {
-        const source = { uri: 'https://firebasestorage.googleapis.com/v0/b/wko-lernplattform.appspot.com/o/courses%2Fpdfs%2FVersicherungsagent%2F2.%20Wettbewerbs-%20Konsumentenschutzrecht%20und%20DSGVO%20Juni%202018.pdf?alt=media&token=87e6a626-8aa7-4954-8fec-6fb0f96893ff', cache: true };
+        const source = { uri: this.props.navigation.getParam('pdfSrc', ''), cache: true };
 
         return (
             <View style={styles.container}>

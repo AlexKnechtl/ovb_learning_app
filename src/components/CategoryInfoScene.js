@@ -57,6 +57,7 @@ class CategoryInfoScene extends Component {
         var subMID = this.props.modules.selectedSubmodule;
         var stats = la.calcCurrentLearningStatsForModule(subMID);
         var lernState = stats.seenQuestions / stats.questionCount;
+        var pdfSrc = this.props.modules.modules ? this.props.modules.modules[this.props.modules.currentModuleID].modules[subMID].pdf : '';
         return (
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -73,6 +74,7 @@ class CategoryInfoScene extends Component {
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
+                    pdfPress={() => this.props.navigation.navigate('pdfScene', {pdfSrc})}
                 />
                 <ScrollView
                     style={styles.containerStyle}
