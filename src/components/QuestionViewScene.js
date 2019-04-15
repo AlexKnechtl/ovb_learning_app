@@ -75,8 +75,10 @@ class QuestionViewScene extends Component {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);
 
-        const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
-
+        answer1Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer1.isRight : false);
+        answer2Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer2.isRight : false);
+        answer3Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer3.isRight : false);
+        
         const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
         const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
         const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';

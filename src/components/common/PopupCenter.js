@@ -21,7 +21,7 @@ class PopupCenter extends Component {
     }
 
     onImpressumPress() {
-        //Actions.question();
+        this.props.impressum();
     }
 
     onDataSecPress() {
@@ -34,7 +34,7 @@ class PopupCenter extends Component {
                 ref={"myModal"}
                 style={styles.modalStyle}
                 position='center'
-                
+
                 backdrop={true}>
                 <View style={{
                     width: 280,
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
 });
 
 export default PopupCenter;
-export {PopupCenter};
+export { PopupCenter };

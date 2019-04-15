@@ -127,7 +127,7 @@ class HomeScene extends Component {
                         )}
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} />
+                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
             </View>
         );
     }

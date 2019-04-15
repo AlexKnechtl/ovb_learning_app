@@ -84,7 +84,7 @@ class QuestionScene extends Component {
         // console.log(this.props.currentQuestion.question);
         // console.log(this.props.currentQuestion.question.question);
 
-        const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
+         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
         const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#23B800' : '#B21515' : answer1Clicked ? "white" : "white";
         const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#23B800' : '#B21515' : answer2Clicked ? "white" : "white";
