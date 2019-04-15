@@ -10,7 +10,7 @@ import TestScene from './components/TestScene';
 import QuestionViewScene from './components/QuestionViewScene';
 import PdfScene from './components/PdfScene';
 
-import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION } from "core";
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION, INIT_EXAM } from "core";
 
 const questionTestNavigator = createSwitchNavigator({
     testScene: {
@@ -86,6 +86,8 @@ export const sceneReducer = (state = {}, { type }) => {
         case CONTINUE_MODULE_LEARNING: NavigationService.navigate('question');
         case LEARN_FALSE_QUESTIONS_FROM_MODULE: NavigationService.navigate('question');
         case CONTINUE_SECTION_LEARNING: NavigationService.navigate('question');
+            return state;
+        case INIT_EXAM: NavigationService.navigate('test');
             return state;
         default:
             return state;

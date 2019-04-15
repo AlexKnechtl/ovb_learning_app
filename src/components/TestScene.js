@@ -1,8 +1,10 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
-import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction } from 'core';
 
 class TestScene extends Component {
     state = {
@@ -10,61 +12,57 @@ class TestScene extends Component {
         answer2Clicked: true,
         answer3Clicked: true,
         check: false,
-        lastAnswerRight: undefined
+        lastAnswerRight: undefined,
+        currentQuestion: undefined,
+        currQuestionIndex: 0
     }
     constructor(props) {
         super(props);
-        props.dispatchGetNextQuestion();
         this.toogleModal = this.toogleModal.bind(this);        
     }
 
+    // props = {
+    //     exam: {
+    //         /** @type {QuestionInfo[]} */
+    //         questions: [],
+    //         /** @type {QuestionInfo} */
+    //         currentQuestion: undefined,
+    //         currentIndex: 0
+    //     }
+    // }
+
     checkAnswers() {
-        this.setState({ check: !this.state.check });
-        if (!this.state.check) {
-            var q = this.props.currentQuestion.question;
-            var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
+            var q = this.props.exam.currentQuestion.question;
+            var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.exam.currentQuestion.question);
             this.setState({ lastAnswerRight: isright });
             console.log(isright);
-            this.props.dispatchUpdateQuestion({ questionid: this.props.currentQuestion.questionId, answeredRight: isright });
-        } else {
+            this.props.dispatchAnswerQuestion(this.props.exam.currentIndex, isright);
             this.props.dispatchGetNextQuestion();
-            this.setState({ answer3Clicked: true });
-            this.setState({ answer1Clicked: true });
-            this.setState({ answer2Clicked: true });
-        }
+            this.setState({ answer1Clicked: true, answer2Clicked: true, answer3Clicked: true, check: false});
     }
 
     answer1Click() {
-        if (this.state.check) return;
-        this.setState({ answer1Clicked: false });
-        this.setState({ answer2Clicked: true });
-        this.setState({ answer3Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = true;
-        this.props.currentQuestion.question.answer2.choosen = false;
-        this.props.currentQuestion.question.answer3.choosen = false;
-        this.checkAnswers();
+        this.setState({ check: true, answer1Clicked: false, answer2Clicked: true, answer3Clicked: true });
+        this.props.exam.currentQuestion.question.answer1.choosen = true;
+        this.props.exam.currentQuestion.question.answer2.choosen = false;
+        this.props.exam.currentQuestion.question.answer3.choosen = false;
+        // this.checkAnswers();
     }
 
     answer2Click() {
-        if (this.state.check) return;
-        this.setState({ answer2Clicked: false });
-        this.setState({ answer1Clicked: true });
-        this.setState({ answer3Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = false;
-        this.props.currentQuestion.question.answer2.choosen = true;
-        this.props.currentQuestion.question.answer3.choosen = false;
-        this.checkAnswers();
+        this.setState({ check: true, answer1Clicked: true, answer2Clicked: false, answer3Clicked: true });
+        this.props.exam.currentQuestion.question.answer1.choosen = false;
+        this.props.exam.currentQuestion.question.answer2.choosen = true;
+        this.props.exam.currentQuestion.question.answer3.choosen = false;
+        // this.checkAnswers();
     }
 
     answer3Click() {
-        if (this.state.check) return;
-        this.setState({ answer3Clicked: false });
-        this.setState({ answer1Clicked: true });
-        this.setState({ answer2Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = false;
-        this.props.currentQuestion.question.answer2.choosen = false;
-        this.props.currentQuestion.question.answer3.choosen = true;
-        this.checkAnswers();
+        this.setState({ check: true, answer1Clicked: true, answer2Clicked: true, answer3Clicked: false });
+        this.props.exam.currentQuestion.question.answer1.choosen = false;
+        this.props.exam.currentQuestion.question.answer2.choosen = false;
+        this.props.exam.currentQuestion.question.answer3.choosen = true;
+        // this.checkAnswers();
     }
 
     toogleModal() {
@@ -72,9 +70,8 @@ class TestScene extends Component {
     }
 
     render() {
-        if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
-        console.log(this.props.currentQuestion);
-
+        if(this.props.exam.questions && this.props.exam.currentIndex >= this.props.exam.questions.length)
+            this.props.dispatchFinishExam();
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
         const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
@@ -98,11 +95,11 @@ class TestScene extends Component {
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
+                            {this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.exam.currentQuestion.questionId.substr(4)}` : ''}
                         </Text>
                         <Text style={styles.questionText}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
-                            {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
+                            {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.question : ''}
+                            {this.props.exam.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.exam.currentQuestion.question.answer1.isRight ? '1' : this.props.exam.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
                         </Text>
                     </ScrollView>
                 </SafeAreaView>
@@ -115,31 +112,31 @@ class TestScene extends Component {
                                 </Text>
                             <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                         </View>
-                        <TouchableOpacity disabled={this.state.check}
+                        <TouchableOpacity 
                             onPress={this.answer1Click.bind(this)}
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
+                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={this.state.check}
+                        <TouchableOpacity 
                             onPress={this.answer2Click.bind(this)}
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
+                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : ''}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={this.state.check}
+                        <TouchableOpacity
                             onPress={this.answer3Click.bind(this)}
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
+                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : ''}
                             </Text>
                         </TouchableOpacity>
                     </ScrollView>
@@ -168,8 +165,8 @@ class TestScene extends Component {
                         </View>
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
-                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
+                        sectionText={this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
+                        questionNumberText={this.props.exam.currentQuestion ? `Frage ${this.props.exam.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.exam.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
             </View>
@@ -265,12 +262,13 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
-    dispatchUpdateQuestion: updateCurrentQuestion,
-    dispatchGetNextQuestion: getNextQuestionAction
+    dispatchGetNextQuestion: getNextExamQuestionAction,
+    dispatchAnswerQuestion: answerExamQuestionAction,
+    dispatchFinishExam: finishExamAction
 };
 
 const mapStateToProps = state => ({
-    currentQuestion: state.learning.currentQuestion,
+    exam: state.exam,
     modules: state.modules
 });
 
