@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
-import { signOutAction, SetCurrentModuleAction } from "core";
+import { signOutAction, SetCurrentModuleAction, initExamAction } from "core";
 import { connect } from "react-redux";
 
 const mainHeaderText = (
@@ -31,7 +31,11 @@ class HomeScene extends Component {
                 icon: icBack
             });
         } else if (this.state.testMode == true) {
-            this.props.navigation.navigate('test');
+            // this.props.navigation.navigate('test');
+            var mids = []
+            Object.keys(this.state.categories).forEach(key => {if(this.state.categories[key].isPressed) mids.push(key);});
+            console.log(mids);
+            this.props.dispatchStartExam(mids);
         }
     }
 
@@ -142,7 +146,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
     dispatchLogOut: signOutAction,
-    dispatchSelectCategory: SetCurrentModuleAction
+    dispatchSelectCategory: SetCurrentModuleAction,
+    dispatchStartExam: initExamAction
 };
 
 const mapStateToProps = state => ({
