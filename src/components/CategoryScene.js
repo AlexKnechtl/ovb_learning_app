@@ -92,7 +92,8 @@ class CategoryScene extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        paddingVertical: 12
     },
 });
 

@@ -34,7 +34,8 @@ class Impressum extends Component {
                         </Text>
                         <View style={styles.borderedView}>
                             <Text style={styles.detailedText}>
-                                Probleme, Fragen und Anregungen an folgende E-Mail:
+                                Probleme, Fragen und {"\n"}
+                                Anregungen an folgende E-Mail:
                             </Text>
                             <Text style={styles.informationText}>
                                 office@seekinnovation.at
@@ -70,13 +71,13 @@ class Impressum extends Component {
                             <Text style={styles.informationText}>
                                 Alexander Knechtl
                             </Text>
-                            <Text style={{color: '#fff', fontSize: 22, marginBottom: 8}}>
+                            <Text style={{ color: '#fff', fontSize: 22, marginBottom: 8 }}>
                                 Organisation, Programmierung
                             </Text>
                             <Text style={styles.informationText}>
                                 Florian Gerstner
                             </Text>
-                            <Text style={{color: '#fff', fontSize: 22, marginBottom: 8}}>
+                            <Text style={{ color: '#fff', fontSize: 22, marginBottom: 8 }}>
                                 Design, Konzept
                             </Text>
                             <Text style={styles.informationText}>
@@ -86,9 +87,26 @@ class Impressum extends Component {
                                 Programmierung
                             </Text>
                         </View>
+                        <Text style={styles.subHeader}>
+                            Danksagung
+                        </Text>
+                        <View style={styles.borderedView}>
+                            <Text style={styles.informationText}>
+                                Margit Eidenhammer
+                            </Text>
+                            <Text style={{ color: '#fff', fontSize: 22, marginBottom: 8 }}>
+                                für Ihre tatkräftige Unterstützung.
+                            </Text>
+                            <Text style={styles.informationText}>
+                                Barnabas Kiss
+                            </Text>
+                            <Text style={styles.detailedText}>
+                                für die Idee.
+                            </Text>
+                        </View>
                     </View>
                 </ScrollView>
-            </ImageBackground >
+            </ImageBackground>
         );
     }
 }
@@ -117,15 +135,16 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: "bold",
         marginLeft: 16,
+        marginBottom: 4,
         marginTop: 12,
     },
     borderedView: {
         flex: 1,
         borderWidth: 2,
         paddingHorizontal: 14,
-        paddingVertical: 12,
+        paddingVertical: 10,
         borderColor: "#fff8",
-        marginHorizontal: 14,
+        marginHorizontal: 10,
         marginBottom: 12
     },
     detailedText: {
