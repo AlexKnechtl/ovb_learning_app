@@ -17,6 +17,11 @@ class CategoryScene extends Component {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
     }
+    componentDidMount() {
+        this._subscribe = this.props.navigation.addListener('didFocus', () => {
+            this.forceUpdate();
+        });
+    }
 
     toogleModal() {
         this.refs.popupCenter.showAddModal();

@@ -23,6 +23,9 @@ const btnText = (
 )
 
 class CategoryInfoScene extends Component {
+
+    _subscribe;
+
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
@@ -33,18 +36,12 @@ class CategoryInfoScene extends Component {
     toogleModal() {
         this.refs.popupCenter.showAddModal();
     }
-
-    // handleBackPress = () => {
-    //     // Actions.category();
-
-    //     return true;
-    // }
-
-    // componentWillMount() {
-    //     BackHandler.removeEventListener('hardwareBackPress', () => {})
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
+    componentDidMount() {
+        this._subscribe = this.props.navigation.addListener('didFocus', () => {
+            this.forceUpdate();
+        });
+    }
+    
     render() {
         const mainHeaderText = (
             <View>

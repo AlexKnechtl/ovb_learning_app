@@ -12,6 +12,15 @@ import PdfScene from './components/PdfScene';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION } from "core";
 
+const questionTestNavigator = createSwitchNavigator({
+    testScene: {
+        screen: TestScene
+    }
+},
+{
+    backBehavior: "none"
+}
+);
 
 const AppStack = createStackNavigator({
     main: {
@@ -26,15 +35,13 @@ const AppStack = createStackNavigator({
     question: {
         screen: QuestionScene
     },
-    test: {
-        screen: TestScene
-    },
     questionView: {
         screen: QuestionViewScene
     },
     pdfScene: {
         screen: PdfScene
     },
+    test: questionTestNavigator
 },
     {
         headerMode: 'none'
@@ -51,8 +58,9 @@ const rootNavigator = createSwitchNavigator({
     Login: AuthStack,
     Home: AppStack,
     AuthLoading: LoadingScene
-}, {
-        initialRouteName: 'AuthLoading',
+}, 
+{
+        initialRouteName: 'AuthLoading'
     });
 
 export default createAppContainer(rootNavigator);

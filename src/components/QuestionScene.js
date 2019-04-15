@@ -21,7 +21,7 @@ class QuestionScene extends Component {
     }
 
     toogleModalBox() {
-        this.refs.popupCenter.showModal();
+        this.refs.popupInfo.showModal();
     }
 
     checkAnswers() {
@@ -77,15 +77,6 @@ class QuestionScene extends Component {
     toogleModal() {
         this.refs.popupBottom.showAddModal();
     }
-
-    // componentWillMount() {
-    //     BackHandler.removeEventListener('hardwareBackPress', () => {})
-    //     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    // }
-
-    // handleBackPress = () => {
-    //     return true;
-    // }
 
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
@@ -193,8 +184,8 @@ class QuestionScene extends Component {
                 </View>
                 <InfoPopup buttonText={"OK"} 
                 headerText={"Keine weiteren Fragen mehr"} 
-                onButtonPress={()=> {this.props.navigation.goBack();}}
-                ref={'popupCenter'}
+                onButtonPress={()=> {this.props.navigation.goBack(); this.props.noMoreQuestions = false;}}
+                ref={'popupInfo'}
                 />
             </View>
         );
