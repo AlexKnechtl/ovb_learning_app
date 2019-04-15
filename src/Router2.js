@@ -40,8 +40,7 @@ const AppStack = createStackNavigator({
     },
     pdfScene: {
         screen: PdfScene
-    },
-    test: questionTestNavigator
+    }
 },
     {
         headerMode: 'none'
@@ -57,7 +56,8 @@ const AuthStack = createStackNavigator({
 const rootNavigator = createSwitchNavigator({
     Login: AuthStack,
     Home: AppStack,
-    AuthLoading: LoadingScene
+    AuthLoading: LoadingScene,
+    test: questionTestNavigator
 }, 
 {
         initialRouteName: 'AuthLoading'

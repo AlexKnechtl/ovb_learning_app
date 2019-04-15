@@ -67,6 +67,7 @@ class CategoryScene extends Component {
                     buttonText={btnText}
                     children={mainHeaderText}
                     pdfPress={() => this.props.navigation.navigate('pdfScene')}
+                    style2={{ backgroundColor: "#fff0", height: 0, width: 0, marginLeft: -8 }}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
                     onPressButton={() => { this.continueSectionLearningPress(); }}
