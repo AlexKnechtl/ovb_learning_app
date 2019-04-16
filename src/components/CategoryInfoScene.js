@@ -37,7 +37,7 @@ class CategoryInfoScene extends Component {
             this.forceUpdate();
         });
     }
-    
+
     render() {
         const mainHeaderText = (
             <View>
@@ -70,7 +70,7 @@ class CategoryInfoScene extends Component {
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={require('../img/ic_options.png')} />}
                     optionsPress={() => this.toogleModal()}
-                    pdfPress={() => this.props.navigation.navigate('pdfScene', {pdfSrc})}
+                    pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc })}
                 />
                 <ScrollView
                     style={styles.containerStyle}
@@ -114,7 +114,6 @@ class CategoryInfoScene extends Component {
                             Dieses Kapitel üben
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
-                            // Actions.question();
                             this.props.dispatchLearnFalseQuestions(this.props.modules.selectedSubmodule);
                         }}
                             disabled={stats.falseQuestions == 0}
@@ -133,9 +132,7 @@ class CategoryInfoScene extends Component {
                         </ActionButton>
                     </SafeAreaView>
                 </ScrollView>
-                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }}>
-
-                </PopupCenter>
+                <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
             </View>
         );
     }

@@ -42,7 +42,6 @@ class HomeScene extends Component {
     optionsPress() {
         if (this.state.testMode == false) {
             //No Test Mode
-
             this.refs.popupCenter.showAddModal();
         } else if (this.state.testMode == true) {
             //Test Mode activated

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
 
 class FinishedPopup extends Component {
@@ -24,19 +24,19 @@ class FinishedPopup extends Component {
                 backdrop={true} >
                 <View style={{
                     width: 280,
-                    height: 45,
+                    padding: 8,
                     backgroundColor: "white",
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        justifyContent: "center",
-                        color: "#003A65"
-                    }}>
-                        {this.props.headerText}
+                    <View style={styles.floatingActionButton}>
+                        <Image style={{ height: 32, width: 36 }} source={require('../../img/ic_check.png')} />
+                    </View>
+                    <Text style={styles.smallText}>
+                        Alle Fragen
+                    </Text>
+                    <Text style={styles.bigText}>
+                        richtig beantwortet
                     </Text>
                 </View>
                 <View style={styles.lineColor} />
@@ -44,8 +44,9 @@ class FinishedPopup extends Component {
                     style={styles.buttonStyle}
                     onPress={this.props.onButtonPress.bind(this)}>
                     <Text style={styles.buttonText}>
-                        {this.props.buttonText}
+                        Weiter
                     </Text>
+                    <Image style={{ height: 28, width: 32, marginLeft: 8, transform: [{ rotate: '180deg' }] }} source={require('../../img/ic_back.png')} />
                 </TouchableOpacity>
             </Modal>
         );
@@ -58,17 +59,14 @@ const styles = StyleSheet.create({
         width: 280,
         alignItems: "center",
         marginTop: 16,
-        paddingLeft: 18,
-        paddingRight: 18,
-        paddingBottom: 18,
         backgroundColor: "#003A65"
     },
     buttonStyle: {
-        width: 240,
-        backgroundColor: "#fff3",
-        marginTop: 14,
-        marginLeft: 20,
-        marginRight: 20,
+        width: '100%',
+        height: 48,
+        justifyContent: "center",
+        flexDirection: "row",
+        alignItems: "center",
         paddingLeft: 8,
         paddingRight: 8
     },
@@ -80,11 +78,34 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 10
     },
+    smallText: {
+        fontSize: 16,
+        marginTop: 4,
+        fontWeight: 'bold',
+        color: "#003A65"
+    },
+    bigText: {
+        fontSize: 22,
+        marginTop: 4,
+        marginBottom: 4,
+        fontWeight: 'bold',
+        color: "#003A65"
+    },
     lineColor: {
         backgroundColor: "#2EEF6A",
-        height: 7,
+        height: 6,
         width: 280
-    }
+    },
+    floatingActionButton: {
+        width: 64,
+        height: 64,
+        marginTop: 6,
+        marginBottom: 6,
+        borderRadius: 32,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: '#2EEF6A',
+    },
 });
 
 export { FinishedPopup };

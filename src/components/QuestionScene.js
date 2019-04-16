@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
-import { PopupBottom } from './common';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { PopupBottom, FinishedPopup } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
-import InfoPopup from './common/InfoPopup';
 
 class QuestionScene extends Component {
     state = {
@@ -16,12 +15,14 @@ class QuestionScene extends Component {
     constructor(props) {
         super(props);
         props.dispatchGetNextQuestion();
-        this.toogleModal = this.toogleModal.bind(this);
-        this.toogleModalBox = this.toogleModalBox.bind(this);
     }
 
     toogleModalBox() {
         this.refs.popupInfo.showModal();
+    }
+
+    closeModal() {
+        this.refs.popupInfo.closeModal();
     }
 
     checkAnswers() {
@@ -74,17 +75,13 @@ class QuestionScene extends Component {
         this.checkAnswers();
     }
 
-    toogleModal() {
-        this.refs.popupBottom.showAddModal();
-    }
-
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
         console.log(this.props.currentQuestion);
         // console.log(this.props.currentQuestion.question);
         // console.log(this.props.currentQuestion.question.question);
 
-         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
+        const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
         const background1 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer1.isRight ? '#23B800' : '#B21515' : answer1Clicked ? "white" : "white";
         const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#23B800' : '#B21515' : answer2Clicked ? "white" : "white";
@@ -100,7 +97,7 @@ class QuestionScene extends Component {
 
         const fontColorAnswers = answer1Clicked && answer2Clicked && answer3Clicked ? "#003A65" : "#fff";
 
-        if(this.props.noMoreQuestions)
+        if (this.props.noMoreQuestions && this.props.currentQuestion == null)
             this.toogleModalBox();
 
         return (
@@ -182,11 +179,9 @@ class QuestionScene extends Component {
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
-                <InfoPopup buttonText={"OK"} 
-                headerText={"Keine weiteren Fragen mehr"} 
-                onButtonPress={()=> {this.props.navigation.goBack(); this.props.noMoreQuestions = false;}}
-                ref={'popupInfo'}
-                />
+                <FinishedPopup
+                    ref={'popupInfo'}
+                    onButtonPress={() => { this.props.navigation.goBack(); }} />
             </View>
         );
     }
@@ -278,8 +273,6 @@ const styles = StyleSheet.create({
         width: 42
     }
 });
-
-// export default QuestionScene;
 
 const mapDispatchToProps = {
     dispatchUpdateQuestion: updateCurrentQuestion,
