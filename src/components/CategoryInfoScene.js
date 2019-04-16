@@ -1,5 +1,3 @@
-//@ts-check
-
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import * as Progress from 'react-native-progress';
@@ -29,8 +27,6 @@ class CategoryInfoScene extends Component {
     constructor(props) {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
-
-        // this.handleBackPress = this.handleBackPress.bind(this);
     }
 
     toogleModal() {

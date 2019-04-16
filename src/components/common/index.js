@@ -8,3 +8,4 @@ export * from './PopupCenter';
 export * from './PopupBottom';
 export * from './PdfView';
 export * from './InfoPopup';
+export * from './StatisticsCategory';

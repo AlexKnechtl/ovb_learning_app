@@ -10,6 +10,7 @@ import TestScene from './components/TestScene';
 import QuestionViewScene from './components/QuestionViewScene';
 import PdfScene from './components/PdfScene';
 import Impressum from './components/Impressum';
+import TestStatistics from './components/StatisticsScene';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION, INIT_EXAM } from "core";
 
@@ -44,6 +45,9 @@ const AppStack = createStackNavigator({
     },
     impressum: {
         screen: Impressum
+    },
+    testStatistics: {
+        screen: TestStatistics
     },
 },
     {
