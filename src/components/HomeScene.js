@@ -35,6 +35,8 @@ class HomeScene extends Component {
             var mids = []
             Object.keys(this.state.categories).forEach(key => {if(this.state.categories[key].isPressed) mids.push(key);});
             console.log(mids);
+            if(mids.length == 0)
+                return;
             this.props.dispatchStartExam(mids);
         }
     }
