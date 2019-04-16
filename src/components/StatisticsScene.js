@@ -3,17 +3,20 @@ import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
 import { StatisticsCategory } from './common/StatisticsCategory';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class StatisticsScene extends Component {
+    state = {
+        icon: null,
+    }
 
-    navigateHome =() => {
+    navigateHome = () => {
         this.props.navigation.navigate('main');
     }
 
     render() {
         const bestandenText = this.props.exam.percentageRight >= 0.8 ? 'Prüfung bestanden!' : 'Prüfung leider nicht bestanden!';
-        const percentageRight = this.props.exam.percentageRight*100;
+        const percentageRight = this.props.exam.percentageRight * 100;
         return (
             <View style={styles.containerStyle}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -39,20 +42,21 @@ class StatisticsScene extends Component {
                     </Text>
                 </View>
                 <View style={styles.lineColor} />
-                <ScrollView style={{ paddingVertical: 12 }}> 
-                    {Object.keys(this.props.exam.finishedStats).map(key=>{ 
+                <ScrollView style={{ paddingVertical: 12 }}>
+                    {Object.keys(this.props.exam.finishedStats).map(key => {
                         var currModResult = this.props.exam.finishedStats[key];
                         var moduleName = this.props.modules.modules[key].name;
                         var imageUri = this.props.modules.modules[key].image;
-                    return <StatisticsCategory 
-                    titleText={moduleName} 
-                    questionsFalse={currModResult.falseQuestions} 
-                    questionsRight={currModResult.rightQuestions}
-                    success={currModResult.percentageRight>=0.8}
-                    learningState={currModResult.percentageRight}
-                    imageUri={imageUri}
-                    onPress={()=>{}}
-                    />;})}
+                        return <StatisticsCategory
+                            titleText={moduleName}
+                            questionsFalse={currModResult.falseQuestions}
+                            questionsRight={currModResult.rightQuestions}
+                            success={currModResult.percentageRight >= 0.8}
+                            learningState={currModResult.percentageRight}
+                            imageUri={imageUri}
+                            onPress={() => { }}
+                        />;
+                    })}
                 </ScrollView>
                 <TouchableOpacity style={styles.floatingActionButton} onPress={() => this.navigateHome()}>
                     <Image source={require('../img/ic_back.png')} style={styles.backIcon} />
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
     backIcon: {
         height: 32,
         width: 32,
-        transform: [{ rotate: '180deg'}]
+        transform: [{ rotate: '180deg' }]
     }
 });
 

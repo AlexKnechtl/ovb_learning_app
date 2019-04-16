@@ -19,6 +19,7 @@ const Category = (props) => {
             <View>
                 <ImageBackground
                     source={props.imageUri}
+                    backgroundColor={"#003A65"}
                     resizeMode='cover' style={styles.containerStyle}
                     imageStyle={{ flex: 1 }}>
                     <View>
