@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, StatusBar, ScrollView, View, Text, TouchableO
 import ProgressCircle from 'react-native-progress-circle'
 import { StatisticsCategory } from './common/StatisticsCategory';
 import { connect } from 'react-redux';
+import { getExamResultStatsForModuleAction } from 'core/lib/adapters/redux/actions/ExamResultActions';
 
 class StatisticsScene extends Component {
     state = {
@@ -64,13 +65,14 @@ class StatisticsScene extends Component {
                             var moduleName = this.props.modules.modules[key].name;
                             var imageUri = this.props.modules.modules[key].image;
                             return <StatisticsCategory
+                                key={key}
                                 titleText={moduleName}
                                 questionsFalse={currModResult.falseQuestions}
                                 questionsRight={currModResult.rightQuestions}
                                 success={currModResult.percentageRight >= 0.8}
                                 learningState={currModResult.percentageRight}
                                 imageUri={imageUri}
-                                onPress={() => { }}
+                                onPress={() => this.props.dispatchInitStatsForModule(key)}
                             />;
                         })}
                     </SafeAreaView>
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
+    dispatchInitStatsForModule: getExamResultStatsForModuleAction
 };
 
 const mapStateToProps = state => ({

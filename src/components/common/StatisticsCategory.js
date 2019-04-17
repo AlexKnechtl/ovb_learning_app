@@ -43,7 +43,7 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
         <ProgressBar style={{ minHeight: 24, width: "100%" }} width={null} progress={learningState} height={24} color={'#2EEF6A'} unfilledColor='#F44B4B' borderWidth={0} borderRadius={0}>
             <Text style={{ marginLeft: 12, marginTop: -24, marginBottom: -2, color: "#fff", width: "100%", fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
         </ProgressBar>
-        <TouchableOpacity style={styles.detailsButton}>
+        <TouchableOpacity style={styles.detailsButton} onPress={onPress}>
             <Image style={{ height: 24, width: 24 }} source={require('../../img/ic_book_white.png')} />
             <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 18, marginLeft: 6 }}>
                 Details

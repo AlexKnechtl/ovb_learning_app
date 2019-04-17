@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
-import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction } from 'core';
+import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction, SELECT_CURRENT_SUBMODULE } from 'core';
+import { getNextExamResultQuestionAction, getPrevExamResultQuestionAction } from 'core/lib/adapters/redux/actions/ExamResultActions';
 
 class TestResultScene extends Component {
     state = {
@@ -31,48 +32,20 @@ class TestResultScene extends Component {
     //     }
     // }
 
-    checkAnswers() {
-        var q = this.props.exam.currentQuestion.question;
-        var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.exam.currentQuestion.question);
-        this.setState({ lastAnswerRight: isright });
-        console.log(isright);
-        this.props.dispatchAnswerQuestion(this.props.exam.currentIndex, isright);
-        this.props.dispatchGetNextQuestion();
-        this.setState({ answer1Clicked: true, answer2Clicked: true, answer3Clicked: true, check: false });
-    }
-
-    answer1Click() {
-        this.setState({ check: true, answer1Clicked: false, answer2Clicked: true, answer3Clicked: true });
-        this.props.exam.currentQuestion.question.answer1.choosen = true;
-        this.props.exam.currentQuestion.question.answer2.choosen = false;
-        this.props.exam.currentQuestion.question.answer3.choosen = false;
-        // this.checkAnswers();
-    }
-
-    answer2Click() {
-        this.setState({ check: true, answer1Clicked: true, answer2Clicked: false, answer3Clicked: true });
-        this.props.exam.currentQuestion.question.answer1.choosen = false;
-        this.props.exam.currentQuestion.question.answer2.choosen = true;
-        this.props.exam.currentQuestion.question.answer3.choosen = false;
-        // this.checkAnswers();
-    }
-
-    answer3Click() {
-        this.setState({ check: true, answer1Clicked: true, answer2Clicked: true, answer3Clicked: false });
-        this.props.exam.currentQuestion.question.answer1.choosen = false;
-        this.props.exam.currentQuestion.question.answer2.choosen = false;
-        this.props.exam.currentQuestion.question.answer3.choosen = true;
-        // this.checkAnswers();
-    }
-
     toogleModal() {
         this.refs.popupBottom.showAddModal();
     }
 
     render() {
-        if (this.props.exam.questions && this.props.exam.currentIndex >= this.props.exam.questions.length)
-            this.props.dispatchFinishExam();
-        const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
+        // const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
+        var currQuestion = this.props.examResult.currentQuestion;
+        if(!currQuestion){
+            return;
+        }
+        
+        const answer1Clicked = !currQuestion.question.answer1.choosen;
+        const answer2Clicked = !currQuestion.question.answer2.choosen;
+        const answer3Clicked = !currQuestion.question.answer3.choosen;
 
         //Antwort die ausgewählt wurde
         const marginAnswer1 = answer1Clicked ? 20 : 0;
@@ -85,21 +58,32 @@ class TestResultScene extends Component {
 
         //Hier muss nur noch die richtige Farbe der Antworten angezeigt werden
         //Richtig --> Grün Falsch --> Rot
-        const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
-        const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
-        const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
+        const backgroundColor1 = currQuestion.question.answer1.isRight ? '#2EEF6A' : '#F44B4B';
+        const backgroundColor2 = currQuestion.question.answer2.isRight ? '#2EEF6A' : '#F44B4B';
+        const backgroundColor3 = currQuestion.question.answer3.isRight ? '#2EEF6A' : '#F44B4B';
+
+
+        var question = currQuestion.question.question;
+
+        var a1 = currQuestion.question.answer1.answer;
+        var a2 = currQuestion.question.answer2.answer;
+        var a3 = currQuestion.question.answer3.answer;
+
+        var canGetNextQuestion = this.props.examResult.canGetNextQuestion;
+        var cangetPrevQuestion = this.props.examResult.currentIndex >0;
+
+        console.log(`canGetNextQuestion: ${canGetNextQuestion}, cangetPrevQuestion: ${cangetPrevQuestion}, `);
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.exam.currentQuestion.questionId.substr(4)}` : ''}
+                            {`${currQuestion.moduleId.replace("_", "\.")} Frage ${currQuestion.questionId.substr(4)}`}
                         </Text>
                         <Text style={styles.questionText}>
-                            {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.question : ''}
-                            {this.props.exam.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.exam.currentQuestion.question.answer1.isRight ? '1' : this.props.exam.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
-                        </Text>
+                            {question}
+                      </Text>
                     </ScrollView>
                 </SafeAreaView>
                 <View style={styles.lineColor} />
@@ -111,33 +95,30 @@ class TestResultScene extends Component {
                                 </Text>
                             <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                         </View>
-                        <TouchableOpacity
-                            onPress={this.answer1Click.bind(this)}
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
+                                {a1}
                             </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this.answer2Click.bind(this)}
+                        </View>
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: "#fff", fontSize: 14, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : ''}
+                                {a2}
                             </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this.answer3Click.bind(this)}
+                        </View>
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : ''}
+                                {a3}
                             </Text>
-                        </TouchableOpacity>
+                        </View>
                     </ScrollView>
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
@@ -146,7 +127,7 @@ class TestResultScene extends Component {
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity disabled={!cangetPrevQuestion} style={{
                                 flex: 1,
                                 backgroundColor: "#fff3",
                                 marginTop: 12,
@@ -154,10 +135,10 @@ class TestResultScene extends Component {
                                 marginLeft: 12,
                                 height: 48,
                                 justifyContent: "center",
-                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                            }} onPress={() => this.props.dispatchGetPrevQuestion()}>
                                 <Image style={styles.backButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity disabled={!canGetNextQuestion} style={{
                                 flex: 1,
                                 backgroundColor: '#fff3',
                                 marginTop: 12,
@@ -165,14 +146,14 @@ class TestResultScene extends Component {
                                 justifyContent: "center",
                                 marginLeft: 12,
                                 height: 48,
-                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                            }} onPress={() => this.props.dispatchGetNextQuestion()}>
                                 <Image style={styles.forwardButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
-                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
+                        sectionText={`${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.modules[currQuestion.sectionId].modules[currQuestion.moduleId].name}`}
+                        questionNumberText={`Frage ${this.props.examResult.currentIndex+1} / ${this.props.examResult.questions.length}`} >
                     </PopupBottom>
                 </View>
             </View>
@@ -281,13 +262,13 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
-    dispatchGetNextQuestion: getNextExamQuestionAction,
-    dispatchAnswerQuestion: answerExamQuestionAction,
-    dispatchFinishExam: finishExamAction
+    dispatchGetNextQuestion: getNextExamResultQuestionAction,
+    dispatchGetPrevQuestion: getPrevExamResultQuestionAction
 };
 
 const mapStateToProps = state => ({
     exam: state.exam,
+    examResult: state.exam.moduleResults,
     modules: state.modules
 });
 
