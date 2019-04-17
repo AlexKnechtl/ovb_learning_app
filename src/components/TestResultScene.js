@@ -148,24 +148,31 @@ class TestResultScene extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity style={{
                                 flex: 1,
-                                backgroundColor: 'rgba(255,255,255, 0.0)',
-                                borderColor: '#fff4',
+                                backgroundColor: "#fff3",
                                 marginTop: 12,
                                 alignItems: "center",
                                 marginLeft: 12,
-                                borderWidth: 2,
-                                paddingLeft: 24,
-                                paddingRight: 24
+                                height: 48,
+                                justifyContent: "center",
                             }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
-                                <Text style={{ color: this.state.check ? '#fff' : '#fff6', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
-                                    Weiter
-                                </Text>
+                                <Image style={styles.backButton} source={require('../img/ic_back.png')} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{
+                                flex: 1,
+                                backgroundColor: '#fff3',
+                                marginTop: 12,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginLeft: 12,
+                                height: 48,
+                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                                <Image style={styles.forwardButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
-                        sectionText={this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.exam.currentQuestion ? `Frage ${this.props.exam.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.exam.currentQuestion.moduleId)).length}` : ''} >
+                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
+                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
             </View>
@@ -257,7 +264,20 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         height: 42,
         width: 42
-    }
+    },
+    backButton: {
+        resizeMode: "contain",
+        width: 32,
+        height: 32,
+        marginRight: 10,
+    },
+    forwardButton: {
+        resizeMode: "contain",
+        width: 32,
+        height: 32,
+        marginRight: 10,
+        transform: [{ rotate: '180deg'}]
+    },
 });
 
 const mapDispatchToProps = {
