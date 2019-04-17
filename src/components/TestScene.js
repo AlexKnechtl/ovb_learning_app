@@ -18,7 +18,7 @@ class TestScene extends Component {
     }
     constructor(props) {
         super(props);
-        this.toogleModal = this.toogleModal.bind(this);        
+        this.toogleModal = this.toogleModal.bind(this);
     }
 
     // props = {
@@ -32,13 +32,13 @@ class TestScene extends Component {
     // }
 
     checkAnswers() {
-            var q = this.props.exam.currentQuestion.question;
-            var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.exam.currentQuestion.question);
-            this.setState({ lastAnswerRight: isright });
-            console.log(isright);
-            this.props.dispatchAnswerQuestion(this.props.exam.currentIndex, isright);
-            this.props.dispatchGetNextQuestion();
-            this.setState({ answer1Clicked: true, answer2Clicked: true, answer3Clicked: true, check: false});
+        var q = this.props.exam.currentQuestion.question;
+        var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.exam.currentQuestion.question);
+        this.setState({ lastAnswerRight: isright });
+        console.log(isright);
+        this.props.dispatchAnswerQuestion(this.props.exam.currentIndex, isright);
+        this.props.dispatchGetNextQuestion();
+        this.setState({ answer1Clicked: true, answer2Clicked: true, answer3Clicked: true, check: false });
     }
 
     answer1Click() {
@@ -70,7 +70,7 @@ class TestScene extends Component {
     }
 
     render() {
-        if(this.props.exam.questions && this.props.exam.currentIndex >= this.props.exam.questions.length)
+        if (this.props.exam.questions && this.props.exam.currentIndex >= this.props.exam.questions.length)
             this.props.dispatchFinishExam();
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
@@ -112,7 +112,7 @@ class TestScene extends Component {
                                 </Text>
                             <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                         </View>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={this.answer1Click.bind(this)}
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
@@ -121,7 +121,7 @@ class TestScene extends Component {
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={this.answer2Click.bind(this)}
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
