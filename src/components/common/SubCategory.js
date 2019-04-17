@@ -7,7 +7,7 @@ const SubCategory = (props) => {
         <TouchableWithoutFeedback onPress={props.onPress}>
             <View style={styles.containerStyle}>
                 <View style={styles.titleStyle}>
-                    <Text style={styles.titleTextStyle}>{props.titleText}</Text>
+                    <Text numberOfLines={1} style={styles.titleTextStyle}>{props.titleText}</Text>
                 </View>
                 <View style={styles.linearLayout}>
                     <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 12,
         fontWeight: "bold",
-        color: "#fff"
+        color: "#fff",
     },
     textStyle: {
         fontSize: 16,

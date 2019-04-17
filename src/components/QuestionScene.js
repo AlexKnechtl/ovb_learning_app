@@ -159,12 +159,10 @@ class QuestionScene extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity style={{
                                 flex: 1,
-                                backgroundColor: 'rgba(255,255,255, 0.0)',
-                                borderColor: '#fff4',
+                                backgroundColor: "#fff3",
                                 marginTop: 12,
                                 alignItems: "center",
                                 marginLeft: 12,
-                                borderWidth: 2,
                                 paddingLeft: 24,
                                 paddingRight: 24
                             }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
@@ -194,10 +192,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#003A65'
     },
     buttonStyle: {
-        backgroundColor: 'rgba(255,255,255, 0.0)',
-        borderColor: '#fff4',
+        backgroundColor: '#fff2',
         marginTop: 12,
-        borderWidth: 2,
         paddingLeft: 24,
         paddingRight: 24
     },

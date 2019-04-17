@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-//Make a Component
 const MainHeader = (props) => {
     return (
         <View style={styles.viewStyle}>
@@ -96,5 +95,5 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }
 });
-//Make the component available to other parts of the app
+
 export { MainHeader };

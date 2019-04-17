@@ -15,7 +15,8 @@ class StatisticsScene extends Component {
     }
 
     render() {
-        const bestandenText = this.props.exam.percentageRight >= 0.8 ? 'Prüfung bestanden!' : 'Prüfung leider nicht bestanden!';
+        const bestandenText = this.props.exam.percentageRight >= 0.6 ? 'Bestanden!' : 'Nicht bestanden.';
+        const infoText = this.props.exam.percentageRight >= 0.6 ? 'Weiter so! :)' : 'Nächstes mal schaffst du es!';
         const percentageRight = this.props.exam.percentageRight * 100;
         return (
             <View style={styles.containerStyle}>
@@ -25,42 +26,55 @@ class StatisticsScene extends Component {
                         barStyle="light-content"
                     />
                 </SafeAreaView >
-                <View style={{ height: '25%', widht: '100%', backgroundColor: "#003A65", justifyContent: "center", alignItems: "center" }}>
-                    <ProgressCircle
-                        percent={percentageRight}
-                        radius={54}
-                        borderWidth={8}
-                        color="#2EEF6A"
-                        shadowColor="#fff"
-                        bgColor="#003A65">
-                        <Text style={{ fontSize: 18, color: "#fff" }}>
-                            {percentageRight.toFixed(0)}%
+                <View>
+                    <View style={{ minHeight: '15%', width: '100%', backgroundColor: "#003A65", padding: 16, alignItems: "center", flexDirection: "row" }}>
+                        <ProgressCircle
+                            percent={percentageRight}
+                            radius={36}
+                            borderWidth={5}
+                            color="#2EEF6A"
+                            shadowColor="#fff"
+                            bgColor="#003A65">
+                            <Text style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}>
+                                {percentageRight.toFixed(0)}%
                         </Text>
-                    </ProgressCircle>
-                    <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 22, marginTop: 12 }}>
-                        {bestandenText}
-                    </Text>
+                        </ProgressCircle>
+                        <View>
+                            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 26, marginTop: 4, marginLeft: 12 }}>
+                                {bestandenText}
+                            </Text>
+                            <Text style={{ color: "#fff", fontSize: 20, marginTop: 4, marginLeft: 12 }}>
+                                {infoText}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.linearLayout}>
+                        <TouchableOpacity onPress={() => this.navigateHome()} style={styles.buttonStyle}>
+                            <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 20 }}>
+                                Weiter lernen
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.lineColor} />
                 <ScrollView style={{ paddingVertical: 12 }}>
-                    {Object.keys(this.props.exam.finishedStats).map(key => {
-                        var currModResult = this.props.exam.finishedStats[key];
-                        var moduleName = this.props.modules.modules[key].name;
-                        var imageUri = this.props.modules.modules[key].image;
-                        return <StatisticsCategory
-                            titleText={moduleName}
-                            questionsFalse={currModResult.falseQuestions}
-                            questionsRight={currModResult.rightQuestions}
-                            success={currModResult.percentageRight >= 0.8}
-                            learningState={currModResult.percentageRight}
-                            imageUri={imageUri}
-                            onPress={() => { }}
-                        />;
-                    })}
+                    <SafeAreaView>
+                        {Object.keys(this.props.exam.finishedStats).map(key => {
+                            var currModResult = this.props.exam.finishedStats[key];
+                            var moduleName = this.props.modules.modules[key].name;
+                            var imageUri = this.props.modules.modules[key].image;
+                            return <StatisticsCategory
+                                titleText={moduleName}
+                                questionsFalse={currModResult.falseQuestions}
+                                questionsRight={currModResult.rightQuestions}
+                                success={currModResult.percentageRight >= 0.8}
+                                learningState={currModResult.percentageRight}
+                                imageUri={imageUri}
+                                onPress={() => { }}
+                            />;
+                        })}
+                    </SafeAreaView>
                 </ScrollView>
-                <TouchableOpacity style={styles.floatingActionButton} onPress={() => this.navigateHome()}>
-                    <Image source={require('../img/ic_back.png')} style={styles.backIcon} />
-                </TouchableOpacity>
             </View>
         );
     }
@@ -75,22 +89,26 @@ const styles = StyleSheet.create({
         height: 7,
         width: '100%'
     },
-    floatingActionButton: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: '#00B7E5',
-        position: 'absolute',
-        bottom: 24,
-        right: 20
-    },
     backIcon: {
         height: 32,
         width: 32,
         transform: [{ rotate: '180deg' }]
-    }
+    },
+    buttonStyle: {
+        marginTop: 6,
+        height: 42,
+        width: '100%',
+        backgroundColor: "#fff3",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    linearLayout: {
+        width: '100%',
+        paddingHorizontal: 12,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#00B7E5",
+    },
 });
 
 const mapDispatchToProps = {
