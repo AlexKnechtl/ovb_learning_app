@@ -74,21 +74,20 @@ class TestResultScene extends Component {
             this.props.dispatchFinishExam();
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
-        const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
-        const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
-        const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
-
-        const textColor1 = answer1Clicked ? "#003A65" : "#fff";
-        const textColor2 = answer2Clicked ? "#003A65" : "#fff";
-        const textColor3 = answer3Clicked ? "#003A65" : "#fff";
+        //Antwort die ausgewählt wurde
+        const marginAnswer1 = answer1Clicked ? 20 : 0;
+        const marginAnswer2 = answer2Clicked ? 20 : 0;
+        const marginAnswer3 = answer3Clicked ? 20 : 0;
 
         const fontWeightStyle = answer1Clicked ? "normal" : "bold";
         const fontWeightStyle2 = answer2Clicked ? "normal" : "bold";
         const fontWeightStyle3 = answer3Clicked ? "normal" : "bold";
 
-        const marginAnswer1 = answer1Clicked ? 20 : 0;
-        const marginAnswer2 = answer2Clicked ? 20 : 0;
-        const marginAnswer3 = answer3Clicked ? 20 : 0;
+        //Hier muss nur noch die richtige Farbe der Antworten angezeigt werden
+        //Richtig --> Grün Falsch --> Rot
+        const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
+        const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
+        const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
@@ -117,7 +116,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -126,7 +125,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: "#fff", fontSize: 14, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -135,7 +134,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : ''}
                             </Text>
                         </TouchableOpacity>
