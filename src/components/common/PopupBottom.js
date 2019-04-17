@@ -14,7 +14,10 @@ export default class PopupBottom extends Component {
     }
 
     onLogoutPress() {
-        this.props.navigation.navigate('main');
+        if (!this.props.testMode)
+            this.props.navigation.navigate('main');
+        else
+            this.props.navigation.goBack();
     }
 
     render() {

@@ -151,7 +151,9 @@ class TestResultScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
+                    <PopupBottom 
+                        ref={'popupBottom'} navigation={this.props.navigation}
+                        testMode={true}
                         sectionText={`${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.modules[currQuestion.sectionId].modules[currQuestion.moduleId].name}`}
                         questionNumberText={`Frage ${this.props.examResult.currentIndex+1} / ${this.props.examResult.questions.length}`} >
                     </PopupBottom>
