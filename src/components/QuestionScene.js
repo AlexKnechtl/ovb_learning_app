@@ -15,10 +15,15 @@ class QuestionScene extends Component {
     constructor(props) {
         super(props);
         props.dispatchGetNextQuestion();
+        this.toogleModal = this.toogleModal.bind(this);
     }
 
     toogleModalBox() {
         this.refs.popupInfo.showModal();
+    }
+
+    toogleModal() {
+        this.refs.popupBottom.showAddModal();
     }
 
     closeModal() {

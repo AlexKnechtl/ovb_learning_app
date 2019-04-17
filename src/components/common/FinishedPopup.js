@@ -21,6 +21,8 @@ class FinishedPopup extends Component {
                 ref={"myModal"}
                 style={styles.modalStyle}
                 position='center'
+                onClosed={this.props.onButtonPress.bind(this)}
+                coverScreen={true}
                 backdrop={true} >
                 <View style={{
                     width: 280,
