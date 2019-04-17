@@ -58,9 +58,9 @@ class TestResultScene extends Component {
 
         //Hier muss nur noch die richtige Farbe der Antworten angezeigt werden
         //Richtig --> Grün Falsch --> Rot
-        const backgroundColor1 = currQuestion.question.answer1.isRight ? '#2EEF6A' : '#F44B4B';
-        const backgroundColor2 = currQuestion.question.answer2.isRight ? '#2EEF6A' : '#F44B4B';
-        const backgroundColor3 = currQuestion.question.answer3.isRight ? '#2EEF6A' : '#F44B4B';
+        const backgroundColor1 = currQuestion.question.answer1.isRight ? '#23B800' : '#B21515';
+        const backgroundColor2 = currQuestion.question.answer2.isRight ? '#23B800' : '#B21515';
+        const backgroundColor3 = currQuestion.question.answer3.isRight ? '#23B800' : '#B21515';
 
 
         var question = currQuestion.question.question;
@@ -168,11 +168,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#003A65'
     },
     buttonStyle: {
-        backgroundColor: 'rgba(255,255,255, 0.0)',
-        borderColor: '#fff4',
+        backgroundColor: '#fff1',
+        height: 48,
         marginTop: 12,
-        borderWidth: 2,
         paddingLeft: 24,
+        justifyContent: "center",
         paddingRight: 24
     },
     answerButtonStyle: {
