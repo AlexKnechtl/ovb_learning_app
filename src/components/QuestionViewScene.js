@@ -1,3 +1,5 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
@@ -9,75 +11,35 @@ class QuestionViewScene extends Component {
         answer1Clicked: true,
         answer2Clicked: true,
         answer3Clicked: true,
-        check: false,
-        lastAnswerRight: undefined
+        currentQuestion: undefined,
+        questions: [],
+        currentIndex: 0
     }
     constructor(props) {
         super(props);
-        props.dispatchGetNextQuestion();
-        this.toogleModal = this.toogleModal.bind(this);        
-    }
-
-    checkAnswers() {
-        this.setState({ check: !this.state.check });
-        if (!this.state.check) {
-            var q = this.props.currentQuestion.question;
-            var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
-            this.setState({ lastAnswerRight: isright });
-            console.log(isright);
-            this.props.dispatchUpdateQuestion({ questionid: this.props.currentQuestion.questionId, answeredRight: isright });
-        } else {
-            this.props.dispatchGetNextQuestion();
-            this.setState({ answer3Clicked: true });
-            this.setState({ answer1Clicked: true });
-            this.setState({ answer2Clicked: true });
-        }
-    }
-
-    answer1Click() {
-        if (this.state.check) return;
-        this.setState({ answer1Clicked: false });
-        this.setState({ answer2Clicked: true });
-        this.setState({ answer3Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = true;
-        this.props.currentQuestion.question.answer2.choosen = false;
-        this.props.currentQuestion.question.answer3.choosen = false;
-        this.checkAnswers();
-    }
-
-    answer2Click() {
-        if (this.state.check) return;
-        this.setState({ answer2Clicked: false });
-        this.setState({ answer1Clicked: true });
-        this.setState({ answer3Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = false;
-        this.props.currentQuestion.question.answer2.choosen = true;
-        this.props.currentQuestion.question.answer3.choosen = false;
-        this.checkAnswers();
-    }
-
-    answer3Click() {
-        if (this.state.check) return;
-        this.setState({ answer3Clicked: false });
-        this.setState({ answer1Clicked: true });
-        this.setState({ answer2Clicked: true });
-        this.props.currentQuestion.question.answer1.choosen = false;
-        this.props.currentQuestion.question.answer2.choosen = false;
-        this.props.currentQuestion.question.answer3.choosen = true;
-        this.checkAnswers();
+        this.toogleModal = this.toogleModal.bind(this); 
+        this.state.questions = new QuestionService().questionStore.getQuestionInfosByModuleId(props.modules.selectedSubmodule);
+        this.state.currentIndex = 0;
+        this.state.currentQuestion = this.state.questions[0];
     }
 
     toogleModal() {
         this.refs.popupBottom.showAddModal();
     }
 
-    render() {
-        if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
-        console.log(this.props.currentQuestion);
+    GetPrevQuestion(){
+        this.setState({currentQuestion: this.state.questions[this.state.currentIndex-1], currentIndex: this.state.currentIndex - 1});
+    }
 
-        answer1Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer1.isRight : false);
-        answer2Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer2.isRight : false);
-        answer3Clicked = !(this.props.currentQuestion ? this.props.currentQuestion.question.answer3.isRight : false);
+    GetNextQuestion() {
+        this.setState({currentQuestion: this.state.questions[this.state.currentIndex+1], currentIndex: this.state.currentIndex + 1});
+    }
+
+    render() {
+        const currQuestion = this.state.currentQuestion;
+        const answer1Clicked = !currQuestion.question.answer1.isRight;
+        const answer2Clicked = !currQuestion.question.answer2.isRight;
+        const answer3Clicked = !currQuestion.question.answer3.isRight;
         
         const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
         const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
@@ -94,17 +56,26 @@ class QuestionViewScene extends Component {
         const marginAnswer1 = answer1Clicked ? 20 : 0;
         const marginAnswer2 = answer2Clicked ? 20 : 0;
         const marginAnswer3 = answer3Clicked ? 20 : 0;
+        
+        var question = currQuestion.question.question;
+
+        var a1 = currQuestion.question.answer1.answer;
+        var a2 = currQuestion.question.answer2.answer;
+        var a3 = currQuestion.question.answer3.answer;
+
+        
+        var canGetNextQuestion = this.state.questions.length>this.state.currentIndex+1;
+        var cangetPrevQuestion = this.state.currentIndex >0;
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
+                            {`${currQuestion.moduleId.replace("_", "\.")} Frage ${currQuestion.questionId.substr(4)}`}
                         </Text>
                         <Text style={styles.questionText}>
-                            {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
-                            {this.props.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.currentQuestion.question.answer1.isRight ? '1' : this.props.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
+                            {question}
                         </Text>
                     </ScrollView>
                 </SafeAreaView>
@@ -117,33 +88,30 @@ class QuestionViewScene extends Component {
                                 </Text>
                             <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                         </View>
-                        <TouchableOpacity disabled={this.state.check}
-                            onPress={this.answer1Click.bind(this)}
+                        <View 
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
+                                {a1}
                             </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity disabled={this.state.check}
-                            onPress={this.answer2Click.bind(this)}
+                        </View>
+                        <View 
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
+                                {a2}
                             </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity disabled={this.state.check}
-                            onPress={this.answer3Click.bind(this)}
+                        </View>
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
-                                {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
+                                {a3}
                             </Text>
-                        </TouchableOpacity>
+                        </View>
                     </ScrollView>
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
@@ -152,7 +120,7 @@ class QuestionViewScene extends Component {
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity disabled={!cangetPrevQuestion} style={{
                                 flex: 1,
                                 backgroundColor: "#fff3",
                                 marginTop: 12,
@@ -160,10 +128,10 @@ class QuestionViewScene extends Component {
                                 marginLeft: 12,
                                 height: 48,
                                 justifyContent: "center",
-                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                            }} onPress={() => this.GetPrevQuestion()}>
                                 <Image style={styles.backButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity disabled={!canGetNextQuestion} style={{
                                 flex: 1,
                                 backgroundColor: '#fff3',
                                 marginTop: 12,
@@ -171,14 +139,14 @@ class QuestionViewScene extends Component {
                                 justifyContent: "center",
                                 marginLeft: 12,
                                 height: 48,
-                            }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
+                            }} onPress={() => this.GetNextQuestion()}>
                                 <Image style={styles.forwardButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
-                        sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
+                        sectionText={this.props.modules ? `${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
+                        questionNumberText={`Frage ${currQuestion.questionId.substr(4)} / ${this.state.questions.length}`} >
                     </PopupBottom>
                 </View>
             </View>
@@ -287,12 +255,9 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
-    dispatchUpdateQuestion: updateCurrentQuestion,
-    dispatchGetNextQuestion: getNextQuestionAction
 };
 
 const mapStateToProps = state => ({
-    currentQuestion: state.learning.currentQuestion,
     modules: state.modules
 });
 
