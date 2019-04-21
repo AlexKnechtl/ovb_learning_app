@@ -64,6 +64,9 @@ class QuestionViewScene extends Component {
         var a2 = currQuestion.question.answer2.answer;
         var a3 = currQuestion.question.answer3.answer;
 
+        if(!canGetNextQuestion) {
+
+        }
 
         var canGetNextQuestion = this.state.questions.length > this.state.currentIndex + 1;
         var cangetPrevQuestion = this.state.currentIndex > 0;
@@ -123,7 +126,7 @@ class QuestionViewScene extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity disabled={!cangetPrevQuestion} style={{
                                 flex: 1,
-                                backgroundColor: "#fff3",
+                                backgroundColor: cangetPrevQuestion ? "#fff3" : "#fff1",
                                 marginTop: 12,
                                 alignItems: "center",
                                 marginLeft: 12,
@@ -132,15 +135,17 @@ class QuestionViewScene extends Component {
                             }} onPress={() => this.GetPrevQuestion()}>
                                 <Image style={styles.backButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
-                            <TouchableOpacity disabled={!canGetNextQuestion} style={{
-                                flex: 1,
-                                backgroundColor: '#fff3',
-                                marginTop: 12,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginLeft: 12,
-                                height: 48,
-                            }} onPress={() => this.GetNextQuestion()}>
+                            <TouchableOpacity
+                                disabled={!canGetNextQuestion}
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: canGetNextQuestion ? "#fff3" : "#fff1",
+                                    marginTop: 12,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    marginLeft: 12,
+                                    height: 48,
+                                }} onPress={() => this.GetNextQuestion()}>
                                 <Image style={styles.forwardButton} source={require('../img/ic_back.png')} />
                             </TouchableOpacity>
                         </View>

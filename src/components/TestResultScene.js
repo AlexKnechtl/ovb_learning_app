@@ -130,7 +130,7 @@ class TestResultScene extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity disabled={!cangetPrevQuestion} style={{
                                 flex: 1,
-                                backgroundColor: "#fff3",
+                                backgroundColor: cangetPrevQuestion ? "#fff3" : "#fff1",
                                 marginTop: 12,
                                 alignItems: "center",
                                 marginLeft: 12,
@@ -141,7 +141,7 @@ class TestResultScene extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity disabled={!canGetNextQuestion} style={{
                                 flex: 1,
-                                backgroundColor: '#fff3',
+                                backgroundColor: canGetNextQuestion ? "#fff3" : "#fff1",
                                 marginTop: 12,
                                 alignItems: "center",
                                 justifyContent: "center",
