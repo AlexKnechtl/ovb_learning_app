@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
 import { Actions } from 'react-native-router-flux';
-import { ActionButton, PopupCenter } from './common';
+import { ActionButton, PopupCenter, FinishedPopup } from './common';
 import { connect } from "react-redux";
 import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction } from "core";
 
@@ -32,6 +32,15 @@ class CategoryInfoScene extends Component {
     toogleModal() {
         this.refs.popupCenter.showAddModal();
     }
+
+    toogleModalBox() {
+        this.refs.popupInfo.showModal();
+    }
+
+    closeModal() {
+        this.refs.popupInfo.closeModal();
+    }
+
     componentDidMount() {
         this._subscribe = this.props.navigation.addListener('didFocus', () => {
             this.forceUpdate();
@@ -114,10 +123,11 @@ class CategoryInfoScene extends Component {
                             Dieses Kapitel üben
                         </ActionButton>
                         <ActionButton image={icon_wrong_questions} onPress={() => {
-                            this.props.dispatchLearnFalseQuestions(this.props.modules.selectedSubmodule);
-                        }}
-                            disabled={stats.falseQuestions == 0}
-                        >
+                            if (stats.falseQuestions == 0)
+                                this.toogleModalBox();
+                            else
+                                this.props.dispatchLearnFalseQuestions(this.props.modules.selectedSubmodule);
+                        }} >
                             Falsche Fragen üben
                         </ActionButton>
                         <ActionButton image={icon_watch_questions} onPress={() => {
@@ -133,6 +143,7 @@ class CategoryInfoScene extends Component {
                     </SafeAreaView>
                 </ScrollView>
                 <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
+                <FinishedPopup ref={'popupInfo'} onButtonPress={() => { this.closeModal(); }} />
             </View>
         );
     }

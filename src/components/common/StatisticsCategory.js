@@ -36,7 +36,7 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
                     </View>
                     <Text style={{ color: '#fff', fontSize: 20, textAlign: "right" }}>
                         {questionsFalse} Fragen {"\n"}falsch
-                            </Text>
+                    </Text>
                 </View>
             </View>
         </ImageBackground >

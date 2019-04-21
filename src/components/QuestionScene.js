@@ -92,13 +92,22 @@ class QuestionScene extends Component {
         const background2 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer2.isRight ? '#23B800' : '#B21515' : answer2Clicked ? "white" : "white";
         const background3 = this.state.check ? this.props.currentQuestion && this.props.currentQuestion.question.answer3.isRight ? '#23B800' : '#B21515' : answer3Clicked ? "white" : "white";
 
+        let lineColor1;
+
+        if (background1 == '#23B800' && !answer1Clicked || background2 == '#23B800' && !answer2Clicked || background3 == '#23B800' && !answer3Clicked)
+            lineColor1 = '#23B800';
+        else if (answer1Clicked && answer2Clicked && answer3Clicked)
+            lineColor1 = '#00B7E5'
+        else
+            lineColor1 = '#B21515'
+
         const fontWeightStyle1 = answer1Clicked ? "normal" : "bold";
         const fontWeightStyle2 = answer2Clicked ? "normal" : "bold";
         const fontWeightStyle3 = answer3Clicked ? "normal" : "bold";
 
-        const marginAnswer1 = answer1Clicked ? 20 : 0;
-        const marginAnswer2 = answer2Clicked ? 20 : 0;
-        const marginAnswer3 = answer3Clicked ? 20 : 0;
+        const marginAnswer1 = answer1Clicked ? 20 : -1;
+        const marginAnswer2 = answer2Clicked ? 20 : -1;
+        const marginAnswer3 = answer3Clicked ? 20 : -1;
 
         const fontColorAnswers = answer1Clicked && answer2Clicked && answer3Clicked ? "#003A65" : "#fff";
 
@@ -118,7 +127,7 @@ class QuestionScene extends Component {
                         </Text>
                     </ScrollView>
                 </SafeAreaView>
-                <View style={styles.lineColor} />
+                <View style={{ backgroundColor: lineColor1, height: 7, width: '100%' }} />
                 <View style={styles.questionView}>
                     <ScrollView style={{ flex: 1, height: '100%' }}>
                         <View style={styles.linearLayout2}>
@@ -130,7 +139,7 @@ class QuestionScene extends Component {
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer1Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: background1
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: background1, borderWidth: answer1Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, fontWeight: fontWeightStyle1, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
@@ -139,7 +148,7 @@ class QuestionScene extends Component {
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer2Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: background2
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: background2, borderWidth: answer2Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, fontWeight: fontWeightStyle2, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
@@ -148,7 +157,7 @@ class QuestionScene extends Component {
                         <TouchableOpacity disabled={this.state.check}
                             onPress={this.answer3Click.bind(this)}
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: background3
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: background3, borderWidth: answer3Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, fontWeight: fontWeightStyle3, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
@@ -184,7 +193,7 @@ class QuestionScene extends Component {
                 </View>
                 <FinishedPopup
                     ref={'popupInfo'}
-                    onButtonPress={() => { this.props.navigation.goBack(); }} />
+                    onButtonPress={() => { this.closeModal(); this.props.navigation.goBack(); }} />
             </View>
         );
     }
