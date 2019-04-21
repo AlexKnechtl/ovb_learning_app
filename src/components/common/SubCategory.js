@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Progress from 'react-native-progress';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { Fonts } from '../../utils/Fonts';
 
 const SubCategory = (props) => {
     return (
@@ -11,14 +12,14 @@ const SubCategory = (props) => {
                 </View>
                 <View style={styles.linearLayout}>
                     <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{(props.learningState*100).toFixed(0)}% abgeschlossen</Text>
+                        <Text style={styles.textStyle}>{(props.learningState * 100).toFixed(0)}% abgeschlossen</Text>
                         <Progress.Bar progress={props.learningState} height={12} width={190} color={'#00B7E5'} unfilledColor='#fff3' borderWidth={0} borderRadius={0} />
                     </View>
                     <View style={{ flex: 1, marginTop: 6, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={styles.chanceViewStyle}>
-                            <Text style={styles.chanceTextStyle}>{(props.successRate*100).toFixed(0)}%</Text>
+                            <Text style={styles.chanceTextStyle}>{(props.successRate * 100).toFixed(0)}%</Text>
                         </View>
-                        <Text style={{ fontSize: 12, margin: 2, color: "#fff" }}>Erfolgschance</Text>
+                        <Text style={{ fontSize: 12, fontFamily: Fonts.RobotoSlab, margin: 2, color: "#fff" }}>Erfolgschance</Text>
                     </View>
                 </View>
             </View>
@@ -46,12 +47,14 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         marginLeft: 12,
         fontWeight: "bold",
         color: "#fff",
     },
     textStyle: {
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         marginBottom: 6,
         color: '#ffffff'
     },
@@ -65,6 +68,7 @@ const styles = StyleSheet.create({
     chanceTextStyle: {
         color: "#fff",
         fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlab,
         fontSize: 16
     }
 });

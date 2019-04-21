@@ -5,6 +5,7 @@ import ProgressCircle from 'react-native-progress-circle'
 import { StatisticsCategory } from './common/StatisticsCategory';
 import { connect } from 'react-redux';
 import { getExamResultStatsForModuleAction } from 'core/lib/adapters/redux/actions/ExamResultActions';
+import { Fonts } from '../utils/Fonts';
 
 class StatisticsScene extends Component {
     state = {
@@ -36,22 +37,22 @@ class StatisticsScene extends Component {
                             color="#2EEF6A"
                             shadowColor="#fff"
                             bgColor="#003A65">
-                            <Text style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}>
+                            <Text style={{ fontSize: 20, fontFamily: Fonts.RobotoSlab, color: "#fff", fontWeight: "bold" }}>
                                 {percentageRight.toFixed(0)}%
                         </Text>
                         </ProgressCircle>
                         <View>
-                            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 26, marginTop: 4, marginLeft: 12 }}>
+                            <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 26, marginTop: 4, marginLeft: 12 }}>
                                 {bestandenText}
                             </Text>
-                            <Text style={{ color: "#fff", fontSize: 20, marginTop: 4, marginLeft: 12 }}>
+                            <Text style={{ color: "#fff", fontSize: 20, fontFamily: Fonts.RobotoSlab, marginTop: 4, marginLeft: 12 }}>
                                 {infoText}
                             </Text>
                         </View>
                     </View>
                     <View style={styles.linearLayout}>
                         <TouchableOpacity onPress={() => this.navigateHome()} style={styles.buttonStyle}>
-                            <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 20 }}>
+                            <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 20 }}>
                                 Weiter lernen
                             </Text>
                         </TouchableOpacity>

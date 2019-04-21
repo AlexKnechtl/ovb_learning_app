@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
+import { Font, Fonts } from '../../utils/Fonts';
 
 const Input = ({ value, onChangeText, placeholderText, secureTextEntry, children }) => {
     return (
@@ -25,7 +26,8 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         color: '#fff',
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: Fonts.RobotoSlab
     },
     containerStyle: {
         height: 50,

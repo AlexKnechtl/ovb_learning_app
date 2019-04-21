@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, Text, StyleSheet, ImageBackground, Image, StatusBar, ScrollView, View, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Fonts } from '../utils/Fonts';
 
 class Impressum extends Component {
 
@@ -118,14 +119,16 @@ const styles = StyleSheet.create({
     header: {
         color: '#fff',
         fontSize: 30,
+        fontFamily: Fonts.RobotoSlab,
+        fontWeight: 'bold',
         marginTop: 6,
         marginBottom: 12,
-        fontWeight: "bold",
         alignSelf: 'center',
     },
     smallHeader: {
         color: '#fff',
         fontSize: 24,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 18,
         alignSelf: 'center'
@@ -133,6 +136,7 @@ const styles = StyleSheet.create({
     subHeader: {
         color: '#fff',
         fontSize: 22,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginLeft: 16,
         marginBottom: 4,
@@ -150,16 +154,19 @@ const styles = StyleSheet.create({
     detailedText: {
         color: '#fff',
         fontSize: 22,
+        fontFamily: Fonts.RobotoSlab,
     },
     informationText: {
         color: '#fff',
         fontSize: 24,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 2,
     },
     link: {
         color: '#fff',
         fontSize: 24,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 2,
         textDecorationLine: 'underline'

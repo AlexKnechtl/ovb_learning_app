@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Fonts } from '../../utils/Fonts';
 
 const MainHeader = (props) => {
     return (
@@ -23,7 +24,7 @@ const MainHeader = (props) => {
                 </View>
                 <TouchableOpacity onPress={props.onPressButton} style={styles.buttonStyle}>
                     <View >
-                        <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
+                        <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 18 }}>
                             {props.text}
                         </Text>
                     </View>

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
 import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 class TestScene extends Component {
     state = {
@@ -117,7 +118,7 @@ class TestScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontFamily: Fonts.RobotoSlab, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -126,7 +127,7 @@ class TestScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, fontFamily: Fonts.RobotoSlab, color: textColor2, fontSize: 14, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -135,7 +136,7 @@ class TestScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, fontFamily: Fonts.RobotoSlab, padding: 8 }}>
                                 {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -143,7 +144,7 @@ class TestScene extends Component {
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
-                                <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                <Text style={{ color: '#fff', fontSize: 20, fontFamily: Fonts.RobotoSlab, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
@@ -156,7 +157,7 @@ class TestScene extends Component {
                                 paddingLeft: 24,
                                 paddingRight: 24
                             }} onPress={() => this.state.check ? this.checkAnswers() : {}}>
-                                <Text style={{ color: this.state.check ? '#fff' : '#fff6', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                <Text style={{ color: this.state.check ? '#fff' : '#fff6', fontSize: 20, fontFamily: Fonts.RobotoSlab, paddingTop: 10, paddingBottom: 10 }}>
                                     Weiter
                                 </Text>
                             </TouchableOpacity>
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#fff"
     },
@@ -224,6 +226,7 @@ const styles = StyleSheet.create({
     },
     questionTextHeader: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 10,
         marginLeft: 20,
         fontWeight: "bold",
@@ -231,6 +234,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 17,
+        fontFamily: Fonts.RobotoSlab,
         color: '#003A65',
         marginLeft: 18,
         marginRight: 12,
@@ -238,6 +242,7 @@ const styles = StyleSheet.create({
     },
     answerHeaderText: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         color: '#fff'
     },
     lineColor: {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 class QuestionViewScene extends Component {
     state = {
@@ -17,7 +18,7 @@ class QuestionViewScene extends Component {
     }
     constructor(props) {
         super(props);
-        this.toogleModal = this.toogleModal.bind(this); 
+        this.toogleModal = this.toogleModal.bind(this);
         this.state.questions = new QuestionService().questionStore.getQuestionInfosByModuleId(props.modules.selectedSubmodule);
         this.state.currentIndex = 0;
         this.state.currentQuestion = this.state.questions[0];
@@ -27,12 +28,12 @@ class QuestionViewScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
-    GetPrevQuestion(){
-        this.setState({currentQuestion: this.state.questions[this.state.currentIndex-1], currentIndex: this.state.currentIndex - 1});
+    GetPrevQuestion() {
+        this.setState({ currentQuestion: this.state.questions[this.state.currentIndex - 1], currentIndex: this.state.currentIndex - 1 });
     }
 
     GetNextQuestion() {
-        this.setState({currentQuestion: this.state.questions[this.state.currentIndex+1], currentIndex: this.state.currentIndex + 1});
+        this.setState({ currentQuestion: this.state.questions[this.state.currentIndex + 1], currentIndex: this.state.currentIndex + 1 });
     }
 
     render() {
@@ -40,7 +41,7 @@ class QuestionViewScene extends Component {
         const answer1Clicked = !currQuestion.question.answer1.isRight;
         const answer2Clicked = !currQuestion.question.answer2.isRight;
         const answer3Clicked = !currQuestion.question.answer3.isRight;
-        
+
         const backgroundColor1 = answer1Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
         const backgroundColor2 = answer2Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
         const backgroundColor3 = answer3Clicked ? "#fff" : 'rgba(0, 183, 229, 1)';
@@ -56,16 +57,16 @@ class QuestionViewScene extends Component {
         const marginAnswer1 = answer1Clicked ? 20 : 0;
         const marginAnswer2 = answer2Clicked ? 20 : 0;
         const marginAnswer3 = answer3Clicked ? 20 : 0;
-        
+
         var question = currQuestion.question.question;
 
         var a1 = currQuestion.question.answer1.answer;
         var a2 = currQuestion.question.answer2.answer;
         var a3 = currQuestion.question.answer3.answer;
 
-        
-        var canGetNextQuestion = this.state.questions.length>this.state.currentIndex+1;
-        var cangetPrevQuestion = this.state.currentIndex >0;
+
+        var canGetNextQuestion = this.state.questions.length > this.state.currentIndex + 1;
+        var cangetPrevQuestion = this.state.currentIndex > 0;
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
@@ -88,19 +89,19 @@ class QuestionViewScene extends Component {
                                 </Text>
                             <Image style={styles.logoStyle} source={require('../img/logo_ovb_white.png')} />
                         </View>
-                        <View 
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontWeight: fontWeightStyle, fontFamily: Fonts.RobotoSlab, fontSize: 14, padding: 8 }}>
                                 {a1}
                             </Text>
                         </View>
-                        <View 
+                        <View
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: textColor2, fontFamily: Fonts.RobotoSlab, fontSize: 14, padding: 8 }}>
                                 {a2}
                             </Text>
                         </View>
@@ -108,7 +109,7 @@ class QuestionViewScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontFamily: Fonts.RobotoSlab, fontSize: 14, padding: 8 }}>
                                 {a3}
                             </Text>
                         </View>
@@ -116,7 +117,7 @@ class QuestionViewScene extends Component {
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
-                                <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                <Text style={{ color: '#fff', fontSize: 20, fontFamily: Fonts.RobotoSlab, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#fff"
     },
@@ -208,6 +210,7 @@ const styles = StyleSheet.create({
     },
     questionTextHeader: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 10,
         marginLeft: 20,
         fontWeight: "bold",
@@ -215,6 +218,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 17,
+        fontFamily: Fonts.RobotoSlab,
         color: '#003A65',
         marginLeft: 18,
         marginRight: 12,
@@ -222,6 +226,7 @@ const styles = StyleSheet.create({
     },
     answerHeaderText: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         color: '#fff'
     },
     lineColor: {
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         marginRight: 10,
-        transform: [{ rotate: '180deg'}]
+        transform: [{ rotate: '180deg' }]
     },
 });
 

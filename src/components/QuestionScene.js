@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom, FinishedPopup } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 class QuestionScene extends Component {
     state = {
@@ -141,7 +142,7 @@ class QuestionScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: background1, borderWidth: answer1Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle1, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, fontWeight: fontWeightStyle1, fontFamily: Fonts.RobotoSlab, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer1.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -150,7 +151,7 @@ class QuestionScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: background2, borderWidth: answer2Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle2, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, fontWeight: fontWeightStyle2, fontFamily: Fonts.RobotoSlab, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer2.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -159,7 +160,7 @@ class QuestionScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: background3, borderWidth: answer3Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
-                            <Text style={{ flex: 1, fontWeight: fontWeightStyle3, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, fontWeight: fontWeightStyle3, fontFamily: Fonts.RobotoSlab, alignSelf: 'center', color: fontColorAnswers, fontSize: 14, padding: 8 }}>
                                 {this.props.currentQuestion ? this.props.currentQuestion.question.answer3.answer : ''}
                             </Text>
                         </TouchableOpacity>
@@ -167,7 +168,7 @@ class QuestionScene extends Component {
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
-                                <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                <Text style={{ color: '#fff', fontSize: 20, fontFamily: Fonts.RobotoSlab, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
@@ -225,6 +226,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#fff"
     },
@@ -251,6 +253,7 @@ const styles = StyleSheet.create({
     },
     questionTextHeader: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 10,
         marginLeft: 20,
         fontWeight: "bold",
@@ -258,6 +261,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 17,
+        fontFamily: Fonts.RobotoSlab,
         color: '#003A65',
         marginLeft: 18,
         marginRight: 12,
@@ -265,6 +269,7 @@ const styles = StyleSheet.create({
     },
     answerHeaderText: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         color: '#fff'
     },
     lineColor: {

@@ -3,9 +3,10 @@ import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, Bac
 import { MainHeader, SubCategory, PopupCenter } from './common';
 import { connect } from "react-redux";
 import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
+    <Text style={{ alignSelf: 'center', fontFamily: Fonts.RobotoSlab, fontWeight: "bold", color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>
 )
@@ -46,10 +47,10 @@ class CategoryScene extends Component {
     render() {
         const mainHeaderText = (
             <View>
-                <Text style={{ fontSize: 22, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
+                <Text style={{ fontSize: 22, fontFamily: Fonts.RobotoSlab, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
                     Kategorien
                 </Text>
-                <Text style={{ fontSize: 16, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
+                <Text style={{ fontSize: 16, fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
                     {this.props.modules.modules[this.props.modules.currentModuleID].name}
                 </Text>
             </View>

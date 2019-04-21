@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-navigation';
 
 const PdfView = (props) => {
     return (
-        <SafeAreaView style={{flex: 1, alignItems: "center", justifyContent: "flex-start", backfaceVisibility: props.visibilty }}>
+        <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "flex-start", backfaceVisibility: props.visibilty }}>
             <Pdf
                 source={props.source}
                 onLoadComplete={(numberOfPages, filePath) => {

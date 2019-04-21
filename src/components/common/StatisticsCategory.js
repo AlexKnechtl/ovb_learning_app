@@ -3,6 +3,7 @@
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import { StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
+import { Fonts } from '../../utils/Fonts';
 
 const icSucceded = require('../../img/ic_check_green.png')
 const icFailed = require('../../img/ic_wrong_red.png')
@@ -34,18 +35,18 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
                     }}>
                         <Image style={styles.icon} source={success ? icSucceded : icFailed} />
                     </View>
-                    <Text style={{ color: '#fff', fontSize: 20, textAlign: "right" }}>
+                    <Text style={{ color: '#fff', fontSize: 20, fontFamily: Fonts.RobotoSlab, textAlign: "right" }}>
                         {questionsFalse} Fragen {"\n"}falsch
                     </Text>
                 </View>
             </View>
         </ImageBackground >
         <ProgressBar style={{ minHeight: 24, width: "100%" }} width={null} progress={learningState} height={24} color={'#2EEF6A'} unfilledColor='#F44B4B' borderWidth={0} borderRadius={0}>
-            <Text style={{ marginLeft: 12, marginTop: -24, marginBottom: -2, color: "#fff", width: "100%", fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
+            <Text style={{ marginLeft: 12, marginTop: -24, marginBottom: -2, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlab, fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
         </ProgressBar>
         <TouchableOpacity style={styles.detailsButton} onPress={onPress}>
             <Image style={{ height: 24, width: 24 }} source={require('../../img/ic_book_white.png')} />
-            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 18, marginLeft: 6 }}>
+            <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 18, marginLeft: 6 }}>
                 Details
             </Text>
         </TouchableOpacity>
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     },
     textErfolg: {
         fontSize: 14,
+        fontFamily: Fonts.RobotoSlab,
         margin: 3,
         color: "#fff"
     },
@@ -69,11 +71,13 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         fontSize: 20,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#fff"
     },
     textStyle: {
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 8,
         marginBottom: 6,
         color: '#fff'
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
     questionInfo: {
         color: '#fff',
         fontSize: 20,
+        fontFamily: Fonts.RobotoSlab,
     },
     icon: {
         height: 24,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
+import { Fonts } from '../../utils/Fonts';
 
 class FinishedPopup extends Component {
     constructor(props) {
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     buttonText: {
         alignSelf: 'center',
         fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlab,
         color: '#fff',
         fontSize: 18,
         paddingTop: 8,
@@ -82,12 +84,14 @@ const styles = StyleSheet.create({
     },
     smallText: {
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 4,
         fontWeight: 'bold',
         color: "#003A65"
     },
     bigText: {
         fontSize: 22,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 4,
         marginBottom: 4,
         fontWeight: 'bold',

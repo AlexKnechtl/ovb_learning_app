@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Dimensions, TouchableOpacity, View, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
+import { Fonts } from '../../utils/Fonts';
 
 var screen = Dimensions.get("window");
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, Text, StyleSheet, ActivityIndicator, ImageBackground, View, Image, StatusBar, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { signInWithoutPasswordAction } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 
 class LoadingScene extends Component {
@@ -24,7 +25,7 @@ class LoadingScene extends Component {
                     </Text>
                     <View style={{ marginTop: 62, flexDirection: "column" }}>
                         <ActivityIndicator size="large" />
-                        <Text style={{ color: "#fff", fontSize: 16, marginTop: 12 }}>Daten werden geladen...</Text>
+                        <Text style={{ color: "#fff", fontSize: 16, fontFamily: Fonts.RobotoSlab, marginTop: 12 }}>Daten werden geladen...</Text>
                     </View>
                     <View style={styles.bottom}>
                         <View style={styles.linearLayout}>
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#fff',
         fontSize: 36,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 32,
         alignSelf: 'center'
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
     smallHeaderText: {
         color: '#fff',
         fontSize: 18,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 18,
         alignSelf: "center"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { Fonts } from '../../utils/Fonts';
 
 const ActionButton = ({ onPress, children, image, ...props }) => {
     return (
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#003A65"
     }

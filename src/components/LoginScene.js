@@ -4,6 +4,7 @@ import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, Image
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Input, Button, Spinner } from './common';
 import { signInAction } from 'core';
+import { Fonts } from '../utils/Fonts';
 
 const mailIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_mail.png')} />)
 const lockIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_password.png')} />)
@@ -15,7 +16,7 @@ const DismissKeyboard = ({ children }) => (
 )
 
 const buttonText = (
-    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontWeight: "bold" }}>
+    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontWeight: "bold", fontFamily: Fonts.RobotoSlab }}>
         Anmelden
     </Text>
 )
@@ -113,12 +114,14 @@ const styles = StyleSheet.create({
     },
     errorTextStyle: {
         fontSize: 20,
+        fontFamily: Fonts.RobotoSlab,
         alignSelf: 'center',
         color: 'red'
     },
     headerText: {
         color: '#fff',
         fontSize: 36,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         alignSelf: 'center'
     },
@@ -164,6 +167,7 @@ const styles = StyleSheet.create({
     smallHeaderText: {
         color: '#fff',
         fontSize: 18,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         marginTop: 8,
         marginBottom: 4,

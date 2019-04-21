@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image, BackHandler } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
-import { Actions } from 'react-native-router-flux';
 import { ActionButton, PopupCenter, FinishedPopup } from './common';
 import { connect } from "react-redux";
 import { setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction } from "core";
+import { Fonts } from '../utils/Fonts';
 
 var screen = Dimensions.get("window");
 
@@ -15,7 +15,7 @@ const icon_continue = (<Image style={{ width: 32, height: 32, marginLeft: 8, mar
 const icon_watch_questions = (<Image style={{ width: 32, height: 32, marginLeft: 8, marginRight: 12 }} source={require('../img/ic_look_questions.png')} />)
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", color: '#fff', fontSize: 18 }}>
+    <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>
 )
@@ -50,10 +50,10 @@ class CategoryInfoScene extends Component {
     render() {
         const mainHeaderText = (
             <View>
-                <Text style={{ fontSize: 22, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
+                <Text style={{ fontSize: 22, fontWeight: "bold", fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
                     Kategorien
                 </Text>
-                <Text style={{ fontSize: 18, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
+                <Text style={{ fontSize: 18, fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
                     {this.props.modules.modules[this.props.modules.currentModuleID].name}
                 </Text>
             </View>
@@ -107,11 +107,11 @@ class CategoryInfoScene extends Component {
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
+                            <Text style={{ color: "#fff", fontSize: 18, fontFamily: Fonts.RobotoSlab, fontWeight: "bold" }}>
                                 {stats.seenQuestions}/{stats.questionCount} Fragen richtig beantwortet
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 14, marginTop: 6, marginBottom: 16, fontWeight: "bold", color: "#003A65", width: '100%', textAlign: "center" }}>
+                        <Text style={{ fontSize: 14, fontFamily: Fonts.RobotoSlab, marginTop: 6, marginBottom: 16, fontWeight: "bold", color: "#003A65", width: '100%', textAlign: "center" }}>
                             {stats.falseQuestions} Fragen falsch beantwortet
                         </Text>
                         <Text style={styles.statisticTextStyle}>
@@ -160,6 +160,7 @@ class CategoryInfoScene extends Component {
 const styles = StyleSheet.create({
     titleTextStyle: {
         fontSize: 20,
+        fontFamily: Fonts.RobotoSlab,
         paddingLeft: 20,
         paddingRight: 20,
         marginTop: 8,
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
     },
     statisticTextStyle: {
         fontSize: 18,
+        fontFamily: Fonts.RobotoSlab,
         marginLeft: 20,
         marginBottom: 4,
         fontWeight: "bold",
@@ -177,6 +179,7 @@ const styles = StyleSheet.create({
     percentTextStyle: {
         fontSize: 24,
         fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlab,
         marginRight: 20,
         marginLeft: 8,
         color: "#003A65"

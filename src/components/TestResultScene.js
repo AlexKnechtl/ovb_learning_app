@@ -6,6 +6,7 @@ import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollVi
 import { PopupBottom } from './common';
 import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction, SELECT_CURRENT_SUBMODULE } from 'core';
 import { getNextExamResultQuestionAction, getPrevExamResultQuestionAction } from 'core/lib/adapters/redux/actions/ExamResultActions';
+import { Fonts } from '../utils/Fonts';
 
 class TestResultScene extends Component {
     state = {
@@ -39,10 +40,10 @@ class TestResultScene extends Component {
     render() {
         // const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
         var currQuestion = this.props.examResult.currentQuestion;
-        if(!currQuestion){
+        if (!currQuestion) {
             return;
         }
-        
+
         const answer1Clicked = !currQuestion.question.answer1.choosen;
         const answer2Clicked = !currQuestion.question.answer2.choosen;
         const answer3Clicked = !currQuestion.question.answer3.choosen;
@@ -70,7 +71,7 @@ class TestResultScene extends Component {
         var a3 = currQuestion.question.answer3.answer;
 
         var canGetNextQuestion = this.props.examResult.canGetNextQuestion;
-        var cangetPrevQuestion = this.props.examResult.currentIndex >0;
+        var cangetPrevQuestion = this.props.examResult.currentIndex > 0;
 
         console.log(`canGetNextQuestion: ${canGetNextQuestion}, cangetPrevQuestion: ${cangetPrevQuestion}, `);
 
@@ -83,7 +84,7 @@ class TestResultScene extends Component {
                         </Text>
                         <Text style={styles.questionText}>
                             {question}
-                      </Text>
+                        </Text>
                     </ScrollView>
                 </SafeAreaView>
                 <View style={styles.lineColor} />
@@ -99,7 +100,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontFamily: Fonts.RobotoSlab, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
                                 {a1}
                             </Text>
                         </View>
@@ -107,7 +108,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, color: "#fff", fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, fontFamily: Fonts.RobotoSlab, color: "#fff", fontSize: 14, padding: 8 }}>
                                 {a2}
                             </Text>
                         </View>
@@ -115,7 +116,7 @@ class TestResultScene extends Component {
                             style={{
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
-                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle3, fontSize: 14, padding: 8 }}>
+                            <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle3, fontFamily: Fonts.RobotoSlab, fontSize: 14, padding: 8 }}>
                                 {a3}
                             </Text>
                         </View>
@@ -123,7 +124,7 @@ class TestResultScene extends Component {
                     <SafeAreaView style={styles.bottom}>
                         <View style={styles.linearLayout}>
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toogleModal()}>
-                                <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                                <Text style={{ color: '#fff', fontSize: 20, fontFamily: Fonts.RobotoSlab, paddingTop: 10, paddingBottom: 10 }}>
                                     Optionen
                                 </Text>
                             </TouchableOpacity>
@@ -151,11 +152,11 @@ class TestResultScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom 
+                    <PopupBottom
                         ref={'popupBottom'} navigation={this.props.navigation}
                         testMode={true}
                         sectionText={`${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.modules[currQuestion.sectionId].modules[currQuestion.moduleId].name}`}
-                        questionNumberText={`Frage ${this.props.examResult.currentIndex+1} / ${this.props.examResult.questions.length}`} >
+                        questionNumberText={`Frage ${this.props.examResult.currentIndex + 1} / ${this.props.examResult.questions.length}`} >
                     </PopupBottom>
                 </View>
             </View>
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         fontSize: 16,
+        fontFamily: Fonts.RobotoSlab,
         fontWeight: "bold",
         color: "#fff"
     },
@@ -217,6 +219,7 @@ const styles = StyleSheet.create({
     },
     questionTextHeader: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         marginTop: 10,
         marginLeft: 20,
         fontWeight: "bold",
@@ -224,6 +227,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 17,
+        fontFamily: Fonts.RobotoSlab,
         color: '#003A65',
         marginLeft: 18,
         marginRight: 12,
@@ -231,6 +235,7 @@ const styles = StyleSheet.create({
     },
     answerHeaderText: {
         fontSize: 28,
+        fontFamily: Fonts.RobotoSlab,
         color: '#fff'
     },
     lineColor: {
@@ -259,7 +264,7 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         marginRight: 10,
-        transform: [{ rotate: '180deg'}]
+        transform: [{ rotate: '180deg' }]
     },
 });
 

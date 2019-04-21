@@ -3,9 +3,10 @@ import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } fr
 import { MainHeader, Category, PopupCenter } from './common';
 import { signOutAction, SetCurrentModuleAction, initExamAction } from "core";
 import { connect } from "react-redux";
+import { Fonts } from '../utils/Fonts';
 
 const mainHeaderText = (
-    <Text style={{ fontSize: 26, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
+    <Text style={{ fontSize: 26, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20, fontFamily: Fonts.RobotoSlab }}>
         Übungsbereiche
     </Text>
 )
@@ -33,9 +34,9 @@ class HomeScene extends Component {
         } else if (this.state.testMode == true) {
             // this.props.navigation.navigate('test');
             var mids = []
-            Object.keys(this.state.categories).forEach(key => {if(this.state.categories[key].isPressed) mids.push(key);});
+            Object.keys(this.state.categories).forEach(key => { if (this.state.categories[key].isPressed) mids.push(key); });
             console.log(mids);
-            if(mids.length == 0)
+            if (mids.length == 0)
                 return;
             this.props.dispatchStartExam(mids);
         }
