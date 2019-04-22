@@ -46,7 +46,7 @@ export default class PopupBottom extends Component {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonStyle} >
+                    <TouchableOpacity style={styles.buttonStyle} onPress={this.props.pdfPress}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image style={{ width: 24, height: 30, marginRight: 12 }} source={require('../../img/ic_pdf_color.png')} />
                             <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>

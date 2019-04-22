@@ -1,8 +1,10 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PopupBottom, FinishedPopup } from './common';
-import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService } from 'core';
+import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo } from 'core';
 import { Fonts } from '../utils/Fonts';
 
 class QuestionScene extends Component {
@@ -30,7 +32,10 @@ class QuestionScene extends Component {
     closeModal() {
         this.refs.popupInfo.closeModal();
     }
-
+    props = {
+        /**@type {QuestionInfo} */
+        currentQuestion: undefined
+    }
     checkAnswers() {
         this.setState({ check: !this.state.check });
         if (!this.state.check) {
