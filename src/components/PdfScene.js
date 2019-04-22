@@ -7,6 +7,8 @@ import { SafeAreaView } from 'react-navigation';
 export default class PDFExample extends React.Component {
     render() {
         const source = { uri: this.props.navigation.getParam('pdfSrc', ''), cache: true };
+        //TODO: implement pdfPageNum
+        const pageNum = this.props.navigation.getParam('pdfPage', 1);
         return (
             <View style={styles.container}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
