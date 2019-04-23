@@ -197,6 +197,7 @@ class QuestionScene extends Component {
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation} 
                     pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
+                    pdfIsDisabled={!pdfSrc}
                         sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
