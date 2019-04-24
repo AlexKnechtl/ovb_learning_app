@@ -16,8 +16,16 @@ export default class CustomPdf extends Pdf {
             });
             this.lastRNBFTask = null;
         }
-        console.log(source.uri);
-        console.log(encodeURI(source.uri));
+        // console.log(source.uri);
+        // console.log(encodeURI(source.uri));
+        var uri = "";
+        if (Platform.OS === "android") {
+            uri = decodeURI(source.uri);
+        } else  {
+            uri = source.uri;
+        }
+
+
         const tempCacheFile = cacheFile + '.tmp';
         this._unlinkFile(tempCacheFile);
         this.lastRNBFTask = RNFetchBlob.config({

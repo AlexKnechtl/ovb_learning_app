@@ -135,9 +135,7 @@ class CategoryInfoScene extends Component {
                         }}>
                             Fragen durchblättern
                         </ActionButton>
-                        <ActionButton image={icon_pdf} onPress={() => {
-                            alert("Feature kommt bald.");
-                        }}>
+                        <ActionButton image={icon_pdf} onPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc })}>
                             PDF durchlesen
                         </ActionButton>
                     </SafeAreaView>
