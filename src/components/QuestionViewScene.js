@@ -70,7 +70,8 @@ class QuestionViewScene extends Component {
 
         var canGetNextQuestion = this.state.questions.length > this.state.currentIndex + 1;
         var cangetPrevQuestion = this.state.currentIndex > 0;
-
+        const pdfSrc = ((currQuestion||{}).pdfInfo||{}).url;
+        const pdfPage = ((currQuestion||{}).pdfInfo||{}).pageNumber;
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
@@ -151,6 +152,8 @@ class QuestionViewScene extends Component {
                         </View>
                     </SafeAreaView>
                     <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
+                        pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
+                        pdfIsDisabled={!pdfSrc}
                         sectionText={this.props.modules ? `${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={`Frage ${currQuestion.questionId.substr(4)} / ${this.state.questions.length}`} >
                     </PopupBottom>

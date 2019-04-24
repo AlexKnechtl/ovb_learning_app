@@ -69,6 +69,8 @@ class TestResultScene extends Component {
         var a1 = currQuestion.question.answer1.answer;
         var a2 = currQuestion.question.answer2.answer;
         var a3 = currQuestion.question.answer3.answer;
+        const pdfSrc = ((currQuestion||{}).pdfInfo||{}).url;
+        const pdfPage = ((currQuestion||{}).pdfInfo||{}).pageNumber;
 
         var canGetNextQuestion = this.props.examResult.canGetNextQuestion;
         var cangetPrevQuestion = this.props.examResult.currentIndex > 0;
@@ -155,6 +157,8 @@ class TestResultScene extends Component {
                     <PopupBottom
                         ref={'popupBottom'} navigation={this.props.navigation}
                         testMode={true}
+                        pdfPress={() => this.props.navigation.push('pdfScene', { pdfSrc, pdfPage })}
+                        pdfIsDisabled={!pdfSrc}
                         sectionText={`${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.modules[currQuestion.sectionId].modules[currQuestion.moduleId].name}`}
                         questionNumberText={`Frage ${this.props.examResult.currentIndex + 1} / ${this.props.examResult.questions.length}`} >
                     </PopupBottom>

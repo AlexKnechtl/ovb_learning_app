@@ -28,6 +28,9 @@ const questionTestNavigator = createSwitchNavigator({
         testResult: {
             screen: TestResultScene
         },
+        pdfScene: {
+            screen: PdfScene
+        },
     }, { headerMode: 'none' })
 },
 {

@@ -33,13 +33,11 @@ export default class PDFExample extends React.Component {
                     onError={(error) => {
                         console.log(error);
                     }}
-                    style={styles.pdf} >
-
-                    <TouchableOpacity onPress={() => { this.props.navigation.goBack(); }} style={styles.floatingAction}>
+                    style={styles.pdf} />
+                
+                <TouchableOpacity onPress={() => { this.props.navigation.goBack(); }} style={styles.floatingAction}>
                         <Image style={{ width: 32, height: 32, marginLeft: -2 }} source={require('../img/ic_back.png')} />
                     </TouchableOpacity>
-
-                </CustomPdf>
             </View>
         )
     }
