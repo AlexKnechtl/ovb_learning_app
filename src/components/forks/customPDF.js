@@ -1,7 +1,8 @@
 //@ts-check
-
 import RNFetchBlob from 'rn-fetch-blob';
+import { Platform } from 'react-native';
 import Pdf from 'react-native-pdf';
+
 export default class CustomPdf extends Pdf {
 
     constructor(props) {
@@ -16,12 +17,11 @@ export default class CustomPdf extends Pdf {
             });
             this.lastRNBFTask = null;
         }
-        // console.log(source.uri);
-        // console.log(encodeURI(source.uri));
+
         var uri = "";
         if (Platform.OS === "android") {
             uri = decodeURI(source.uri);
-        } else  {
+        } else {
             uri = source.uri;
         }
 
@@ -42,7 +42,7 @@ export default class CustomPdf extends Pdf {
             // listen to download progress event
             .progress((received, total) => {
                 this.props.onLoadProgress && this.props.onLoadProgress(received / total);
-                this.setState({progress: received / total});
+                this.setState({ progress: received / total });
             });
 
         this.lastRNBFTask
@@ -75,7 +75,7 @@ export default class CustomPdf extends Pdf {
                 RNFetchBlob.fs
                     .cp(tempCacheFile, cacheFile)
                     .then(() => {
-                        this.setState({path: cacheFile, isDownloaded: true, progress: 1});
+                        this.setState({ path: cacheFile, isDownloaded: true, progress: 1 });
                         this._unlinkFile(tempCacheFile);
                     })
                     .catch(async (error) => {
@@ -87,6 +87,5 @@ export default class CustomPdf extends Pdf {
                 this._unlinkFile(cacheFile);
                 this._onError(error);
             });
-
     };
 }
