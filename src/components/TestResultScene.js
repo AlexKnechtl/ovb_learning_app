@@ -49,9 +49,9 @@ class TestResultScene extends Component {
         const answer3Clicked = !currQuestion.question.answer3.choosen;
 
         //Antwort die ausgewählt wurde
-        const marginAnswer1 = answer1Clicked ? 20 : 0;
-        const marginAnswer2 = answer2Clicked ? 20 : 0;
-        const marginAnswer3 = answer3Clicked ? 20 : 0;
+        const marginAnswer1 = answer1Clicked ? 20 : -1;
+        const marginAnswer2 = answer2Clicked ? 20 : -1;
+        const marginAnswer3 = answer3Clicked ? 20 : -1;
 
         const fontWeightStyle = answer1Clicked ? "normal" : "bold";
         const fontWeightStyle2 = answer2Clicked ? "normal" : "bold";
@@ -62,7 +62,6 @@ class TestResultScene extends Component {
         const backgroundColor1 = currQuestion.question.answer1.isRight ? '#23B800' : '#B21515';
         const backgroundColor2 = currQuestion.question.answer2.isRight ? '#23B800' : '#B21515';
         const backgroundColor3 = currQuestion.question.answer3.isRight ? '#23B800' : '#B21515';
-
 
         var question = currQuestion.question.question;
 
@@ -100,7 +99,7 @@ class TestResultScene extends Component {
                         </View>
                         <View
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1, borderWidth: answer1Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontFamily: Fonts.RobotoSlab, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
                                 {a1}
@@ -108,7 +107,7 @@ class TestResultScene extends Component {
                         </View>
                         <View
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2, borderWidth: answer2Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, fontFamily: Fonts.RobotoSlab, color: "#fff", fontSize: 14, padding: 8 }}>
                                 {a2}
@@ -116,7 +115,7 @@ class TestResultScene extends Component {
                         </View>
                         <View
                             style={{
-                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
+                                flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3, borderWidth: answer3Clicked ? 0 : 1, borderColor: '#fff'
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: "#fff", fontWeight: fontWeightStyle3, fontFamily: Fonts.RobotoSlab, fontSize: 14, padding: 8 }}>
                                 {a3}
