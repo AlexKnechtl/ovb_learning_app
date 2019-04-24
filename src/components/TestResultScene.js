@@ -63,6 +63,15 @@ class TestResultScene extends Component {
         const backgroundColor2 = currQuestion.question.answer2.isRight ? '#23B800' : '#B21515';
         const backgroundColor3 = currQuestion.question.answer3.isRight ? '#23B800' : '#B21515';
 
+        let lineColor1;
+
+        if (backgroundColor1 == '#23B800' && !answer1Clicked || backgroundColor2 == '#23B800' && !answer2Clicked || backgroundColor3 == '#23B800' && !answer3Clicked)
+            lineColor1 = '#23B800';
+        else if (answer1Clicked && answer2Clicked && answer3Clicked)
+            lineColor1 = '#00B7E5'
+        else
+            lineColor1 = '#B21515'
+
         var question = currQuestion.question.question;
 
         var a1 = currQuestion.question.answer1.answer;
@@ -88,7 +97,7 @@ class TestResultScene extends Component {
                         </Text>
                     </ScrollView>
                 </SafeAreaView>
-                <View style={styles.lineColor} />
+                <View style={{ backgroundColor: lineColor1, height: 7, width: '100%' }} />
                 <View style={styles.questionView}>
                     <ScrollView style={{ flex: 1, height: '100%' }}>
                         <View style={styles.linearLayout2}>
