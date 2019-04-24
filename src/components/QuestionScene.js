@@ -30,7 +30,7 @@ class QuestionScene extends Component {
     }
 
     closeModal() {
-        this.refs.popupInfo.closeModal();
+        this.refs.popupInfo && this.refs.popupInfo.closeModal();
     }
     props = {
         /**@type {QuestionInfo} */

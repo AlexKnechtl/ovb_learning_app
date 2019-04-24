@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter } from './common';
-import { signOutAction, SetCurrentModuleAction, initExamAction } from "core";
+import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction } from "core";
 import { connect } from "react-redux";
 import { Fonts } from '../utils/Fonts';
 
@@ -15,6 +15,7 @@ const icOptions = require('../img/ic_options.png')
 const icBack = require('../img/ic_back.png')
 
 class HomeScene extends Component {
+    initialized = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +26,17 @@ class HomeScene extends Component {
         console.log(this.state);
     }
 
+    componentDidMount() {
+        this._subscribe = this.props.navigation.addListener('didFocus', () => {
+            if(this.initialized && Object.keys(this.props.modules).length>0){
+                var mods = this.props.modules;
+                this.props.dispatchUpdateModules(mods);
+            }
+        });
+    }
+
     testButtonPress() {
+        this.initialized = true;
         if (this.state.testMode == false) {
             this.setState({
                 testMode: !this.state.testMode,
@@ -43,6 +54,7 @@ class HomeScene extends Component {
     }
 
     optionsPress() {
+        this.initialized = true;
         if (this.state.testMode == false) {
             //No Test Mode
             this.refs.popupCenter.showAddModal();
@@ -63,6 +75,7 @@ class HomeScene extends Component {
     }
 
     categoryPress(sectionID) {
+        this.initialized = true;
         if (this.state.testMode == false) {
             this.props.dispatchSelectCategory(sectionID);
         } else {
@@ -91,7 +104,8 @@ class HomeScene extends Component {
         } else {
             testModus = false;
         }
-
+        console.log("Homescene");
+        
         console.log(this.props.modules);
 
         return (
@@ -123,12 +137,12 @@ class HomeScene extends Component {
                                 isPressed={(this.state.categories[sectionID] || {}).isPressed}
                                 testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
-                                imageUri={{ uri: this.props.modules[sectionID].image }}
-                                titleText={this.props.modules[sectionID].name}
-                                questionsRight={this.props.modules[sectionID].seenQuestions}
-                                questionsFalse={this.props.modules[sectionID].falseQuestions}
-                                learningState={this.props.modules[sectionID].seenQuestions / this.props.modules[sectionID].questionCount}
-                                successRate={this.props.modules[sectionID].successRate}
+                                imageUri={{ uri: this.props.modules[sectionID].image||"" }}
+                                titleText={this.props.modules[sectionID].name||""}
+                                questionsRight={this.props.modules[sectionID].seenQuestions||0}
+                                questionsFalse={this.props.modules[sectionID].falseQuestions||0}
+                                learningState={(this.props.modules[sectionID].seenQuestions||0) / (this.props.modules[sectionID].questionCount||1)}
+                                successRate={this.props.modules[sectionID].successRate || 0}
                             />
                         )}
                     </SafeAreaView>
@@ -150,7 +164,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = {
     dispatchLogOut: signOutAction,
     dispatchSelectCategory: SetCurrentModuleAction,
-    dispatchStartExam: initExamAction
+    dispatchStartExam: initExamAction,
+    dispatchUpdateModules: GotModulesAction
 };
 
 const mapStateToProps = state => ({
