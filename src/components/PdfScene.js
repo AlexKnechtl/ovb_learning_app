@@ -36,7 +36,7 @@ export default class PDFExample extends React.Component {
                     style={styles.pdf} />
                 
                 <TouchableOpacity onPress={() => { this.props.navigation.goBack(); }} style={styles.floatingAction}>
-                        <Image style={{ width: 32, height: 32, marginLeft: -2 }} source={require('../img/ic_back.png')} />
+                        <Image style={{ width: 36, height: 36, marginLeft: -2 }} source={require('../img/ic_back.png')} />
                     </TouchableOpacity>
             </View>
         )
@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
     },
     floatingAction: {
-        width: 54,
-        height: 54,
-        borderRadius: 28,
+        width: 58,
+        height: 58,
+        borderRadius: 30,
         backgroundColor: '#94C231',
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
-        bottom: 20,
-        right: 20,
+        bottom: 22,
+        right: 22,
     }
 });
