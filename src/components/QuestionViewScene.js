@@ -36,6 +36,13 @@ class QuestionViewScene extends Component {
         this.setState({ currentQuestion: this.state.questions[this.state.currentIndex + 1], currentIndex: this.state.currentIndex + 1 });
     }
 
+    onBackPress() {
+        if (!this.props.testMode)
+            this.props.navigation.navigate('main');
+        else
+            this.props.navigation.goBack();
+    }
+
     render() {
         const currQuestion = this.state.currentQuestion;
         const answer1Clicked = !currQuestion.question.answer1.isRight;
@@ -64,14 +71,14 @@ class QuestionViewScene extends Component {
         var a2 = currQuestion.question.answer2.answer;
         var a3 = currQuestion.question.answer3.answer;
 
-        if(!canGetNextQuestion) {
+        if (!canGetNextQuestion) {
 
         }
 
         var canGetNextQuestion = this.state.questions.length > this.state.currentIndex + 1;
         var cangetPrevQuestion = this.state.currentIndex > 0;
-        const pdfSrc = ((currQuestion||{}).pdfInfo||{}).url;
-        const pdfPage = ((currQuestion||{}).pdfInfo||{}).pageNumber;
+        const pdfSrc = ((currQuestion || {}).pdfInfo || {}).url;
+        const pdfPage = ((currQuestion || {}).pdfInfo || {}).pageNumber;
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>
@@ -151,7 +158,11 @@ class QuestionViewScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
+                    <PopupBottom
+                        backText={"Zurück"}
+                        ref={'popupBottom'}
+                        navigation={this.props.navigation}
+                        onBackPress={this.onBackPress.bind(this)}
                         pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
                         pdfIsDisabled={!pdfSrc}
                         sectionText={this.props.modules ? `${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}

@@ -37,6 +37,10 @@ class TestResultScene extends Component {
         this.refs.popupBottom.showAddModal();
     }
 
+    onBackPress() {
+        this.props.navigation.goBack();
+    }
+
     render() {
         // const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
         var currQuestion = this.props.examResult.currentQuestion;
@@ -77,8 +81,8 @@ class TestResultScene extends Component {
         var a1 = currQuestion.question.answer1.answer;
         var a2 = currQuestion.question.answer2.answer;
         var a3 = currQuestion.question.answer3.answer;
-        const pdfSrc = ((currQuestion||{}).pdfInfo||{}).url;
-        const pdfPage = ((currQuestion||{}).pdfInfo||{}).pageNumber;
+        const pdfSrc = ((currQuestion || {}).pdfInfo || {}).url;
+        const pdfPage = ((currQuestion || {}).pdfInfo || {}).pageNumber;
 
         var canGetNextQuestion = this.props.examResult.canGetNextQuestion;
         var cangetPrevQuestion = this.props.examResult.currentIndex > 0;
@@ -163,8 +167,10 @@ class TestResultScene extends Component {
                         </View>
                     </SafeAreaView>
                     <PopupBottom
+                        backText={"Zurück"}
                         ref={'popupBottom'} navigation={this.props.navigation}
                         testMode={true}
+                        onBackPress={this.onBackPress.bind(this)}
                         pdfPress={() => this.props.navigation.push('pdfScene', { pdfSrc, pdfPage })}
                         pdfIsDisabled={!pdfSrc}
                         sectionText={`${currQuestion.moduleId.replace("_", "\.")} ${this.props.modules.modules[currQuestion.sectionId].modules[currQuestion.moduleId].name}`}

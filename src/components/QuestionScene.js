@@ -32,6 +32,14 @@ class QuestionScene extends Component {
     closeModal() {
         this.refs.popupInfo && this.refs.popupInfo.closeModal();
     }
+
+    onBackPress() {
+        if (!this.props.testMode)
+            this.props.navigation.navigate('main');
+        else
+            this.props.navigation.goBack();
+    }
+
     props = {
         /**@type {QuestionInfo} */
         currentQuestion: undefined
@@ -119,9 +127,9 @@ class QuestionScene extends Component {
 
         if (this.props.noMoreQuestions && this.props.currentQuestion == null)
             this.toogleModalBox();
-        console.log(`QuestionPDF: ${((this.props.currentQuestion||{}).pdfInfo||{}).url}`);
-        const pdfSrc = ((this.props.currentQuestion||{}).pdfInfo||{}).url;
-        const pdfPage = ((this.props.currentQuestion||{}).pdfInfo||{}).pageNumber;
+        console.log(`QuestionPDF: ${((this.props.currentQuestion || {}).pdfInfo || {}).url}`);
+        const pdfSrc = ((this.props.currentQuestion || {}).pdfInfo || {}).url;
+        const pdfPage = ((this.props.currentQuestion || {}).pdfInfo || {}).pageNumber;
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
@@ -195,9 +203,13 @@ class QuestionScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom ref={'popupBottom'} navigation={this.props.navigation} 
-                    pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
-                    pdfIsDisabled={!pdfSrc}
+                    <PopupBottom
+                        ref={'popupBottom'}
+                        navigation={this.props.navigation}
+                        onBackPress={this.onBackPress.bind(this)}
+                        backText={"Zurück"}
+                        pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
+                        pdfIsDisabled={!pdfSrc}
                         sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Dimensions, TouchableOpacity, View, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
-import { Fonts } from '../../utils/Fonts';
 
 var screen = Dimensions.get("window");
 
@@ -14,11 +13,8 @@ export default class PopupBottom extends Component {
         this.refs.myModal.open();
     }
 
-    onLogoutPress() {
-        if (!this.props.testMode)
-            this.props.navigation.navigate('main');
-        else
-            this.props.navigation.goBack();
+    closeAddModal = () => {
+        this.refs.myModal.close();
     }
 
     render() {
@@ -30,7 +26,7 @@ export default class PopupBottom extends Component {
                 backdrop={true}>
                 <View style={styles.linearLayout}>
                     <TouchableOpacity
-                        onPress={this.onLogoutPress.bind(this)}
+                        onPress={this.props.onBackPress}
                         style={{
                             flex: 1,
                             backgroundColor: 'rgba(255,255,255, 0.0)',
@@ -42,14 +38,20 @@ export default class PopupBottom extends Component {
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image style={{ width: 34, height: 20, marginRight: 8 }} source={require('../../img/ic_back.png')} />
                             <Text style={{ color: '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
-                                Zurück
+                                {this.props.backText}
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{...styles.buttonStyle, borderColor: this.props.pdfIsDisabled ? "#fff3":'#fff'}} onPress={this.props.pdfIsDisabled ? {} : this.props.pdfPress} disabled={this.props.pdfIsDisabled}>
+                    <TouchableOpacity
+                        style={{
+                            ...styles.buttonStyle,
+                            borderColor: this.props.pdfIsDisabled ? "#fff3" : '#fff'
+                        }}
+                        onPress={this.props.pdfIsDisabled ? {} : this.props.pdfPress}
+                        disabled={this.props.pdfIsDisabled}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image style={{ width: 24, height: 30, marginRight: 12 }} source={require('../../img/ic_pdf_color.png')} />
-                            <Text style={{ color: this.props.pdfIsDisabled ? "#fff3":'#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                            <Text style={{ color: this.props.pdfIsDisabled ? "#fff3" : '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                 PDF öffnen
                             </Text>
                         </View>

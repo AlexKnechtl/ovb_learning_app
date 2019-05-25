@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { PopupBottom } from './common';
+import { PopupBottom, SurePopup } from './common';
 import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction } from 'core';
 import { Fonts } from '../utils/Fonts';
 
@@ -21,16 +21,6 @@ class TestScene extends Component {
         super(props);
         this.toogleModal = this.toogleModal.bind(this);
     }
-
-    // props = {
-    //     exam: {
-    //         /** @type {QuestionInfo[]} */
-    //         questions: [],
-    //         /** @type {QuestionInfo} */
-    //         currentQuestion: undefined,
-    //         currentIndex: 0
-    //     }
-    // }
 
     checkAnswers() {
         var q = this.props.exam.currentQuestion.question;
@@ -66,8 +56,29 @@ class TestScene extends Component {
         // this.checkAnswers();
     }
 
+    onBackPress() {
+        this.closeBottomModal();
+        this.toogleSureModal();
+    }
+
+    closeBottomModal() {
+        this.refs.popupBottom.closeAddModal();
+    }
+
     toogleModal() {
         this.refs.popupBottom.showAddModal();
+    }
+
+    closeModal() {
+        this.refs.popupSure && this.refs.popupSure.closeModal();
+    }
+
+    toogleSureModal() {
+        this.refs.popupSure.showModal();
+    }
+
+    onFinishTestPress() {
+        this.props.navigation.navigate('main');
     }
 
     render() {
@@ -163,10 +174,18 @@ class TestScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    <PopupBottom ref={'popupBottom'} navigation={this.props.navigation}
+                    <PopupBottom
+                        backText={"Beenden"}
+                        ref={'popupBottom'}
+                        navigation={this.props.navigation}
+                        onBackPress={this.onBackPress.bind(this)}
+                        pdfIsDisabled={true}
                         sectionText={this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
                         questionNumberText={this.props.exam.currentQuestion ? `Frage ${this.props.exam.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.exam.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
+                    <SurePopup
+                        ref={'popupSure'}
+                        onButtonPress={() => { this.onFinishTestPress(); }} />
                 </View>
             </View>
         );

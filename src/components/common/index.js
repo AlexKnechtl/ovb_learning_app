@@ -10,3 +10,4 @@ export * from './PdfView';
 export * from './InfoPopup';
 export * from './StatisticsCategory';
 export * from './FinishedPopup';
+export * from './SurePopup';
