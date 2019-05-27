@@ -101,8 +101,6 @@ const styles = StyleSheet.create({
         paddingBottom: 6,
         paddingRight: 12,
         paddingLeft: 10,
-        borderTopLeftRadius: 4,
-        borderBottomLeftRadius: 4,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
