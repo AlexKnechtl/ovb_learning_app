@@ -36,8 +36,8 @@ const Category = (props) => {
                             </View>
                             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                                 <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontWeight: "bold" }}>Lernfortschritt</Text>
-                                <ProgressBar style={{ minHeight: 22, width: "85%" }} width={null} progress={props.learningState} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
-                                    <Text style={{ marginTop: -20, marginBottom: -2, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>{(props.learningState * 100).toFixed(0)} %</Text>
+                                <ProgressBar style={{ minHeight: 22, width: "85%", justifyContent: 'center' }} width={null} progress={props.learningState} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
+                                    <Text style={{ position: 'absolute', flex: 0, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>{(props.learningState * 100).toFixed(0)} %</Text>
                                 </ProgressBar>
                                 <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>{props.questionsRight} Fragen richtig / {props.questionsFalse} falsch</Text>
                             </View>

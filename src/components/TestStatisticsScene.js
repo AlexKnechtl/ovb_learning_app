@@ -1,4 +1,3 @@
-//@ts-check
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
@@ -7,7 +6,7 @@ import { connect } from 'react-redux';
 import { getExamResultStatsForModuleAction } from 'core/lib/adapters/redux/actions/ExamResultActions';
 import { Fonts } from '../utils/Fonts';
 
-class StatisticsScene extends Component {
+class TestStatisticsScene extends Component {
     state = {
         icon: null,
     }
@@ -28,37 +27,42 @@ class StatisticsScene extends Component {
                         barStyle="light-content"
                     />
                 </SafeAreaView >
-                <View>
-                    <View style={{ minHeight: '15%', width: '100%', backgroundColor: "#003A65", padding: 16, alignItems: "center", flexDirection: "row" }}>
+                <View style={{ minHeight: '15%', width: '100%', backgroundColor: "#003A65", padding: 12, alignItems: "center" }}>
+                    <View style={{
+                        padding: 8,
+                        borderRadius: 100,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: '#fff0',
+                        borderColor: this.props.exam.percentageRight >= 0.6 ? 'rgba(46, 239, 106, 0.3)' : 'rgba(244, 75, 75, 0.3)',
+                        borderWidth: 2
+                    }}>
                         <ProgressCircle
                             percent={percentageRight}
-                            radius={36}
-                            borderWidth={5}
-                            color="#2EEF6A"
-                            shadowColor="#fff"
+                            radius={64}
+                            borderWidth={8}
+                            color={this.props.exam.percentageRight >= 0.6 ? '#2EEF6A' : '#F44B4B'}
+                            shadowColor="#003A65"
                             bgColor="#003A65">
-                            <Text style={{ fontSize: 20, fontFamily: Fonts.RobotoSlab, color: "#fff", fontWeight: "bold" }}>
+                            <Text style={{ fontSize: 32, fontFamily: Fonts.RobotoSlab, color: "#fff", fontWeight: "bold" }}>
                                 {percentageRight.toFixed(0)}%
-                        </Text>
+                            </Text>
                         </ProgressCircle>
-                        <View>
-                            <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 26, marginTop: 4, marginLeft: 12 }}>
-                                {bestandenText}
-                            </Text>
-                            <Text style={{ color: "#fff", fontSize: 20, fontFamily: Fonts.RobotoSlab, marginTop: 4, marginLeft: 12 }}>
-                                {infoText}
-                            </Text>
-                        </View>
                     </View>
+                    <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 38, marginTop: 4, marginLeft: 12 }}>
+                        {bestandenText}
+                    </Text>
+                    <Text style={{ color: "#fff", fontSize: 22, fontFamily: Fonts.RobotoSlab, marginTop: 4, marginLeft: 12 }}>
+                        {infoText}
+                    </Text>
                     <View style={styles.linearLayout}>
-                        <TouchableOpacity onPress={() => this.navigateHome()} style={styles.buttonStyle}>
-                            <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 20 }}>
-                                Weiter lernen
-                            </Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.lineColor} />
+                <View style={{
+                    backgroundColor: this.props.exam.percentageRight >= 0.6 ? '#2EEF6A' : '#F44B4B',
+                    height: 7,
+                    width: '100%'
+                }} />
                 <ScrollView style={{ paddingVertical: 12 }}>
                     <SafeAreaView>
                         {Object.keys(this.props.exam.finishedStats).map(key => {
@@ -83,14 +87,15 @@ class StatisticsScene extends Component {
     }
 }
 
+/*<TouchableOpacity onPress={() => this.navigateHome()} style={styles.buttonStyle}>
+<Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 20 }}>
+    Weiter lernen
+</Text>
+</TouchableOpacity> */
+
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-    },
-    lineColor: {
-        backgroundColor: "#00B7E5",
-        height: 7,
-        width: '100%'
     },
     backIcon: {
         height: 32,
@@ -123,4 +128,4 @@ const mapStateToProps = state => ({
     modules: state.modules
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatisticsScene);
+export default connect(mapStateToProps, mapDispatchToProps)(TestStatisticsScene);

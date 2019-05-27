@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
-import { MainHeader, Category, PopupCenter } from './common';
+import { MainHeader, Category, PopupCenter, StatisticView } from './common';
 import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction } from "core";
 import { connect } from "react-redux";
 import { Fonts } from '../utils/Fonts';
@@ -123,6 +123,7 @@ class HomeScene extends Component {
                     style={styles.containerStyle}
                     resizeMode='cover'>
                     <SafeAreaView>
+                        <StatisticView />
                         {Object.keys(this.props.modules).map((sectionID) =>
                             <Category
                                 key={sectionID}
