@@ -86,9 +86,7 @@ class TestResultScene extends Component {
 
         var canGetNextQuestion = this.props.examResult.canGetNextQuestion;
         var cangetPrevQuestion = this.props.examResult.currentIndex > 0;
-
-        console.log(`canGetNextQuestion: ${canGetNextQuestion}, cangetPrevQuestion: ${cangetPrevQuestion}, `);
-
+        
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
                 <SafeAreaView>

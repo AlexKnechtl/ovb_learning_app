@@ -36,10 +36,7 @@ class LoginScene extends Component {
     }
 
     onButtonPress() {
-        console.log("Before Login");
-
         this.props.loginUser(this.state);
-        console.log("After Loginpress");
     }
 
     renderError() {

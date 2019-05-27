@@ -23,12 +23,11 @@ class HomeScene extends Component {
             icon: icOptions,
             categories: []
         };
-        console.log(this.state);
     }
 
     componentDidMount() {
         this._subscribe = this.props.navigation.addListener('didFocus', () => {
-            if(this.initialized && Object.keys(this.props.modules).length>0){
+            if (this.initialized && Object.keys(this.props.modules).length > 0) {
                 var mods = this.props.modules;
                 this.props.dispatchUpdateModules(mods);
             }
@@ -43,10 +42,8 @@ class HomeScene extends Component {
                 icon: icBack
             });
         } else if (this.state.testMode == true) {
-            // this.props.navigation.navigate('test');
             var mids = []
             Object.keys(this.state.categories).forEach(key => { if (this.state.categories[key].isPressed) mids.push(key); });
-            console.log(mids);
             if (mids.length == 0)
                 return;
             this.props.dispatchStartExam(mids);
@@ -104,9 +101,6 @@ class HomeScene extends Component {
         } else {
             testModus = false;
         }
-        console.log("Homescene");
-        
-        console.log(this.props.modules);
 
         return (
             <View style={{ flex: 1, alignItems: "stretch", backgroundColor: "#fff" }}>
@@ -137,11 +131,11 @@ class HomeScene extends Component {
                                 isPressed={(this.state.categories[sectionID] || {}).isPressed}
                                 testMode={this.state.testMode}
                                 erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
-                                imageUri={{ uri: this.props.modules[sectionID].image||"" }}
-                                titleText={this.props.modules[sectionID].name||""}
-                                questionsRight={this.props.modules[sectionID].seenQuestions||0}
-                                questionsFalse={this.props.modules[sectionID].falseQuestions||0}
-                                learningState={(this.props.modules[sectionID].seenQuestions||0) / (this.props.modules[sectionID].questionCount||1)}
+                                imageUri={{ uri: this.props.modules[sectionID].image || "" }}
+                                titleText={this.props.modules[sectionID].name || ""}
+                                questionsRight={this.props.modules[sectionID].seenQuestions || 0}
+                                questionsFalse={this.props.modules[sectionID].falseQuestions || 0}
+                                learningState={(this.props.modules[sectionID].seenQuestions || 0) / (this.props.modules[sectionID].questionCount || 1)}
                                 successRate={this.props.modules[sectionID].successRate || 0}
                             />
                         )}

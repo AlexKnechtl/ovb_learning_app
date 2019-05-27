@@ -26,7 +26,6 @@ class TestScene extends Component {
         var q = this.props.exam.currentQuestion.question;
         var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.exam.currentQuestion.question);
         this.setState({ lastAnswerRight: isright });
-        console.log(isright);
         this.props.dispatchAnswerQuestion(this.props.exam.currentIndex, isright);
         this.props.dispatchGetNextQuestion();
         this.setState({ answer1Clicked: true, answer2Clicked: true, answer3Clicked: true, check: false });
@@ -37,7 +36,6 @@ class TestScene extends Component {
         this.props.exam.currentQuestion.question.answer1.choosen = true;
         this.props.exam.currentQuestion.question.answer2.choosen = false;
         this.props.exam.currentQuestion.question.answer3.choosen = false;
-        // this.checkAnswers();
     }
 
     answer2Click() {
@@ -45,7 +43,6 @@ class TestScene extends Component {
         this.props.exam.currentQuestion.question.answer1.choosen = false;
         this.props.exam.currentQuestion.question.answer2.choosen = true;
         this.props.exam.currentQuestion.question.answer3.choosen = false;
-        // this.checkAnswers();
     }
 
     answer3Click() {
@@ -53,7 +50,6 @@ class TestScene extends Component {
         this.props.exam.currentQuestion.question.answer1.choosen = false;
         this.props.exam.currentQuestion.question.answer2.choosen = false;
         this.props.exam.currentQuestion.question.answer3.choosen = true;
-        // this.checkAnswers();
     }
 
     onBackPress() {

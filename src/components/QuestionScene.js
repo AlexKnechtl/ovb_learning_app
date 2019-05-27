@@ -50,8 +50,6 @@ class QuestionScene extends Component {
             var q = this.props.currentQuestion.question;
             var isright = new MultipleChoiceQuestionInteractor().checkIsQuestionRight(this.props.currentQuestion.question);
             this.setState({ lastAnswerRight: isright });
-            console.log(isright);
-            // var answeredRight = this.state.answer1Clicked == q.answer1.isRight && this.state.answer2Clicked == q.answer2.isRight && this.state.answer3Clicked == q.answer3.isRight;
             this.props.dispatchUpdateQuestion({ questionid: this.props.currentQuestion.questionId, answeredRight: isright });
         } else {
             this.props.dispatchGetNextQuestion();
@@ -96,9 +94,6 @@ class QuestionScene extends Component {
 
     render() {
         if (!this.props.currentQuestion) this.props.dispatchGetNextQuestion();
-        console.log(this.props.currentQuestion);
-        // console.log(this.props.currentQuestion.question);
-        // console.log(this.props.currentQuestion.question.question);
 
         const { answer1Clicked, answer2Clicked, answer3Clicked } = this.state;
 
@@ -127,7 +122,6 @@ class QuestionScene extends Component {
 
         if (this.props.noMoreQuestions && this.props.currentQuestion == null)
             this.toogleModalBox();
-        console.log(`QuestionPDF: ${((this.props.currentQuestion || {}).pdfInfo || {}).url}`);
         const pdfSrc = ((this.props.currentQuestion || {}).pdfInfo || {}).url;
         const pdfPage = ((this.props.currentQuestion || {}).pdfInfo || {}).pageNumber;
 
