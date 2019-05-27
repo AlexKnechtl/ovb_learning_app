@@ -21,8 +21,8 @@ const StatisticView = (props) => {
                     </View>
                     <ProgressBar style={{ height: 32, width: "100%", justifyContent: 'center' }} width={null} progress={props.learningState} height={32} color={'#94C231'} unfilledColor='#fff3' borderWidth={0} borderRadius={0}>
                         <View style={{ position: 'absolute', flex: 0, flexDirection: 'row', width: '100%', paddingLeft: 12, paddingRight: 12, justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={{ color: "#fff", textAlign: "left", fontSize: 18 }}>Gesamtfortschritt</Text>
-                            <Text style={{ color: "#fff", textAlign: "right", fontSize: 18 }}>{(props.learningState * 100).toFixed(0)} %</Text>
+                            <Text style={{ color: "#fff", textAlign: "left", fontSize: 20 }}>Gesamtfortschritt</Text>
+                            <Text style={{ color: "#fff", textAlign: "right", fontSize: 20 }}>{(props.learningState * 100).toFixed(0)} %</Text>
                         </View>
                     </ProgressBar>
                 </ImageBackground >
@@ -33,7 +33,7 @@ const StatisticView = (props) => {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        height: 82,
+        height: 84,
         marginLeft: 12,
         marginRight: 12,
         marginBottom: 12
@@ -47,18 +47,18 @@ const styles = StyleSheet.create({
     titleStyle: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 6,
+        marginBottom: 6,
         height: 40
     },
     titleTextStyle: {
-        fontSize: 24,
+        fontSize: 26,
         fontFamily: Fonts.RobotoSlab,
         marginLeft: 12,
         color: "#fff"
     },
     titleBold: {
-        fontSize: 24,
+        fontSize: 26,
         fontFamily: Fonts.RobotoSlab,
         fontWeight: "600",
         marginRight: 8,

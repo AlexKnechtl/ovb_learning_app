@@ -123,7 +123,7 @@ class HomeScene extends Component {
                     style={styles.containerStyle}
                     resizeMode='cover'>
                     <SafeAreaView>
-                        <StatisticView />
+                        <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} />
                         {Object.keys(this.props.modules).map((sectionID) =>
                             <Category
                                 key={sectionID}
