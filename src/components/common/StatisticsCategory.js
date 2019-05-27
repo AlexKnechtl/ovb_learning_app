@@ -8,7 +8,7 @@ import { Fonts } from '../../utils/Fonts';
 const icSucceded = require('../../img/ic_check_green.png')
 const icFailed = require('../../img/ic_wrong_red.png')
 
-const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState }) => (
+const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState, buttonText }) => (
     <View style={{ marginHorizontal: 12, marginBottom: 12 }}>
         <ImageBackground
             source={{ uri: imageUri }}
@@ -42,12 +42,12 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
             </View>
         </ImageBackground >
         <ProgressBar style={{ minHeight: 24, width: "100%" }} width={null} progress={learningState} height={24} color={'#2EEF6A'} unfilledColor='#F44B4B' borderWidth={0} borderRadius={0}>
-            <Text style={{ marginLeft: 12, marginTop: -24, marginBottom: -2, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlab, fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
+            <Text style={{ position: 'absolute', flex: 0, marginLeft: 12, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlab, fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
         </ProgressBar>
         <TouchableOpacity style={styles.detailsButton} onPress={onPress}>
-            <Image style={{ height: 24, width: 24 }} source={require('../../img/ic_book_white.png')} />
+            <Image style={{ height: 24, width: 24, justifyContent: 'center' }} source={require('../../img/ic_book_white.png')} />
             <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 18, marginLeft: 6 }}>
-                Details
+                {buttonText}
             </Text>
         </TouchableOpacity>
     </View>
@@ -96,9 +96,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: -16,
         alignItems: "center",
-        width: '35%',
         alignSelf: "flex-end",
-        padding: 6,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingRight: 12,
+        paddingLeft: 10,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 4,
         shadowColor: "#000",

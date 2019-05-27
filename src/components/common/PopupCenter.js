@@ -67,7 +67,7 @@ class PopupCenter extends Component {
                     style={styles.buttonStyle}
                     onPress={this.onModuleChangePress.bind(this)}>
                     <Text style={styles.buttonText}>
-                        Statistiken
+                        Modul wechseln
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -125,5 +125,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PopupCenter;
 export { PopupCenter };

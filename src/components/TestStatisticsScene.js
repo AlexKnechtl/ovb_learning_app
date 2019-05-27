@@ -75,6 +75,7 @@ class TestStatisticsScene extends Component {
                                 questionsFalse={currModResult.falseQuestions}
                                 questionsRight={currModResult.rightQuestions}
                                 success={currModResult.percentageRight >= 0.6}
+                                buttonText="Details"
                                 learningState={currModResult.percentageRight}
                                 imageUri={imageUri}
                                 onPress={() => this.props.dispatchInitStatsForModule(key)}

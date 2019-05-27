@@ -16,12 +16,11 @@ const icon_watch_questions = (<Image style={{ width: 32, height: 32, marginLeft:
 
 const btnText = (
     <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 18 }}>
-        Lernvorgang fortsetzen
+        Zurück
     </Text>
 )
 
-class CategoryInfoScene extends Component {
-
+class StatisticScene extends Component {
     _subscribe;
 
     constructor(props) {
@@ -150,8 +149,6 @@ class CategoryInfoScene extends Component {
     }
     startLearning() {
         this.props.dispatchContinueModuleLearning(this.props.modules.selectedSubmodule);
-        // Actions.question();
-        // this.props.navigation.push('question');
     }
 }
 
@@ -190,7 +187,6 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
-    // dispatchSelectLearningMode: setLearningModeAction,
     dispatchContinueModuleLearning: continueModuleLearningAction,
     dispatchContinueSectionLearning: continueSectionLearningAction,
     dispatchLearnFalseQuestions: learnFalseQuestionsFromModuleAction
@@ -200,4 +196,4 @@ const mapStateToProps = state => ({
     modules: state.modules,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryInfoScene);
+export default connect(mapStateToProps, mapDispatchToProps)(StatisticScene);

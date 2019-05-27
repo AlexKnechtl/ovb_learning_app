@@ -12,10 +12,9 @@ import PdfScene from './components/PdfScene';
 import Impressum from './components/Impressum';
 import TestStatistics from './components/TestStatisticsScene';
 import TestResultScene from './components/TestResultScene';
+import StatisticScene from './components/StatisticScene';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNED_OUT, START_SIGN_IN, START_SIGN_IN_WITHOUT_CREDENTIAL, SET_CURRENT_MODULE, SELECT_CURRENT_SUBMODULE, CONTINUE_MODULE_LEARNING, CONTINUE_SECTION_LEARNING, LEARN_FALSE_QUESTIONS_FROM_MODULE, GET_NEXT_QUESTION, INIT_EXAM, FINISH_EXAM, GET_RESULT_STATS_FOR_MODULE } from "core";
-
-
 
 const questionTestNavigator = createSwitchNavigator({
     testScene: {
@@ -25,7 +24,7 @@ const questionTestNavigator = createSwitchNavigator({
         testStatistics: {
             screen: TestStatistics
         },
-        testResult: {
+        testResult: {
             screen: TestResultScene
         },
         pdfScene: {
@@ -33,9 +32,9 @@ const questionTestNavigator = createSwitchNavigator({
         },
     }, { headerMode: 'none' })
 },
-{
-    backBehavior: "none"
-}
+    {
+        backBehavior: "none"
+    }
 );
 
 const AppStack = createStackNavigator({
@@ -44,6 +43,9 @@ const AppStack = createStackNavigator({
     },
     category: {
         screen: CategoryScene
+    },
+    statistics: {
+        screen: StatisticScene
     },
     info: {
         screen: CategoryInfoScene
@@ -77,16 +79,14 @@ const rootNavigator = createSwitchNavigator({
     Home: AppStack,
     AuthLoading: LoadingScene,
     test: questionTestNavigator
-}, 
-{
+},
+    {
         initialRouteName: 'AuthLoading'
     });
 
 export default createAppContainer(rootNavigator);
 
 export const sceneReducer = (state = {}, { type }) => {
-    console.log(`SceneReducer" ${type}`);
-    // if(!Actions.main) return state;
     switch (type) {
         case LOGIN_SUCCESS: NavigationService.navigate('Home');
             return state;
@@ -111,7 +111,7 @@ export const sceneReducer = (state = {}, { type }) => {
         case FINISH_EXAM: NavigationService.navigate('testStatistics');
             return state;
         case GET_RESULT_STATS_FOR_MODULE:
-                NavigationService.navigate('testResult');
+            NavigationService.navigate('testResult');
             return state;
         default:
             return state;
