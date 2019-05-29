@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         alignSelf: 'center',
-        fontWeight: "bold",
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         color: '#fff',
         fontSize: 18,
         paddingTop: 8,
@@ -97,18 +96,16 @@ const styles = StyleSheet.create({
     },
     smallText: {
         fontSize: 22,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 2,
         marginBottom: 4,
-        fontWeight: 'bold',
         color: "#003A65"
     },
     bigText: {
         fontSize: 22,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 4,
         marginBottom: 4,
-        fontWeight: 'bold',
         color: "#003A65"
     },
     lineColor: {

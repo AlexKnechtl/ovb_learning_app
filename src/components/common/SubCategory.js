@@ -47,9 +47,8 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         fontSize: 16,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginLeft: 12,
-        fontWeight: "bold",
         color: "#fff",
     },
     textStyle: {
@@ -67,8 +66,7 @@ const styles = StyleSheet.create({
     },
     chanceTextStyle: {
         color: "#fff",
-        fontWeight: "bold",
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         fontSize: 16
     }
 });

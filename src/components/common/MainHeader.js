@@ -24,7 +24,7 @@ const MainHeader = (props) => {
                 </View>
                 <TouchableOpacity onPress={props.onPressButton} style={styles.buttonStyle}>
                     <View >
-                        <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 18 }}>
+                        <Text style={{ alignSelf: 'center', fontFamily: Fonts.RobotoSlabBold, color: '#fff', fontSize: 18 }}>
                             {props.text}
                         </Text>
                     </View>

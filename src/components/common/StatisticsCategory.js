@@ -42,11 +42,11 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
             </View>
         </ImageBackground >
         <ProgressBar style={{ minHeight: 24, width: "100%" }} width={null} progress={learningState} height={24} color={'#2EEF6A'} unfilledColor='#F44B4B' borderWidth={0} borderRadius={0}>
-            <Text style={{ position: 'absolute', flex: 0, marginLeft: 12, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlab, fontWeight: "bold", fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
+            <Text style={{ position: 'absolute', flex: 0, marginLeft: 12, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlabBold, fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
         </ProgressBar>
         <TouchableOpacity style={styles.detailsButton} onPress={onPress}>
             <Image style={{ height: 24, width: 24, justifyContent: 'center' }} source={require('../../img/ic_book_white.png')} />
-            <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 18, marginLeft: 6 }}>
+            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlabBold, fontSize: 18, marginLeft: 6 }}>
                 {buttonText}
             </Text>
         </TouchableOpacity>
@@ -71,8 +71,7 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         fontSize: 20,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         color: "#fff"
     },
     textStyle: {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image, BackHandler } from 'react-native';
-import { MainHeader, SubCategory, PopupCenter } from './common';
+import { SafeAreaView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
+import { MainHeader, SubCategory, PopupCenter, ScrollViewPadding } from './common';
 import { connect } from "react-redux";
 import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction } from 'core';
 import { Fonts } from '../utils/Fonts';
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontFamily: Fonts.RobotoSlab, fontWeight: "bold", color: '#fff', fontSize: 18 }}>
+    <Text style={{ alignSelf: 'center', fontFamily: Fonts.RobotoSlabBold, color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>
 )
@@ -47,7 +47,7 @@ class CategoryScene extends Component {
     render() {
         const mainHeaderText = (
             <View>
-                <Text style={{ fontSize: 22, fontFamily: Fonts.RobotoSlab, fontWeight: "bold", textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
+                <Text style={{ fontSize: 22, fontFamily: Fonts.RobotoSlabBold, textAlign: "left", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 16 }}>
                     Kategorien
                 </Text>
                 <Text style={{ fontSize: 16, fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', textAlign: "left", color: '#fff', marginLeft: 16 }}>
@@ -73,13 +73,9 @@ class CategoryScene extends Component {
                     optionsPress={() => this.toogleModal()}
                     onPressButton={() => { this.continueSectionLearningPress(); }}
                 />
-                <ScrollView
-                    style={styles.containerStyle}
-                    resizeMode='cover'>
-                    <SafeAreaView>
+                <ScrollViewPadding padding={12}>
                         {this.mapModules()}
-                    </SafeAreaView>
-                </ScrollView>
+                </ScrollViewPadding>
                 <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
             </View>
         );

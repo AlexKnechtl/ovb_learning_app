@@ -15,7 +15,7 @@ const icon_continue = (<Image style={{ width: 32, height: 32, marginLeft: 8, mar
 const icon_watch_questions = (<Image style={{ width: 32, height: 32, marginLeft: 8, marginRight: 12 }} source={require('../img/ic_look_questions.png')} />)
 
 const btnText = (
-    <Text style={{ alignSelf: 'center', fontWeight: "bold", fontFamily: Fonts.RobotoSlab, color: '#fff', fontSize: 18 }}>
+    <Text style={{ alignSelf: 'center', fontFamily: Fonts.RobotoSlabBold, color: '#fff', fontSize: 18 }}>
         Lernvorgang fortsetzen
     </Text>
 )
@@ -50,7 +50,7 @@ class CategoryInfoScene extends Component {
     render() {
         const mainHeaderText = (
             <View>
-                <Text style={{ fontSize: 22, fontWeight: "bold", fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
+                <Text style={{ fontSize: 22, fontFamily: Fonts.RobotoSlabBold, textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20 }}>
                     Kategorien
                 </Text>
                 <Text style={{ fontSize: 18, fontFamily: Fonts.RobotoSlab, textAlignVertical: 'bottom', color: '#fff4', marginLeft: 20 }}>
@@ -107,11 +107,11 @@ class CategoryInfoScene extends Component {
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#fff", fontSize: 18, fontFamily: Fonts.RobotoSlab, fontWeight: "bold" }}>
+                            <Text style={{ color: "#fff", fontSize: 18, fontFamily: Fonts.RobotoSlabBold }}>
                                 {stats.seenQuestions}/{stats.questionCount} Fragen richtig beantwortet
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 14, fontFamily: Fonts.RobotoSlab, marginTop: 6, marginBottom: 16, fontWeight: "bold", color: "#003A65", width: '100%', textAlign: "center" }}>
+                        <Text style={{ fontSize: 14, fontFamily: Fonts.RobotoSlabBold, marginTop: 6, marginBottom: 16, color: "#003A65", width: '100%', textAlign: "center" }}>
                             {stats.falseQuestions} Fragen falsch beantwortet
                         </Text>
                         <Text style={styles.statisticTextStyle}>
@@ -158,26 +158,23 @@ class CategoryInfoScene extends Component {
 const styles = StyleSheet.create({
     titleTextStyle: {
         fontSize: 20,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         paddingLeft: 20,
         paddingRight: 20,
         marginTop: 8,
         width: screen.width,
-        fontWeight: "bold",
         color: "#003A65",
     },
     statisticTextStyle: {
         fontSize: 18,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginLeft: 20,
         marginBottom: 4,
-        fontWeight: "bold",
         color: "#003A65",
     },
     percentTextStyle: {
         fontSize: 24,
-        fontWeight: "bold",
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginRight: 20,
         marginLeft: 8,
         color: "#003A65"

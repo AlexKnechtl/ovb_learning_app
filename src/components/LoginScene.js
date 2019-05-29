@@ -16,7 +16,7 @@ const DismissKeyboard = ({ children }) => (
 )
 
 const buttonText = (
-    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontWeight: "bold", fontFamily: Fonts.RobotoSlab }}>
+    <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontFamily: Fonts.RobotoSlabBold }}>
         Anmelden
     </Text>
 )
@@ -118,8 +118,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#fff',
         fontSize: 36,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         alignSelf: 'center'
     },
     rectangleStyle: {
@@ -164,8 +163,7 @@ const styles = StyleSheet.create({
     smallHeaderText: {
         color: '#fff',
         fontSize: 18,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 8,
         marginBottom: 4,
         alignSelf: "center"

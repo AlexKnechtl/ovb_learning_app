@@ -8,7 +8,7 @@ const Category = (props) => {
     renderView = () => {
         if (!props.testMode) {
             props.isPressed = false;
-            return <Text style={{ fontSize: 16, fontFamily: Fonts.RobotoSlab, fontWeight: "bold", color: props.testMode ? '#fff0' : '#fff' }}>{(props.successRate * 100).toFixed(0)} %</Text>;
+            return <Text style={{ fontSize: 16, fontFamily: Fonts.RobotoSlabBold, color: props.testMode ? '#fff0' : '#fff' }}>{(props.successRate * 100).toFixed(0)} %</Text>;
         } else {
             return <Image source={require('../../img/ic_check.png')} style={{ width: props.isPressed ? 31 : 0, height: 24 }} />;
         }
@@ -35,11 +35,11 @@ const Category = (props) => {
                                 {props.erfolgText}
                             </View>
                             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                                <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontWeight: "bold" }}>Lernfortschritt</Text>
+                                <Text style={{ marginTop: 8, marginBottom: 6, color: "#fff", fontSize: 16, fontFamily: Fonts.RobotoSlabBold }}>Lernfortschritt</Text>
                                 <ProgressBar style={{ minHeight: 22, width: "85%", justifyContent: 'center' }} width={null} progress={props.learningState} height={22} color={'#94C231'} unfilledColor='#fff6' borderWidth={0} borderRadius={0}>
-                                    <Text style={{ position: 'absolute', flex: 0, color: "#fff", width: "100%", textAlign: "center", fontWeight: "bold" }}>{(props.learningState * 100).toFixed(0)} %</Text>
+                                    <Text style={{ position: 'absolute', flex: 0, color: "#fff", width: "100%", textAlign: "center", fontFamily: Fonts.RobotoSlabBold }}>{(props.learningState * 100).toFixed(0)} %</Text>
                                 </ProgressBar>
-                                <Text style={{ marginTop: 6, marginBottom: 8, color: "#fff9" }}>{props.questionsRight} Fragen richtig / {props.questionsFalse} falsch</Text>
+                                <Text style={{ marginTop: 6, marginBottom: 8, fontFamily: Fonts.RobotoSlab, color: "#fff9" }}>{props.questionsRight} Fragen richtig / {props.questionsFalse} falsch</Text>
                             </View>
                         </View>
                     </View>
@@ -68,9 +68,8 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         fontSize: 20,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginLeft: 12,
-        fontWeight: "bold",
         color: "#fff"
     },
     textStyle: {
@@ -89,8 +88,7 @@ const styles = StyleSheet.create({
     },
     chanceTextStyle: {
         fontSize: 16,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         color: "#fff"
     }
 });

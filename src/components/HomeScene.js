@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
-import { MainHeader, Category, PopupCenter, StatisticView } from './common';
+import { MainHeader, Category, PopupCenter, StatisticView, ScrollViewPadding } from './common';
 import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction } from "core";
 import { connect } from "react-redux";
 import { Fonts } from '../utils/Fonts';
 
 const mainHeaderText = (
-    <Text style={{ fontSize: 26, fontWeight: "bold", textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20, fontFamily: Fonts.RobotoSlab }}>
+    <Text style={{ fontSize: 26, textAlignVertical: 'bottom', color: '#ffffff', marginLeft: 20, fontFamily: Fonts.RobotoSlabBold }}>
         Übungsbereiche
     </Text>
 )
@@ -119,42 +119,30 @@ class HomeScene extends Component {
                     children={mainHeaderText}
                     children2={<Image style={{ height: 40, width: 40 }} source={this.state.icon} />}
                 />
-                <ScrollView
-                    style={styles.containerStyle}
-                    resizeMode='cover'>
-                    <SafeAreaView>
-                        <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} />
-                        {Object.keys(this.props.modules).map((sectionID) =>
-                            <Category
-                                key={sectionID}
-                                // ref={(thisItem) => this[sectionID] = thisItem}
-                                onPress={this.categoryPress.bind(this, sectionID)}
-                                isPressed={(this.state.categories[sectionID] || {}).isPressed}
-                                testMode={this.state.testMode}
-                                erfolgText={<Text style={{ fontSize: 14, margin: 3, color: background }}>Erfolgschance</Text>}
-                                imageUri={{ uri: this.props.modules[sectionID].image || "" }}
-                                titleText={this.props.modules[sectionID].name || ""}
-                                questionsRight={this.props.modules[sectionID].seenQuestions || 0}
-                                questionsFalse={this.props.modules[sectionID].falseQuestions || 0}
-                                learningState={(this.props.modules[sectionID].seenQuestions || 0) / (this.props.modules[sectionID].questionCount || 1)}
-                                successRate={this.props.modules[sectionID].successRate || 0}
-                            />
-                        )}
-                    </SafeAreaView>
-                </ScrollView>
+                <ScrollViewPadding padding={12}>
+                    <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} />
+                    {Object.keys(this.props.modules).map((sectionID) =>
+                        <Category
+                            key={sectionID}
+                            // ref={(thisItem) => this[sectionID] = thisItem}
+                            onPress={this.categoryPress.bind(this, sectionID)}
+                            isPressed={(this.state.categories[sectionID] || {}).isPressed}
+                            testMode={this.state.testMode}
+                            erfolgText={<Text style={{ fontSize: 13, margin: 3, color: background, fontFamily: Fonts.RobotoSlab }}>Erfolgschance</Text>}
+                            imageUri={{ uri: this.props.modules[sectionID].image || "" }}
+                            titleText={this.props.modules[sectionID].name || ""}
+                            questionsRight={this.props.modules[sectionID].seenQuestions || 0}
+                            questionsFalse={this.props.modules[sectionID].falseQuestions || 0}
+                            learningState={(this.props.modules[sectionID].seenQuestions || 0) / (this.props.modules[sectionID].questionCount || 1)}
+                            successRate={this.props.modules[sectionID].successRate || 0}
+                        />
+                    )}
+                </ScrollViewPadding>
                 <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    containerStyle: {
-        flex: 1,
-        backgroundColor: '#ffffff',
-        paddingVertical: 12
-    }
-});
 
 const mapDispatchToProps = {
     dispatchLogOut: signOutAction,

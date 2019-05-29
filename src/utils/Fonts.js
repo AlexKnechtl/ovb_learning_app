@@ -1,3 +1,4 @@
 export const Fonts = {
-    RobotoSlab: 'RobotoSlab-Regular'
+    RobotoSlab: 'RobotoSlab-Regular',
+    RobotoSlabBold: 'RobotoSlab-Bold'
 }

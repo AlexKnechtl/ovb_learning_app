@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Dimensions, TouchableOpacity, View, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
+import { Fonts } from '../../utils/Fonts';
 
 var screen = Dimensions.get("window");
 
@@ -51,16 +52,16 @@ export default class PopupBottom extends Component {
                         disabled={this.props.pdfIsDisabled}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image style={{ width: 24, height: 30, marginRight: 12 }} source={require('../../img/ic_pdf_color.png')} />
-                            <Text style={{ color: this.props.pdfIsDisabled ? "#fff3" : '#fff', fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
+                            <Text style={{ color: this.props.pdfIsDisabled ? "#fff3" : '#fff', fontFamily: Fonts.RobotoSlab, fontSize: 20, paddingTop: 10, paddingBottom: 10 }}>
                                 PDF öffnen
                             </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginTop: 8, alignSelf: "center", color: "white" }}>
+                <Text style={{ fontSize: 20, fontFamily: Fonts.RobotoSlabBold, textAlign: "center", marginTop: 8, alignSelf: "center", color: "white" }}>
                     {this.props.sectionText}
                 </Text>
-                <Text style={{ fontSize: 20, alignSelf: "center", textAlign: "center", color: "white" }}>
+                <Text style={{ fontSize: 20, alignSelf: "center", fontFamily: Fonts.RobotoSlab, textAlign: "center", color: "white" }}>
                     {this.props.questionNumberText}
                 </Text>
             </Modal>

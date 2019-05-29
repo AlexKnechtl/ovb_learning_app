@@ -46,12 +46,12 @@ class TestStatisticsScene extends Component {
                                     color={this.props.exam.percentageRight >= 0.6 ? '#2EEF6A' : '#F44B4B'}
                                     shadowColor="#003A65"
                                     bgColor="#003A65">
-                                    <Text style={{ fontSize: 32, fontFamily: Fonts.RobotoSlab, color: "#fff", fontWeight: "bold" }}>
+                                    <Text style={{ fontSize: 32, fontFamily: Fonts.RobotoSlabBold, color: "#fff" }}>
                                         {percentageRight.toFixed(0)}%
                             </Text>
                                 </ProgressCircle>
                             </View>
-                            <Text style={{ color: "#fff", fontWeight: "bold", fontFamily: Fonts.RobotoSlab, fontSize: 38, marginTop: 4, marginLeft: 12 }}>
+                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlabBold, fontSize: 38, marginTop: 4, marginLeft: 12 }}>
                                 {bestandenText}
                             </Text>
                             <Text style={{ color: "#fff", fontSize: 22, fontFamily: Fonts.RobotoSlab, marginTop: 4, marginLeft: 12 }}>
@@ -98,7 +98,7 @@ class TestStatisticsScene extends Component {
                         elevation: 5,
                     }}>
                     <View style={styles.buttonStyle}>
-                        <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', marginRight: 8 }}>
+                        <Text style={{ fontSize: 20, color: '#fff', fontFamily: Fonts.RobotoSlabBold, marginRight: 8 }}>
                             Weiter lernen
                         </Text>
                         <Image source={require('../img/ic_back.png')} style={{ transform: [{ rotate: '180deg' }], width: 32, height: 20 }} />

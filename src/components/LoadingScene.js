@@ -55,8 +55,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#fff',
         fontSize: 36,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 32,
         alignSelf: 'center'
     },
@@ -74,8 +73,7 @@ const styles = StyleSheet.create({
     smallHeaderText: {
         color: '#fff',
         fontSize: 18,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 18,
         alignSelf: "center"
     },

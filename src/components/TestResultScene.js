@@ -208,8 +208,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         fontSize: 16,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         color: "#fff"
     },
     linearLayout: {
@@ -235,10 +234,9 @@ const styles = StyleSheet.create({
     },
     questionTextHeader: {
         fontSize: 28,
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 10,
         marginLeft: 20,
-        fontWeight: "bold",
         color: '#003A65'
     },
     questionText: {

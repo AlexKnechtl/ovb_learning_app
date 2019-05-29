@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modalbox';
+import { Fonts } from '../../utils/Fonts';
 
 class InfoPopup extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class InfoPopup extends Component {
                 }}>
                     <Text style={{
                         fontSize: 16,
-                        fontWeight: 'bold',
+                        fontFamily: Fonts.RobotoSlabBold,
                         textAlign: 'center',
                         justifyContent: "center",
                         color: "#003A65"
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         alignSelf: 'center',
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         color: '#fff',
         fontSize: 18,
         paddingTop: 8,

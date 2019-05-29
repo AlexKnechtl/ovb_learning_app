@@ -26,8 +26,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 16,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         color: "#003A65"
     }
 });

@@ -46,8 +46,7 @@ class PopupCenter extends Component {
                 }}>
                     <Text style={{
                         fontSize: 22,
-                        fontFamily: Fonts.RobotoSlab,
-                        fontWeight: 'bold',
+                        fontFamily: Fonts.RobotoSlabBold,
                         textAlign: 'center',
                         justifyContent: "center",
                         color: "#003A65"
@@ -111,8 +110,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         alignSelf: 'center',
-        fontWeight: "bold",
-        fontFamily: Fonts.RobotoSlab,
+        fontFamily: Fonts.RobotoSlabBold,
         color: '#fff',
         fontSize: 20,
         paddingTop: 8,

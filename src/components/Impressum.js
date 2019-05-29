@@ -119,8 +119,7 @@ const styles = StyleSheet.create({
     header: {
         color: '#fff',
         fontSize: 30,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: 'bold',
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 6,
         marginBottom: 12,
         alignSelf: 'center',
@@ -128,16 +127,14 @@ const styles = StyleSheet.create({
     smallHeader: {
         color: '#fff',
         fontSize: 24,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 18,
         alignSelf: 'center'
     },
     subHeader: {
         color: '#fff',
         fontSize: 22,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginLeft: 16,
         marginBottom: 4,
         marginTop: 12,
@@ -159,15 +156,13 @@ const styles = StyleSheet.create({
     informationText: {
         color: '#fff',
         fontSize: 24,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 2,
     },
     link: {
         color: '#fff',
         fontSize: 24,
-        fontFamily: Fonts.RobotoSlab,
-        fontWeight: "bold",
+        fontFamily: Fonts.RobotoSlabBold,
         marginTop: 2,
         textDecorationLine: 'underline'
     },
