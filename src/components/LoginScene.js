@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Input, Button, Spinner } from './common';
+import { Input, Button } from './common';
 import { signInAction } from 'core';
 import { Fonts } from '../utils/Fonts';
 
