@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter, StatisticView, ScrollViewPadding } from './common';
 import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction } from "core";
 import { connect } from "react-redux";
@@ -124,7 +124,6 @@ class HomeScene extends Component {
                     {Object.keys(this.props.modules).map((sectionID) =>
                         <Category
                             key={sectionID}
-                            // ref={(thisItem) => this[sectionID] = thisItem}
                             onPress={this.categoryPress.bind(this, sectionID)}
                             isPressed={(this.state.categories[sectionID] || {}).isPressed}
                             testMode={this.state.testMode}

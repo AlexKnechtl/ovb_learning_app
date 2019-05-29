@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image, BackHandler } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
 import { ActionButton, PopupCenter, FinishedPopup } from './common';
@@ -150,8 +150,6 @@ class CategoryInfoScene extends Component {
     }
     startLearning() {
         this.props.dispatchContinueModuleLearning(this.props.modules.selectedSubmodule);
-        // Actions.question();
-        // this.props.navigation.push('question');
     }
 }
 

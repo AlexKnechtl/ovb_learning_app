@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, View, Text, Image } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { MainHeader } from './common';
-import { ActionButton, PopupCenter, FinishedPopup } from './common';
+import { PopupCenter, FinishedPopup } from './common';
 import { connect } from "react-redux";
 import { LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction } from "core";
 import { Fonts } from '../utils/Fonts';
