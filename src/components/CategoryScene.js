@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = {
+    dispatchLogOut: signOutAction,
     dispatchSelectSubmodule: SelectSubmoduleAction,
     dispatchSelectLearningMode: setLearningModeAction,
     dispatchContinueSectionLearning: continueSectionLearningAction
