@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
-import { Font, Fonts } from '../../utils/Fonts';
+import {  Fonts } from '../../utils/Fonts';
 
 const Input = ({ value, onChangeText, placeholderText, secureTextEntry, children }) => {
     return (

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import { PopupBottom, FinishedPopup } from './common';
 import { updateCurrentQuestion, getNextQuestionAction, MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo } from 'core';
 import { Fonts } from '../utils/Fonts';
@@ -127,6 +127,10 @@ class QuestionScene extends Component {
 
         return (
             <View style={{ flexDirection: 'column', flex: 1 }}>
+                <StatusBar
+                    backgroundColor="#fff"
+                    barStyle="dark-content"
+                />
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>

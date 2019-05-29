@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, Image, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import { PopupBottom, SurePopup } from './common';
 import { MultipleChoiceQuestionInteractor, QuestionService, QuestionInfo, getNextExamQuestionAction, answerExamQuestionAction, finishExamAction } from 'core';
 import { Fonts } from '../utils/Fonts';
@@ -99,8 +99,12 @@ class TestScene extends Component {
         const marginAnswer3 = answer3Clicked ? 20 : 0;
 
         return (
-            <View style={{ flexDirection: 'column', flex: 1 }}>
-                <SafeAreaView>
+            <View style={{ flexDirection: 'column', flex: 1, backgroundColor: '#fff' }}>
+                    <StatusBar
+                        backgroundColor="#fff"
+                        barStyle="dark-content"
+                    />
+                <SafeAreaView >
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
                             {this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.exam.currentQuestion.questionId.substr(4)}` : ''}

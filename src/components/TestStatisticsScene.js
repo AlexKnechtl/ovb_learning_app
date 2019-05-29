@@ -23,7 +23,7 @@ class TestStatisticsScene extends Component {
             <View style={styles.containerStyle}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
                     <StatusBar
-                        backgroundColor="#154A38"
+                        backgroundColor="#003A65"
                         barStyle="light-content"
                     />
                 </SafeAreaView >
