@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
+    dispatchLogOut: signOutAction,
     dispatchContinueModuleLearning: continueModuleLearningAction,
     dispatchContinueSectionLearning: continueSectionLearningAction,
     dispatchLearnFalseQuestions: learnFalseQuestionsFromModuleAction

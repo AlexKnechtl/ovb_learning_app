@@ -98,6 +98,13 @@ class TestScene extends Component {
         const marginAnswer2 = answer2Clicked ? 20 : 0;
         const marginAnswer3 = answer3Clicked ? 20 : 0;
 
+        const questionHeaderText = this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.exam.currentQuestion.questionId.substr(4)}` : '';
+        const questionText = this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.question : '';
+        const answer1Text = this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : '';
+        const answer2Text = this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : '';
+        const answer3Text = this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : '';
+        const subModuleId = this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : '';
+        const questionNumberText = this.props.exam.currentQuestion ? `Frage ${this.props.exam.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.exam.currentQuestion.moduleId)).length}` : '';
         return (
             <View style={{ flexDirection: 'column', flex: 1, backgroundColor: '#fff' }}>
                     <StatusBar
@@ -107,10 +114,10 @@ class TestScene extends Component {
                 <SafeAreaView >
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.exam.currentQuestion.questionId.substr(4)}` : ''}
+                            {questionHeaderText}
                         </Text>
                         <Text style={styles.questionText}>
-                            {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.question : ''}
+                            {questionText}
                             {this.props.exam.currentQuestion && __DEV__ ? `\nAntwort Nummer ${this.props.exam.currentQuestion.question.answer1.isRight ? '1' : this.props.exam.currentQuestion.question.answer2.isRight ? '2' : '3'} ist korrekt` : ''}
                         </Text>
                     </ScrollView>
@@ -130,7 +137,7 @@ class TestScene extends Component {
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer1, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor1
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor1, fontFamily: Fonts.RobotoSlab, fontWeight: fontWeightStyle, fontSize: 14, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer1.answer : ''}
+                                {answer1Text}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -139,7 +146,7 @@ class TestScene extends Component {
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer2, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor2
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', fontWeight: fontWeightStyle2, fontFamily: Fonts.RobotoSlab, color: textColor2, fontSize: 14, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer2.answer : ''}
+                                {answer2Text}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -148,7 +155,7 @@ class TestScene extends Component {
                                 flexDirection: 'row', minHeight: 90, alignItems: 'center', marginLeft: marginAnswer3, marginRight: 20, marginBottom: 16, backgroundColor: backgroundColor3
                             }}>
                             <Text style={{ flex: 1, alignSelf: 'center', color: textColor3, fontWeight: fontWeightStyle3, fontSize: 14, fontFamily: Fonts.RobotoSlab, padding: 8 }}>
-                                {this.props.exam.currentQuestion ? this.props.exam.currentQuestion.question.answer3.answer : ''}
+                                {answer3Text}
                             </Text>
                         </TouchableOpacity>
                     </ScrollView>
@@ -180,8 +187,8 @@ class TestScene extends Component {
                         navigation={this.props.navigation}
                         onBackPress={this.onBackPress.bind(this)}
                         pdfIsDisabled={true}
-                        sectionText={this.props.exam.currentQuestion ? `${this.props.exam.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.exam.currentQuestion ? `Frage ${this.props.exam.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.exam.currentQuestion.moduleId)).length}` : ''} >
+                        sectionText={subModuleId}
+                        questionNumberText={questionNumberText} >
                     </PopupBottom>
                     <SurePopup
                         ref={'popupSure'}
