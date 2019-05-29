@@ -130,7 +130,7 @@ class QuestionScene extends Component {
                 <SafeAreaView>
                     <ScrollView style={{ height: '25%' }}>
                         <Text style={styles.questionTextHeader}>
-                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${this.props.currentQuestion.questionId.substr(4)}` : ''}
+                            {this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} Frage ${parseInt(this.props.currentQuestion.questionId.substr(4))}` : ''}
                         </Text>
                         <Text style={styles.questionText}>
                             {this.props.currentQuestion ? this.props.currentQuestion.question.question : ''}
@@ -205,7 +205,7 @@ class QuestionScene extends Component {
                         pdfPress={() => this.props.navigation.navigate('pdfScene', { pdfSrc, pdfPage })}
                         pdfIsDisabled={!pdfSrc}
                         sectionText={this.props.currentQuestion ? `${this.props.currentQuestion.moduleId.replace("_", "\.")} ${this.props.modules.selectedSubmoduleName}` : ''}
-                        questionNumberText={this.props.currentQuestion ? `Frage ${this.props.currentQuestion.questionId.substr(4)} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
+                        questionNumberText={this.props.currentQuestion ? `Frage ${parseInt(this.props.currentQuestion.questionId.substr(4))} / ${Object.keys(new QuestionService().questionStore.getQuestionInfosByModuleId(this.props.currentQuestion.moduleId)).length}` : ''} >
                     </PopupBottom>
                 </View>
                 <FinishedPopup
