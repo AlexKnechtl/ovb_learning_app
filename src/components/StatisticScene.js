@@ -1,12 +1,25 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
-import { MainHeader } from './common';
+import { MainHeader, StatisticsCategory, ExamStatistic } from './common';
 import { PopupCenter, FinishedPopup } from './common';
 import { connect } from "react-redux";
-import { LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction } from "core";
+import { LearningAlgorithm, QuestionService, LearningService, continueModuleLearningAction, continueSectionLearningAction, learnFalseQuestionsFromModuleAction, signOutAction } from "core";
 import { Fonts } from '../utils/Fonts';
-
+/**
+ * Prop types
+ * @typedef {Object} Props
+ * @property {number} falseQuestions
+ * @property {number} rightQuestions
+ * @property {number} count
+ * @property {number} percentageRight
+ * @property {{ [timestamp:string]:{ falseQuestions: number, rightQuestions: number, percentageRight: number, count: number, exam:{ [key:string]:{ count: number, falseQuestions: number, percentageRight: number, rightQuestions: number } } } }} exams
+ */
+/**
+ * @augments React.Component<{prevExams: Props}, {}>
+ */
 class StatisticScene extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +45,14 @@ class StatisticScene extends Component {
                 </Text>
             </View>
         );
-
+        const {percentageRight, rightQuestions} = this.props.prevExams;
+        var mods = this.props.modules.modules;
+        var keys = Object.keys(mods);
+        var seenQuestions = keys.reduce((pv, key)=> pv+(mods[key].seenQuestions || 0), 0);
+        var questionCount = keys.reduce((pv, key)=> pv+(mods[key].questionCount || 0), 0);
+        var falseQuestions = keys.reduce((pv, key)=> pv+(mods[key].falseQuestions || 0), 0);
+        var lernState = seenQuestions / questionCount;
+        const successRate = percentageRight;
         return (
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
@@ -60,8 +80,8 @@ class StatisticScene extends Component {
                                 Fortschritt Lernvorgang
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
-                                <Progress.Bar progress={0.4/*lernState*/} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{"40"/*(lernState * 100).toFixed(0)*/}%</Text>
+                                <Progress.Bar progress={lernState} height={32.4} width={0} style={{ width: "82%" }} color={'#58D980'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
+                                <Text style={styles.percentTextStyle}>{(lernState * 100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 12 }}>
@@ -69,28 +89,86 @@ class StatisticScene extends Component {
                                 Erfolgschance
                             </Text>
                             <View style={{ marginLeft: 20, marginRight: 20, flexDirection: "row" }}>
-                                <Progress.Bar progress={0.2/*stats.successRate*/} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
-                                <Text style={styles.percentTextStyle}>{"20"/*(stats.successRate * 100).toFixed(0)*/}%</Text>
+                                <Progress.Bar progress={successRate} height={32.4} width={0} style={{ width: "82%" }} color={'#58ACD9'} unfilledColor='rgba(0, 58, 101, 0.2)' borderWidth={0} borderRadius={0} />
+                                <Text style={styles.percentTextStyle}>{(successRate * 100).toFixed(0)}%</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 20, marginRight: 20, marginLeft: 20, height: 45, backgroundColor: "#003A65", alignItems: "center", justifyContent: "center" }}>
                             <Text style={{ color: "#fff", fontSize: 17, fontFamily: Fonts.RobotoSlabBold }}>
-                                {"23"/*stats.seenQuestions*/}/{"104"/*stats.questionCount*/} Fragen richtig beantwortet
+                                {seenQuestions}/{questionCount} Fragen richtig beantwortet
                             </Text>
                         </View>
                         <Text style={{ fontSize: 15, fontFamily: Fonts.RobotoSlabBold, marginTop: 6, marginBottom: 16, color: "#003A65", width: '100%', textAlign: "center" }}>
-                            {"23"/*stats.falseQuestions*/} Fragen falsch beantwortet
+                            {falseQuestions} Fragen falsch beantwortet
                         </Text>
                         <Text style={styles.statisticTextStyle}>
                             Prüfungshistorie
                         </Text>
-                        {/*Hier kommen die StatisticCategories rein mit buttonText: "Falsche Fragen üben"*/}
+                        {this.mapStatisticCategories()}
                     </SafeAreaView>
                 </ScrollView>
                 <PopupCenter ref={'popupCenter'} logOut={() => { this.props.dispatchLogOut(); }} impressum={() => { this.props.navigation.navigate('impressum'); }} />
                 <FinishedPopup ref={'popupInfo'} onButtonPress={() => { this.closeModal(); }} />
             </View>
         );
+    }
+
+    /**
+     * 
+     * @param {Date} date 
+     */
+    mapDateTimeToNiceString(date){
+        var comp = new Date();
+        var diffDate = new Date((comp.valueOf()-date.valueOf()));
+        if(diffDate.getFullYear() == 1970){
+            if(diffDate.getMonth() == 0){
+                if(diffDate.getDate() == 1)
+                    return "Heute";
+                if(diffDate.getDate() == 2)
+                    return "Gestern";
+                if(diffDate.getDate() == 3)
+                    return "Vorgestern";
+                if(diffDate.getDate() < 8){
+                    switch (date.getDay()) {
+                        case 1:
+                            return "Montag";
+                        case 2:
+                            return "Dienstag";
+                        case 3:
+                            return "Mittwoch";
+                        case 4:
+                            return "Donnerstag";
+                        case 5:
+                            return "Freitag";
+                        case 6:
+                            return "Samstag";
+                        case 7:
+                            return "Sonntag";
+                        default:
+                            return diffDate.getDay();
+                            break;
+                    }
+                }
+                if(diffDate.getDate()< 9)
+                    return `Vor einer Woche`;
+                if(diffDate.getDate() < 9+7)
+                    return 'Vor zwei Wochen';
+            }
+        }
+        return date.toLocaleDateString();
+      }
+    mapStatisticCategories() {
+        const exams = this.props.prevExams.exams;
+        var lastDate = "";
+
+        return Object.keys(exams).reverse().map(key=>{
+            var currDate = this.mapDateTimeToNiceString(new Date(parseInt(key)));
+            var isDifferent = currDate !== lastDate;
+            lastDate = currDate;
+        return (<View>
+                {isDifferent && <Text style={styles.dateStyle}>{this.mapDateTimeToNiceString(new Date(parseInt(key)))}</Text>}
+            <ExamStatistic key={key} exam={exams[key]} modules={this.props.modules.modules} />
+        </View>)});
     }
     startSectionLearning() {
         this.props.dispatchContinueSectionLearning(this.props.modules.currentModuleID);
@@ -116,6 +194,13 @@ const styles = StyleSheet.create({
         marginBottom: 4,
         color: "#003A65",
     },
+    dateStyle:{
+        fontSize: 14,
+        fontFamily: Fonts.RobotoSlabBold,
+        marginLeft: 20,
+        marginBottom: 4,
+        color: "#003A65",
+    },
     percentTextStyle: {
         fontSize: 24,
         fontFamily: Fonts.RobotoSlabBold,
@@ -131,7 +216,6 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
-    dispatchLogOut: signOutAction,
     dispatchContinueModuleLearning: continueModuleLearningAction,
     dispatchContinueSectionLearning: continueSectionLearningAction,
     dispatchLearnFalseQuestions: learnFalseQuestionsFromModuleAction
@@ -139,6 +223,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     modules: state.modules,
+    prevExams: state.userdata
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatisticScene);
+

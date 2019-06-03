@@ -1,8 +1,10 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, SubCategory, PopupCenter, ScrollViewPadding } from './common';
 import { connect } from "react-redux";
-import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction } from 'core';
+import { SelectSubmoduleAction, setLearningModeAction, LearningAlgorithm, QuestionService, LearningService, continueSectionLearningAction, signOutAction } from 'core';
 import { Fonts } from '../utils/Fonts';
 
 const btnText = (

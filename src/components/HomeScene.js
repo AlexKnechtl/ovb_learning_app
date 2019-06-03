@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter, StatisticView, ScrollViewPadding } from './common';
-import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction } from "core";
+import { signOutAction, SetCurrentModuleAction, initExamAction, GotModulesAction, getPreviousExams } from "core";
 import { connect } from "react-redux";
 import { Fonts } from '../utils/Fonts';
 
@@ -14,8 +14,21 @@ const mainHeaderText = (
 const icOptions = require('../img/ic_options.png')
 const icBack = require('../img/ic_back.png')
 
+/**
+ * Prop types
+ * @typedef {Object} Props
+ * @property {number} falseQuestions
+ * @property {number} rightQuestions
+ * @property {number} count
+ * @property {number} percentageRight
+ * @property {{ [timestamp:string]:{ falseQuestions: number, rightQuestions: number, percentageRight: number, count: number, exam:{ [key:string]:{ count: number, falseQuestions: number, percentageRight: number, rightQuestions: number } } } }} exams
+ */
+/**
+ * @augments React.Component<{prevExams: Props}, {}>
+ */
+var initialized = false;
 class HomeScene extends Component {
-    initialized = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -27,15 +40,16 @@ class HomeScene extends Component {
 
     componentDidMount() {
         this._subscribe = this.props.navigation.addListener('didFocus', () => {
-            if (this.initialized && Object.keys(this.props.modules).length > 0) {
+            if (initialized && Object.keys(this.props.modules).length > 0) {
                 var mods = this.props.modules;
                 this.props.dispatchUpdateModules(mods);
+                this.props.dispatchUpdateExams();
             }
         });
     }
 
     testButtonPress() {
-        this.initialized = true;
+        initialized = true;
         if (this.state.testMode == false) {
             this.setState({
                 testMode: !this.state.testMode,
@@ -51,7 +65,7 @@ class HomeScene extends Component {
     }
 
     optionsPress() {
-        this.initialized = true;
+        initialized = true;
         if (this.state.testMode == false) {
             //No Test Mode
             this.refs.popupCenter.showAddModal();
@@ -72,7 +86,7 @@ class HomeScene extends Component {
     }
 
     categoryPress(sectionID) {
-        this.initialized = true;
+        initialized = true;
         if (this.state.testMode == false) {
             this.props.dispatchSelectCategory(sectionID);
         } else {
@@ -87,7 +101,6 @@ class HomeScene extends Component {
     }
 
     render() {
-
         const { testMode } = this.state;
         const btnText = testMode ? "Prüfung starten" : "Prüfung auswählen";
         const background = testMode ? "#fff0" : "#fff"
@@ -120,7 +133,7 @@ class HomeScene extends Component {
                     children2={<Image style={{ height: 40, width: 40 }} source={this.state.icon} />}
                 />
                 <ScrollViewPadding padding={12}>
-                    <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} />
+                    <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} learningState={this.props.prevExams.percentageRight}/>
                     {Object.keys(this.props.modules).map((sectionID) =>
                         <Category
                             key={sectionID}
@@ -147,11 +160,13 @@ const mapDispatchToProps = {
     dispatchLogOut: signOutAction,
     dispatchSelectCategory: SetCurrentModuleAction,
     dispatchStartExam: initExamAction,
-    dispatchUpdateModules: GotModulesAction
+    dispatchUpdateModules: GotModulesAction,
+    dispatchUpdateExams: getPreviousExams
 };
 
 const mapStateToProps = state => ({
     modules: state.modules.modules,
+    prevExams: state.userdata
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScene);

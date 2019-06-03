@@ -1,12 +1,13 @@
+//@ts-check
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import { Fonts } from '../../utils/Fonts';
 
-const StatisticView = (props) => {
+const StatisticView = ({onPress, learningState }) => {
     return (
         <TouchableWithoutFeedback
-            onPress={props.onPress}>
+            onPress={onPress}>
             <View >
                 <ImageBackground
                     source={require('../../img/statistic_bg.png')}
@@ -19,10 +20,10 @@ const StatisticView = (props) => {
                         <Text style={styles.titleBold}>Statistik</Text>
                         <Image source={require('../../img/ic_back.png')} style={{ transform: [{ rotate: '180deg' }], width: 34, height: 20 }} />
                     </View>
-                    <ProgressBar style={{ height: 32, width: "100%", justifyContent: 'center' }} width={null} progress={props.learningState} height={32} color={'#94C231'} unfilledColor='#fff3' borderWidth={0} borderRadius={0}>
+                    <ProgressBar style={{ height: 32, width: "100%", justifyContent: 'center' }} width={null} progress={learningState} height={32} color={'#94C231'} unfilledColor='#fff3' borderWidth={0} borderRadius={0}>
                         <View style={{ position: 'absolute', flex: 0, flexDirection: 'row', width: '100%', paddingLeft: 12, paddingRight: 12, justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "left", fontSize: 20 }}>Gesamtfortschritt</Text>
-                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "right", fontSize: 20 }}>{(props.learningState * 100).toFixed(0)} %</Text>
+                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "right", fontSize: 20 }}>{(learningState * 100).toFixed(0)} %</Text>
                         </View>
                     </ProgressBar>
                 </ImageBackground >

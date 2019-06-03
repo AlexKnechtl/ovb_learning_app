@@ -8,10 +8,10 @@ import { Fonts } from '../../utils/Fonts';
 const icSucceded = require('../../img/ic_check_green.png')
 const icFailed = require('../../img/ic_wrong_red.png')
 
-const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState, buttonText }) => (
+const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState, buttonText, hideButton=false }) => (
     <View style={{ marginHorizontal: 12, marginBottom: 12 }}>
         <ImageBackground
-            source={{ uri: imageUri }}
+            source={imageUri && { uri: imageUri }}
             backgroundColor={"#003A65"}
             resizeMode='cover' style={styles.containerStyle}
             imageStyle={{ flex: 1 }}>
@@ -40,16 +40,16 @@ const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPr
                     </Text>
                 </View>
             </View>
-        </ImageBackground >
+        </ImageBackground>
         <ProgressBar style={{ minHeight: 24, width: "100%" }} width={null} progress={learningState} height={24} color={'#2EEF6A'} unfilledColor='#F44B4B' borderWidth={0} borderRadius={0}>
             <Text style={{ position: 'absolute', flex: 0, marginLeft: 12, color: "#fff", width: "100%", fontFamily: Fonts.RobotoSlabBold, fontSize: 18 }}>{(learningState * 100).toFixed(0)} %</Text>
         </ProgressBar>
-        <TouchableOpacity style={styles.detailsButton} onPress={onPress}>
+        {!hideButton&&<TouchableOpacity style={styles.detailsButton} onPress={onPress}>
             <Image style={{ height: 24, width: 24, justifyContent: 'center' }} source={require('../../img/ic_book_white.png')} />
             <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlabBold, fontSize: 18, marginLeft: 6 }}>
                 {buttonText}
             </Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
     </View>
 );
 

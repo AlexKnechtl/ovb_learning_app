@@ -13,3 +13,4 @@ export * from './FinishedPopup';
 export * from './SurePopup';
 export * from './StatisticView';
 export * from './ScrollViewPadding';
+export * from './ExamStatistic';

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Linking } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { Fonts } from '../../utils/Fonts';
+import { store } from '../../App';
+import { signOutAction } from 'core';
 
 class PopupCenter extends Component {
     constructor(props) {
@@ -57,7 +59,7 @@ class PopupCenter extends Component {
                 <View style={styles.lineColor} />
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={this.onLogoutPress.bind(this)}>
+                    onPress={()=>store.dispatch(signOutAction())}>
                     <Text style={styles.buttonText}>
                         Logout
                     </Text>

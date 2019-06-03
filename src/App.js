@@ -7,7 +7,7 @@ import Router, {sceneReducer} from './Router2';
 import { signInWithoutPasswordAction, configureStore } from 'core/lib';
 import NavigationService from './NavigationService';
 
-const store = configureStore({routes: sceneReducer});
+export const store = configureStore({routes: sceneReducer});
 // store.dispatch(signInWithoutPasswordAction());
 
 export default class App extends Component {
