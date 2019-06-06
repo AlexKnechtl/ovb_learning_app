@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Input, Button } from './common';
 import { signInAction } from 'core';
@@ -17,14 +17,13 @@ const DismissKeyboard = ({ children }) => (
 
 const buttonText = (
     <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontFamily: Fonts.RobotoSlabBold }}>
-        Anmelden
+        Passwort anfordern
     </Text>
 )
 
-class LoginScene extends Component {
+class ForgotPasswordScene extends Component {
     state = {
         email: "",
-        password: ""
     };
 
     onEmailChange(text) {
@@ -42,9 +41,11 @@ class LoginScene extends Component {
     renderError() {
         if (this.props.error && this.props.error != "") {
             return (
+                <View style={{ marginTop: 8 }} >
                     <Text style={styles.errorTextStyle}>
-                        {this.props.error}
+                        E-Mail ist nicht im System.
                     </Text>
+                </View>
             );
         }
     }
@@ -68,25 +69,18 @@ class LoginScene extends Component {
                             Learning Suite
                         </Text>
                         <View style={{ marginTop: 42 }}>
+                            <Text style={styles.headerText}>
+                                Passwort ändern
+                            </Text>
                             <Input
                                 children={mailIcon}
                                 placeholderText="E-Mail"
                                 onChangeText={this.onEmailChange.bind(this)}
                                 value={this.state.email}
                             />
-                            <Input
-                                children={lockIcon}
-                                secureTextEntry
-                                placeholderText="Passwort"
-                                onChangeText={this.onPasswordChange.bind(this)}
-                                value={this.state.password}
-                            />
                             <Button children={buttonText}
                                 onPress={this.onButtonPress.bind(this)}>
                             </Button>
-                            <TouchableOpacity>
-                                <Text style={styles.passwordForgotText}>Passwort vergessen?</Text>
-                            </TouchableOpacity>
                         </View>
                         <KeyboardSpacer />
                         {this.renderError()}
@@ -111,8 +105,6 @@ const styles = StyleSheet.create({
     },
     errorTextStyle: {
         fontSize: 20,
-        marginTop: 12,
-        textAlign: "center",
         fontFamily: Fonts.RobotoSlab,
         alignSelf: 'center',
         color: 'red'
@@ -145,10 +137,9 @@ const styles = StyleSheet.create({
     passwordForgotText: {
         textDecorationLine: "underline",
         color: '#fff',
-        fontFamily: Fonts.RobotoSlab,
-        fontSize: 16,
+        fontSize: 20,
         alignSelf: "center",
-        marginTop: 12
+        marginBottom: 24
     },
     logoSmall: {
         resizeMode: "contain",
@@ -194,4 +185,4 @@ const mapDispatchToProps = {
     loginUser: signInAction,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScene); 
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordScene); 
