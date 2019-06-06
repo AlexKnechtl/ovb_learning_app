@@ -26,7 +26,7 @@ const icBack = require('../img/ic_back.png')
 /**
  * @augments React.Component<{prevExams: Props}, {}>
  */
-var initialized = false;
+
 class HomeScene extends Component {
 
     constructor(props) {
@@ -38,9 +38,10 @@ class HomeScene extends Component {
         };
     }
 
+    initialized = false;
     componentDidMount() {
         this._subscribe = this.props.navigation.addListener('didFocus', () => {
-            if (initialized && Object.keys(this.props.modules).length > 0) {
+            if (this.initialized && Object.keys(this.props.modules).length > 0) {
                 var mods = this.props.modules;
                 this.props.dispatchUpdateModules(mods);
                 this.props.dispatchUpdateExams();
@@ -49,7 +50,7 @@ class HomeScene extends Component {
     }
 
     testButtonPress() {
-        initialized = true;
+        this.initialized = true;
         if (this.state.testMode == false) {
             this.setState({
                 testMode: !this.state.testMode,
@@ -65,7 +66,7 @@ class HomeScene extends Component {
     }
 
     optionsPress() {
-        initialized = true;
+        this.initialized = true;
         if (this.state.testMode == false) {
             //No Test Mode
             this.refs.popupCenter.showAddModal();
@@ -86,7 +87,7 @@ class HomeScene extends Component {
     }
 
     categoryPress(sectionID) {
-        initialized = true;
+        this.initialized = true;
         if (this.state.testMode == false) {
             this.props.dispatchSelectCategory(sectionID);
         } else {

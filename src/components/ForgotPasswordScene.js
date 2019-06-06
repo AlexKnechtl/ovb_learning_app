@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Input, Button } from './common';
-import { signInAction } from 'core';
+import { signInAction, AuthInteractor, AuthService } from 'core';
 import { Fonts } from '../utils/Fonts';
 
 const mailIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_mail.png')} />)
@@ -24,22 +24,24 @@ const buttonText = (
 class ForgotPasswordScene extends Component {
     state = {
         email: "",
+        error: "",
+        emailSent: false
     };
+
+    authenticator = new AuthInteractor(new AuthService());
 
     onEmailChange(text) {
         this.setState({ email: text });
     }
 
-    onPasswordChange(text) {
-        this.setState({ password: text });
-    }
-
     onButtonPress() {
-        this.props.loginUser(this.state);
+        this.authenticator.resetPassword(this.state.email.trim()).then(({emailSent, error})=> {
+            this.setState({emailSent, error});
+        });
     }
 
     renderError() {
-        if (this.props.error && this.props.error != "") {
+        if (this.state.error && this.state.error != "") {
             return (
                 <View style={{ marginTop: 8 }} >
                     <Text style={styles.errorTextStyle}>
@@ -68,20 +70,7 @@ class ForgotPasswordScene extends Component {
                         <Text style={styles.headerText}>
                             Learning Suite
                         </Text>
-                        <View style={{ marginTop: 42 }}>
-                            <Text style={styles.headerText}>
-                                Passwort ändern
-                            </Text>
-                            <Input
-                                children={mailIcon}
-                                placeholderText="E-Mail"
-                                onChangeText={this.onEmailChange.bind(this)}
-                                value={this.state.email}
-                            />
-                            <Button children={buttonText}
-                                onPress={this.onButtonPress.bind(this)}>
-                            </Button>
-                        </View>
+                        {this.state.emailSent? this.renderFinished() : this.renderPasswordUi()}
                         <KeyboardSpacer />
                         {this.renderError()}
                         <View style={styles.bottom}>
@@ -96,6 +85,21 @@ class ForgotPasswordScene extends Component {
                 </DismissKeyboard>
             </ImageBackground>
         );
+    }
+
+    renderFinished() {
+        return <Text style={{...styles.smallHeaderText, margin: 20}}>Passwort rücksetz Email wurde an die angegebene Email gesendet. Bitte überprüfen Sie auch Ihren Spam Ordner</Text>;
+    }
+
+    renderPasswordUi() {
+        return <View style={{ marginTop: 42 }}>
+            <Text style={styles.headerText}>
+                Passwort ändern
+            </Text>
+            <Input children={mailIcon} placeholderText="E-Mail" onChangeText={this.onEmailChange.bind(this)} value={this.state.email} />
+            <Button children={buttonText} onPress={this.onButtonPress.bind(this)}>
+            </Button>
+        </View>;
     }
 }
 

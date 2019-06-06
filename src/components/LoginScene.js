@@ -84,7 +84,7 @@ class LoginScene extends Component {
                             <Button children={buttonText}
                                 onPress={this.onButtonPress.bind(this)}>
                             </Button>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=> this.props.navigation.navigate("forgotPassword")}>
                                 <Text style={styles.passwordForgotText}>Passwort vergessen?</Text>
                             </TouchableOpacity>
                         </View>

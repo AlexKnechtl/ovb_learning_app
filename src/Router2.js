@@ -69,7 +69,8 @@ const AppStack = createStackNavigator({
     });
 
 const AuthStack = createStackNavigator({
-    SignIn: LoginScene
+    SignIn: LoginScene,
+    forgotPassword: ForgotPasswordScene
 },
     {
         headerMode: 'none'
