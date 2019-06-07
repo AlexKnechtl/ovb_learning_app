@@ -52,7 +52,7 @@ class StatisticScene extends Component {
         var questionCount = keys.reduce((pv, key)=> pv+(mods[key].questionCount || 0), 0);
         var falseQuestions = keys.reduce((pv, key)=> pv+(mods[key].falseQuestions || 0), 0);
         var lernState = seenQuestions / questionCount;
-        const successRate = percentageRight;
+        const successRate = keys.reduce((pv, key)=> pv+(mods[key].successRate || 0), 0)/keys.length;;
         return (
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={{ backgroundColor: "#003A65" }}>
