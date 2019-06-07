@@ -1,3 +1,4 @@
+
 //ts-check
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
@@ -7,10 +8,10 @@ import { Fonts } from '../../utils/Fonts';
 const icSucceded = require('../../img/ic_check_green.png')
 const icFailed = require('../../img/ic_wrong_red.png')
 
-const StatisticsCategory = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState, buttonText, hideButton=false }) => (
+const ExamView = ({ titleText, questionsRight, success, imageUri, onPress, questionsFalse, learningState, buttonText, hideButton=false }) => (
     <View style={{ marginHorizontal: 12, marginBottom: 12 }}>
         <ImageBackground
-            source={imageUri && { uri: imageUri }}
+            source={require('../../img/exam_bg.jpg')}
             backgroundColor={"#003A65"}
             resizeMode='cover' style={styles.containerStyle}
             imageStyle={{ flex: 1 }}>
@@ -110,4 +111,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export { StatisticsCategory };
+export { ExamView };
