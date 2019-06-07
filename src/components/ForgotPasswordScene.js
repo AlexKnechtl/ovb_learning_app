@@ -1,13 +1,14 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, Keyboard, StyleSheet, Image, StatusBar, SafeAreaView, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Input, Button } from './common';
+import { Input, Button, InfoPopup } from './common';
 import { signInAction, AuthInteractor, AuthService } from 'core';
 import { Fonts } from '../utils/Fonts';
 
 const mailIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_mail.png')} />)
-const lockIcon = (<Image style={{ width: 28, height: 28 }} source={require('../img/ic_password.png')} />)
 
 const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -17,7 +18,7 @@ const DismissKeyboard = ({ children }) => (
 
 const buttonText = (
     <Text style={{ alignSelf: 'center', color: '#315C3D', fontSize: 22, fontFamily: Fonts.RobotoSlabBold }}>
-        Passwort anfordern
+        E-Mail anfordern
     </Text>
 )
 
@@ -34,9 +35,13 @@ class ForgotPasswordScene extends Component {
         this.setState({ email: text });
     }
 
+    closeModal() {
+        this.refs.popupInfo && this.refs.popupInfo.closeModal();
+    }
+
     onButtonPress() {
-        this.authenticator.resetPassword(this.state.email.trim()).then(({emailSent, error})=> {
-            this.setState({emailSent, error});
+        this.authenticator.resetPassword(this.state.email.trim()).then(({ emailSent, error }) => {
+            this.setState({ emailSent, error });
         });
     }
 
@@ -68,9 +73,16 @@ class ForgotPasswordScene extends Component {
                     <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
                         <Image style={styles.logoBig} source={require('../img/logo_ovb_white.png')} />
                         <Text style={styles.headerText}>
-                            Learning Suite
+                            Passwort zurücksetzen
                         </Text>
-                        {this.state.emailSent? this.renderFinished() : this.renderPasswordUi()}
+                        <View style={{ marginTop: 14 }}>
+                            <Text style={styles.infoText}>
+                                Tippe hier deine E-Mail Adresse ein um dein Learning Suite Passwort zurückzusetzen.
+                            </Text>
+                            <Input children={mailIcon} placeholderText="E-Mail" onChangeText={this.onEmailChange.bind(this)} value={this.state.email} />
+                            <Button children={buttonText} onPress={this.onButtonPress.bind(this)}>
+                            </Button>
+                        </View>
                         <KeyboardSpacer />
                         {this.renderError()}
                         <View style={styles.bottom}>
@@ -83,23 +95,9 @@ class ForgotPasswordScene extends Component {
                         </View>
                     </SafeAreaView>
                 </DismissKeyboard>
+                <InfoPopup ref={'popupInfo'} modalVisible={this.state.emailSent} onButtonPress={() => { this.closeModal(); this.props.navigation.goBack(); }} />
             </ImageBackground>
         );
-    }
-
-    renderFinished() {
-        return <Text style={{...styles.smallHeaderText, margin: 20}}>Passwort rücksetz Email wurde an die angegebene Email gesendet. Bitte überprüfen Sie auch Ihren Spam Ordner</Text>;
-    }
-
-    renderPasswordUi() {
-        return <View style={{ marginTop: 42 }}>
-            <Text style={styles.headerText}>
-                Passwort ändern
-            </Text>
-            <Input children={mailIcon} placeholderText="E-Mail" onChangeText={this.onEmailChange.bind(this)} value={this.state.email} />
-            <Button children={buttonText} onPress={this.onButtonPress.bind(this)}>
-            </Button>
-        </View>;
     }
 }
 
@@ -113,10 +111,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'red'
     },
+    infoText: {
+        color: '#fff',
+        textAlign: 'center',
+        marginLeft: 16,
+        marginRight: 16,
+        marginBottom: 28
+    },
     headerText: {
         color: '#fff',
-        fontSize: 36,
-        fontFamily: Fonts.RobotoSlabBold,
+        textAlign: "center",
+        fontSize: 38,
+        marginTop: 12,
+        fontFamily: Fonts.RobotoSlab,
         alignSelf: 'center'
     },
     rectangleStyle: {
@@ -144,12 +151,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: "center",
         marginBottom: 24
-    },
-    logoSmall: {
-        resizeMode: "contain",
-        width: 32,
-        height: '6%',
-        marginRight: 10
     },
     iconStyle: {
         height: 28,
