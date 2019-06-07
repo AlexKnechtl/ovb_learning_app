@@ -1,3 +1,5 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { SafeAreaView, StatusBar, View, Text, Image } from 'react-native';
 import { MainHeader, Category, PopupCenter, StatisticView, ScrollViewPadding } from './common';
@@ -102,6 +104,7 @@ class HomeScene extends Component {
     }
 
     render() {
+        var mods = this.props.modules;
         const { testMode } = this.state;
         const btnText = testMode ? "Prüfung starten" : "Prüfung auswählen";
         const background = testMode ? "#fff0" : "#fff"
@@ -115,6 +118,15 @@ class HomeScene extends Component {
         } else {
             testModus = false;
         }
+        var keys = Object.keys(mods);
+        console.log(keys);
+        console.log(mods);
+
+        var seenQuestions = keys.reduce((pv, key)=> pv+(mods[key].seenQuestions || 0), 0)||0;
+        var questionCount = keys.reduce((pv, key)=> pv+(mods[key].questionCount || 0), 0)||1;
+        var falseQuestions = keys.reduce((pv, key)=> pv+(mods[key].falseQuestions || 0), 0);
+        const lernState = (seenQuestions||0) / (questionCount||0);
+        const successRate = keys.reduce((pv, key)=> pv+(mods[key].successRate || 0), 0)/keys.length;
 
         return (
             <View style={{ flex: 1, alignItems: "stretch", backgroundColor: "#fff" }}>
@@ -134,7 +146,7 @@ class HomeScene extends Component {
                     children2={<Image style={{ height: 40, width: 40 }} source={this.state.icon} />}
                 />
                 <ScrollViewPadding padding={12}>
-                    <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} learningState={this.props.prevExams.percentageRight}/>
+                    <StatisticView onPress={() => { this.props.navigation.navigate('statistics') }} learningState={lernState} successRate={successRate}/>
                     {Object.keys(this.props.modules).map((sectionID) =>
                         <Category
                             key={sectionID}

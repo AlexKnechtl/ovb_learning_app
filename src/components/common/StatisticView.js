@@ -4,7 +4,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import { StyleSheet, ImageBackground, View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import { Fonts } from '../../utils/Fonts';
 
-const StatisticView = ({onPress, learningState }) => {
+const StatisticView = ({onPress, learningState, successRate }) => {
     return (
         <TouchableWithoutFeedback
             onPress={onPress}>
@@ -20,10 +20,10 @@ const StatisticView = ({onPress, learningState }) => {
                         <Text style={styles.titleBold}>Statistik</Text>
                         <Image source={require('../../img/ic_back.png')} style={{ transform: [{ rotate: '180deg' }], width: 34, height: 20 }} />
                     </View>
-                    <ProgressBar style={{ height: 32, width: "100%", justifyContent: 'center' }} width={null} progress={learningState} height={32} color={'#94C231'} unfilledColor='#fff3' borderWidth={0} borderRadius={0}>
+                    <ProgressBar style={{ height: 32, width: "100%", justifyContent: 'center' }} width={null} progress={(learningState==1)?successRate:learningState} height={32} color={learningState==1?'#58ACD9':'#94C231'} unfilledColor='#fff3' borderWidth={0} borderRadius={0}>
                         <View style={{ position: 'absolute', flex: 0, flexDirection: 'row', width: '100%', paddingLeft: 12, paddingRight: 12, justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "left", fontSize: 20 }}>Gesamtfortschritt</Text>
-                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "right", fontSize: 20 }}>{(learningState * 100).toFixed(0)} %</Text>
+                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "left", fontSize: 20 }}>{(learningState==1)?"Erfolgschance":"Gesamtfortschritt"}</Text>
+                            <Text style={{ color: "#fff", fontFamily: Fonts.RobotoSlab, textAlign: "right", fontSize: 20 }}>{(((learningState==1)?successRate:learningState) * 100).toFixed(0)} %</Text>
                         </View>
                     </ProgressBar>
                 </ImageBackground >
