@@ -24,20 +24,21 @@ const Input = ({ value, onChangeText, placeholderText, secureTextEntry, children
 const styles = StyleSheet.create({
     inputStyle: {
         height: 50,
-        width: '100%',
         color: '#fff',
+        width: '100%',
         fontSize: 20,
         fontFamily: Fonts.RobotoSlab
     },
     containerStyle: {
         height: 50,
-        alignSelf: 'stretch',
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 16,
+        paddingRight: 8,
         backgroundColor: '#fff6',
-        marginLeft: 50,
-        marginRight: 50,
+        width: '77%',
+        marginLeft: 18,
+        marginRight: 18,
         marginTop: 12
     },
     lineStyle: {
