@@ -28,7 +28,7 @@ class App extends Component {
                 break;
             case codePush.SyncStatus.UPDATE_INSTALLED:
                 console.log("Update installed.");
-                // alert("Update installiert!!");
+                alert("Update installiert!!");
                 break;
         }
     }
