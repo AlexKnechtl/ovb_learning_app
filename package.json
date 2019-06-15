@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "preinstall": "cd ./core && npm install",
     "test": "jest"
   },
   "dependencies": {
