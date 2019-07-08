@@ -1,3 +1,4 @@
 <resources>
+	<string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">7183aef8-df0f-4427-8ecd-ffe5d1eaec87</string>
     <string name="app_name">OVB Learning</string>
 </resources>

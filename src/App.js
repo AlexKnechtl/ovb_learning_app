@@ -6,11 +6,36 @@ import { Provider } from 'react-redux';
 import Router, {sceneReducer} from './Router2';
 import { signInWithoutPasswordAction, configureStore } from 'core/lib';
 import NavigationService from './NavigationService';
+import codePush from 'react-native-code-push';
 
 export const store = configureStore({routes: sceneReducer});
 // store.dispatch(signInWithoutPasswordAction());
 
-export default class App extends Component {
+class App extends Component {
+    codePushStatusDidChange(status) {
+        switch(status) {
+            case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+                console.log("Checking for updates.");
+                break;
+            case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+                console.log("Downloading package.");
+                break;
+            case codePush.SyncStatus.INSTALLING_UPDATE:
+                console.log("Installing update.");
+                break;
+            case codePush.SyncStatus.UP_TO_DATE:
+                console.log("Up-to-date.");
+                break;
+            case codePush.SyncStatus.UPDATE_INSTALLED:
+                console.log("Update installed.");
+                alert("Update installiert!!");
+                break;
+        }
+    }
+    codePushDownloadDidProgress(progress) {
+        console.log(progress.receivedBytes + " of " + progress.totalBytes + " received.");
+    }
+
     componentDidMount(){
         store.dispatch(signInWithoutPasswordAction());
     }
@@ -32,3 +57,5 @@ export default class App extends Component {
     //     return true;
     // }
 }
+
+export default codePush({ checkFrequency: codePush.CheckFrequency.ON_APP_RESUME, installMode: codePush.InstallMode.ON_NEXT_RESUME })(App);
