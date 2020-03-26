@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "preinstall": "cd ./core && npm install",
+    "android": "react-native run-android",
     "test": "jest"
   },
   "dependencies": {
